@@ -1,0 +1,38 @@
+mixin textInput(name, value='')
+  input(name=`attr_${name}` type='text' value=value)&attributes(attributes)
+
+mixin numberInput(name, value='')
+  input(name=`attr_${name}` type='number' value=value)&attributes(attributes)
+
+mixin textareaInput(name, value='')
+  textarea(name=`attr_${name}`)&attributes(attributes)= value
+
+//- Textarea with a span named the same, the creator seemed to like that
+mixin spanareaInput(name, value='')
+  +textareaInput(name, value)(class!=attributes.class placeholder!=attributes.placeholder)= value
+  span(name=`attr_${name}`)
+
+mixin hiddenInput(name, value='')
+  input(class!=attributes.class name=`attr_${name}` type='hidden' value=value)
+
+
+mixin rollButton(name, value='', label=false)
+  button(name=`roll_${name}` title!=attributes.title type='roll' value!=value)
+    if (label)
+      span #{label}
+
+mixin actButton(name, value='')
+  button(class!=attributes.class name=`act_${name}` type='action' value!=value)
+
+mixin cbButton(name, label, value=null)
+  label(class!=attributes.class)
+    if value
+      input(name=`attr_${name}` value=value type='checkbox')&attributes(attributes)
+    else
+      input(name=name type='checkbox')&attributes(attributes)
+    span(title=label)
+
+mixin rdButton(name, label, value='')
+  label
+    input(name=`attr_${name}`, value=value, type='radio')
+    span(title=label)
