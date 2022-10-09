@@ -1,3 +1,154 @@
+.charactersheet {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1333333333), rgba(255, 255, 255, 0.5333333333)), url("https://raw.githubusercontent.com/Calmacil/l5r-v4/master/img/papierriz.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 700px;
+  min-height: 300px;
+}
+.charactersheet .itemcontrol {
+  z-index: 2;
+}
+.charactersheet .btn {
+  border-radius: 0;
+}
+.charactersheet img,
+.charactersheet div,
+.charactersheet span,
+.charactersheet input[type=number],
+.charactersheet input[type=text],
+.charactersheet textarea,
+.charactersheet select,
+.charactersheet h1,
+.charactersheet h2,
+.charactersheet label,
+.charactersheet button[type=roll],
+.charactersheet button[type=action] {
+  display: flex;
+}
+.charactersheet input[type=number],
+.charactersheet input[type=text],
+.charactersheet select,
+.charactersheet textarea {
+  color: black;
+}
+.charactersheet input[type=text],
+.charactersheet input[type=number],
+.charactersheet select {
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+.charactersheet input[type=number]::-webkit-outer-spin-button, .charactersheet input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.charactersheet input[type=number],
+.charactersheet input[type=text] {
+  -moz-appearance: textfield;
+  border-radius: 0;
+}
+.charactersheet textarea {
+  border: none;
+  width: 100%;
+  padding: 0;
+  text-align: justify;
+  border-radius: 0;
+  margin: 0;
+}
+.charactersheet .repcontrol {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+.charactersheet .repcontrol > .btn {
+  padding-bottom: 0;
+  border-radius: 0;
+  border: 1px solid green;
+}
+.charactersheet div.sheet-autoex {
+  line-height: 1.4em;
+  min-width: 1.4em;
+  cursor: text;
+  text-align: left;
+  position: relative;
+  width: 100%;
+}
+.charactersheet div.sheet-autoex > span, .charactersheet div.sheet-autoex > textarea {
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  word-spacing: inherit;
+  text-align: inherit;
+  min-height: inherit;
+  height: 100%;
+  word-wrap: anywhere;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.charactersheet div.sheet-autoex > span {
+  visibility: hidden;
+}
+.charactersheet div.sheet-autoex > textarea {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 4px);
+  overflow: hidden;
+  resize: none;
+  margin: 0;
+}
+.charactersheet div.sheet-autoex > textarea::placeholder {
+  font-family: "Contrail One";
+  color: rgba(87, 89, 87, 0.8549019608);
+  font-style: italic;
+  text-align: center;
+  font-size: 95%;
+  font-weight: normal;
+}
+.charactersheet div.sheet-autoex.sheet-autoex22 {
+  min-height: 22px;
+}
+.charactersheet div.sheet-autoex.sheet-autoex24 {
+  min-height: 24px;
+}
+.charactersheet div.sheet-autoex.sheet-autoex26 {
+  min-height: 26px;
+}
+.charactersheet div.sheet-autoex.sheet-autoex28 {
+  min-height: 28px;
+}
+.charactersheet div.sheet-autoex.sheet-autoex40 {
+  min-height: 40px;
+}
+.charactersheet div.sheet-autoex.sheet-autoex100 {
+  min-height: 100px;
+}
+.charactersheet .container {
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 700px;
+  background-color: transparent;
+  background-image: radial-gradient(closest-side at 50% 50%, white, rgba(255, 255, 255, 0));
+  border: 1px dashed blue;
+}
 
+.charactersheet .menu {
+  width: 140px;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.charactersheet .menu > .logo {
+  width: 100%;
+  min-height: 50px;
+  background-image: url("https://raw.githubusercontent.com/Calmacil/l5r-v4/master/img/legend-of-the-five-rings-logo.png");
+  background-size: contain;
+}
 
 /*# sourceMappingURL=l5r.css.map */
