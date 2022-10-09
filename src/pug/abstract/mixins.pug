@@ -34,5 +34,5 @@ mixin cbButton(name, label, value=null)
 
 mixin rdButton(name, label, value='')
   label
-    input(name=`attr_${name}`, value=value, type='radio')
+    input(name=`attr_${name}`, value=value, type='radio')&attributes(attributes)
     span(title=label)

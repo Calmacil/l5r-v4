@@ -1,5 +1,12 @@
 include pug/abstract/mixins.pug
 
 .container
+
     include pug/components/menu.pug
-    +textInput('character_name')
+
+    .main-container
+
+        include pug/components/dicebox.pug
+
+        +hiddenInput('activeTab', 1)
+        include pug/tabs/tab1-personnage.pug

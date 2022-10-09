@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 .charactersheet {
   background-image: radial-gradient(rgba(255, 255, 255, 0.1333333333), rgba(255, 255, 255, 0.5333333333)), url("https://raw.githubusercontent.com/Calmacil/l5r-v4/master/img/papierriz.png");
   background-size: cover;
   background-repeat: no-repeat;
   min-width: 700px;
   min-height: 300px;
+  display: flex !important;
+  flex-direction: column;
 }
 .charactersheet .itemcontrol {
   z-index: 2;
@@ -129,26 +132,81 @@
 .charactersheet .container {
   width: 100%;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-self: flex-start;
   justify-content: space-between;
   min-width: 700px;
   background-color: transparent;
   background-image: radial-gradient(closest-side at 50% 50%, white, rgba(255, 255, 255, 0));
-  border: 1px dashed blue;
+  padding: 0;
+  margin: 0;
+}
+.charactersheet .container .main-container {
+  width: calc(100% - 187.5px - 10px);
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 .charactersheet .menu {
-  width: 140px;
-  border: 1px solid red;
+  width: 175px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
+  align-items: space-between;
+  min-height: 560px;
 }
 .charactersheet .menu > .logo {
   width: 100%;
-  min-height: 50px;
+  min-height: 62px;
   background-image: url("https://raw.githubusercontent.com/Calmacil/l5r-v4/master/img/legend-of-the-five-rings-logo.png");
   background-size: contain;
+  background-repeat: no-repeat;
+}
+.charactersheet .menu > .menuMain, .charactersheet .menu > .menuFooter {
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  padding-right: 8px;
+}
+.charactersheet .menu > div > label > input[type=radio] {
+  position: absolute;
+  width: calc(25% - 33px);
+  opacity: 0;
+  height: 30px;
+}
+.charactersheet .menu > div > label > input[type=radio] ~ span {
+  width: 100%;
+}
+.charactersheet .menu > div > label > input[type=radio] ~ span::before {
+  display: flex;
+  content: attr(title);
+  width: 100%;
+  height: 24px;
+  line-height: 26px;
+  justify-content: center;
+  font-family: "Permanent Marker";
+  background-image: linear-gradient(to right, rgba(34, 34, 40, 0.9333333333) 60%, #eeeeff);
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  border-radius: 10px;
+}
+.charactersheet .menu > div > label > input[type=radio]:checked ~ span::before {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 0, 0, 0.5333333333);
+  text-decoration-thickness: 2px;
+}
+
+.charactersheet .dicebox {
+  width: calc(100% - 20px);
+  height: 60px;
+  border-bottom: 1px solid lightgrey;
+  margin: 0 10px 0 10px;
+  padding-bottom: 5px;
+}
+
+.charactersheet .tab {
+  width: 100%;
+  height: calc(100% - 60px);
 }
 
 /*# sourceMappingURL=l5r.css.map */
