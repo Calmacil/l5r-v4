@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 .charactersheet {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1333333333), rgba(255, 255, 255, 0.5333333333)), url("https://raw.githubusercontent.com/Calmacil/l5r-v4/master/img/papierriz.png");
-  background-size: cover;
+  background-image: url("https://raw.githubusercontent.com/Calmacil/l5r-v4/master/img/appierriz.png");
+  background-size: 100%;
   background-repeat: no-repeat;
   min-width: 700px;
   min-height: 300px;
@@ -147,8 +147,36 @@
   padding: 0;
 }
 
+.charactersheet div.col3 {
+  width: 33.3333333333%;
+  flex-wrap: wrap;
+}
+.charactersheet div.col2 {
+  width: 50%;
+  flex-wrap: wrap;
+}
+.charactersheet div.col40 {
+  width: calc(40% - 10px);
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.charactersheet div.col60 {
+  width: calc(60% - 10px);
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.charactersheet div.col2T1 {
+  width: 66.6666666667%;
+  flex-wrap: wrap;
+}
+.charactersheet .tab {
+  display: none;
+}
+.charactersheet input[name=attr_activeTab][value="8"] ~ div.tab8, .charactersheet input[name=attr_activeTab][value="7"] ~ div.tab7, .charactersheet input[name=attr_activeTab][value="6"] ~ div.tab6, .charactersheet input[name=attr_activeTab][value="5"] ~ div.tab5, .charactersheet input[name=attr_activeTab][value="4"] ~ div.tab4, .charactersheet input[name=attr_activeTab][value="3"] ~ div.tab3, .charactersheet input[name=attr_activeTab][value="2"] ~ div.tab2, .charactersheet input[name=attr_activeTab][value="1"] ~ div.tab1, .charactersheet input[name=attr_activeTab][value="0"] ~ div.tab0 {
+  display: flex;
+}
 .charactersheet .menu {
-  width: 175px;
+  width: 187.5px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -194,6 +222,8 @@
   text-decoration: underline;
   text-decoration-color: rgba(255, 0, 0, 0.5333333333);
   text-decoration-thickness: 2px;
+  color: rgba(255, 0, 0, 0.5333333333);
+  background-image: linear-gradient(to left, rgba(34, 34, 40, 0.9333333333) 60%, #eeeeff);
 }
 
 .charactersheet .dicebox {

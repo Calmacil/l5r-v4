@@ -1,0 +1,51 @@
+.charactersheet
+    .menu
+        width: calc(750px / 4)
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        align-items: space-between
+        min-height: 560px
+
+        &> .logo
+            width: 100%
+            min-height: 62px
+            background-image: url('#{$imgRepo}/img/legend-of-the-five-rings-logo.png')
+            background-size: contain
+            background-repeat: no-repeat
+
+        &> .menuMain,
+        &> .menuFooter
+            flex-direction: column
+            width: 100%
+            padding: 0
+            padding-right: 8px
+            //&> .menuMain
+            //border-right: solid gray 1px
+
+        &> div > label 
+            &> input[type=radio]
+                position: absolute
+                width: calc((100% / 4) - 33px)
+                opacity: 0
+                height: 30px
+                &~ span
+                    width: 100%
+                    &::before
+                        display: flex
+                        content: attr(title)
+                        width: 100%
+                        height: 24px
+                        line-height: 26px
+                        justify-content: center
+                        font-family: $fontHeader
+                        background-image: linear-gradient(to right, #222228ee 60%, #eeff)
+                        color: white
+                        text-shadow: 1px 1px 2px black
+                        border-radius: 10px
+                &:checked ~ span::before
+                    text-decoration: underline
+                    text-decoration-color: #f008
+                    text-decoration-thickness: 2px
+                    color: #f008
+                    background-image: linear-gradient(to left, #222228ee 60%, #eeff)

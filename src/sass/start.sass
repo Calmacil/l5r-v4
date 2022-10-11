@@ -1,0 +1,142 @@
+.charactersheet
+    //background-image: radial-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .5)), 
+    background-image:  url('#{$imgRepo}/img/appierriz.png')
+    background-size: 100%
+    background-repeat: no-repeat
+    min-width: 700px
+    min-height: 300px
+    display: flex !important
+    flex-direction: column
+
+    .itemcontrol
+        z-index: 2
+
+    .btn
+        border-radius: 0
+
+    img,
+    div,
+    span,
+    input[type=number],
+    input[type=text],
+    textarea,
+    select,
+    h1,
+    h2,
+    label,
+    button[type=roll],
+    button[type=action]
+        display: flex
+
+    input[type=number],
+    input[type=text],
+    select,
+    textarea
+        color: black
+
+    input[type=text],
+    input[type=number],
+    select
+        padding: 0
+        margin: 0
+        border-radius: 0
+
+    input[type=number]
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button
+            -webkit-appearance: none
+            margin: 0
+
+    input[type=number],
+    input[type=text]
+        -moz-appearance: textfield,
+        border-radius: 0
+
+    textarea
+        border: none
+        width: 100%
+        padding: 0
+        text-align: justify
+        border-radius: 0
+        margin: 0
+
+    .repcontrol
+        display: flex
+        width: 100%
+        justify-content: space-between
+        flex-direction: row-reverse
+        &> .btn
+            padding-bottom: 0
+            border-radius: 0
+            border: 1px solid green
+
+    div.sheet-autoex
+        line-height: 1.4em
+        min-width: 1.4em
+        cursor: text
+        text-align: left
+        position: relative
+        width: 100%
+
+        &> span,
+        &> textarea
+            display: block
+            font-family: inherit
+            font-size: inherit
+            line-height: inherit
+            word-spacing: inherit
+            text-align: inherit
+            min-height: inherit
+            height: 100%
+            word-wrap: anywhere
+            padding-left: 2px
+            padding-right: 2px
+
+        &> span
+            visibility: hidden
+        &> textarea
+            z-index: 1
+            position: absolute
+            top: 0
+            left: 0
+            width: calc(100% - 4px)
+            overflow: hidden
+            resize: none
+            margin: 0
+            &::placeholder
+                font-family: 'Contrail One'
+                color: #575957da
+                font-style: italic
+                text-align: center
+                font-size: 95%
+                font-weight: normal
+
+        &.sheet-autoex22
+            min-height: 22px
+        &.sheet-autoex24
+            min-height: 24px
+        &.sheet-autoex26
+            min-height: 26px
+        &.sheet-autoex28
+            min-height: 28px
+        &.sheet-autoex40
+            min-height: 40px
+        &.sheet-autoex100
+            min-height: 100px
+
+    .container
+        width: 100%
+        flex-wrap: wrap
+        align-self: flex-start
+        justify-content: space-between
+        min-width: 700px
+        background-color: transparent
+        background-image: radial-gradient(closest-side at 50% 50%, #ffff, #fff0)
+        padding: 0
+        margin: 0
+
+        .main-container
+            width: calc(100% - (750px / 4) - 10px)
+            flex-direction: column
+            margin: 0
+            padding: 0
