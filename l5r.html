@@ -47,7 +47,7 @@
         <label for="clan"><span>Clan:</span>
           <input name="attr_clan" type="text" value="" id="clan">
         </label>
-        <label for="family"> <span>Famille:</span>
+        <label for="family"><span>Famille:</span>
           <input name="attr_family" type="text" value="" id="family">
         </label>
         <label for="genre"><span>Genre:</span>
@@ -56,9 +56,60 @@
         <label for="age"><span>Âge:</span>
           <input name="attr_age" type="text" value="" id="age">
         </label>
-        <div class="autoex autoex40">
-          <textarea name="attr_description" placeholder="Description"></textarea><span name="attr_description"></span>
-        </div>
+          <div class="caracbar" id="caracs">
+            <div class="elem">
+              <label for="constitution"><span>Constitution</span>
+                <input name="attr_constitution" type="number" value="2" id="constitution">
+              </label>
+              <label for="earth"><span>Terre</span>
+                <input name="attr_earth" type="number" value="2" id="earth" readonly>
+              </label>
+              <label for="will"><span>Volonté</span>
+                <input name="attr_will" type="number" value="2" id="will">
+              </label>
+            </div>
+            <div class="elem">
+              <label for="reflex"><span>Réflexes</span>
+                <input name="attr_reflex" type="number" value="2" id="reflex">
+              </label>
+              <label for="air"><span>Air</span>
+                <input name="attr_air" type="number" value="2" id="air" readonly>
+              </label>
+              <label for="awareness"><span>Intuition</span>
+                <input name="attr_awareness" type="number" value="2" id="awareness">
+              </label>
+            </div>
+            <div class="elem">
+              <label for="strength"><span>Force</span>
+                <input name="attr_strength" type="number" value="2" id="strength">
+              </label>
+              <label for="water"><span>Eau</span>
+                <input name="attr_water" type="number" value="2" id="water" readonly>
+              </label>
+              <label for="perception"><span>Perception</span>
+                <input name="attr_perception" type="number" value="2" id="perception">
+              </label>
+            </div>
+            <div class="elem">
+              <label for="agility"><span>Agilité</span>
+                <input name="attr_agility" type="number" value="2" id="agility">
+              </label>
+              <label for="fire"><span>Feu</span>
+                <input name="attr_fire" type="number" value="2" id="fire" readonly>
+              </label>
+              <label for="intelligence"><span>Intelligence</span>
+                <input name="attr_intelligence" type="number" value="2" id="intelligence">
+              </label>
+            </div>
+            <div class="elem elemVoid">
+              <label for="void"><span>Vide</span>
+                <input name="attr_void" type="number" value="2" id="void">
+              </label>
+              <label for="voidUsed"><span>Utilisé</span>
+                <input name="attr_voidUsed" type="number" value="0" id="voidUsed">
+              </label>
+            </div>
+          </div>
       </div>
       <div class="col3"><span>HonorBox</span></div>
     </div>
@@ -88,3 +139,16 @@
     </div>
   </div>
 </div>
+<script type="text/worker">on('sheet:opened change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', function()
+{
+    getAttrs(['constitution', 'will', 'awareness', 'reflex', 'force', 'perception', 'agility', 'intelligence'], function(v)
+    {
+        setAttrs({
+            earth: Math.min(v['constitution'], v['will']),
+            air: Math.min(v['reflex'], v['awareness']),
+            water: Math.min(v['force'], v['perception']),
+            fire: Math.min(v['agility'], v['intelligence'])
+        })
+    })
+})
+</script>

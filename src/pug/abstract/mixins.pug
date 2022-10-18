@@ -1,8 +1,18 @@
 mixin textInput(name, value='')
   input(name=`attr_${name}` type='text' value=value)&attributes(attributes)
 
+mixin textLabelled(name, label, id, value='')
+  label(for=id)
+    span!= label
+    +textInput(name, value)(id=id)&attributes(attributes)
+
 mixin numberInput(name, value='')
   input(name=`attr_${name}` type='number' value=value)&attributes(attributes)
+
+mixin numberLabelled(name, label, id, value='')
+  label(for=id)
+    span!= label
+    +numberInput(name, value)(id=id)&attributes(attributes)
 
 mixin textareaInput(name, value='')
   textarea(name=`attr_${name}`)&attributes(attributes)= value

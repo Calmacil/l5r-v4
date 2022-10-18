@@ -3,6 +3,7 @@ include pug/abstract/mixins.pug
 .container
 
     include pug/components/menu.pug
+    include pug/components/caracs.pug
 
     .main-container
 
@@ -19,3 +20,6 @@ include pug/abstract/mixins.pug
         include pug/tabs/tab8-shadowlands.pug
 
         include pug/tabs/tab0-config.pug
+
+script(type='text/worker')
+    include workers/update_rings.js

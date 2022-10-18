@@ -1,0 +1,25 @@
+mixin caracbar(id)
+    div(id=id).caracbar
+        .elem
+            +numberLabelled('constitution', 'Constitution', 'constitution', 2)
+            +numberLabelled('earth', 'Terre', 'earth', 2)(readonly)
+            +numberLabelled('will', 'Volonté', 'will', 2)
+
+        .elem
+            +numberLabelled('reflex', 'Réflexes', 'reflex', 2)
+            +numberLabelled('air', 'Air', 'air', 2)(readonly)
+            +numberLabelled('awareness', 'Intuition', 'awareness', 2)
+
+        .elem
+            +numberLabelled('strength', 'Force', 'strength', 2)
+            +numberLabelled('water', 'Eau', 'water', 2)(readonly)
+            +numberLabelled('perception', 'Perception', 'perception', 2)
+
+        .elem
+            +numberLabelled('agility', 'Agilité', 'agility', 2)
+            +numberLabelled('fire', 'Feu', 'fire', 2)(readonly)
+            +numberLabelled('intelligence', 'Intelligence', 'intelligence', 2)
+
+        .elem.elemVoid
+            +numberLabelled('void', 'Vide', 'void', 2)
+            +numberLabelled('voidUsed', 'Utilisé', 'voidUsed', 0)

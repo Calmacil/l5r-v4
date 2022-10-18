@@ -1,22 +1,14 @@
 .tab.tab1
     .col2T1#identity
         
-        label(for='character_name')
-            span Nom:
-            +textInput('character_name')#character_name
-        label(for='clan')
-            span Clan:
-            +textInput('clan')#clan
-        label(for='family') 
-            span Famille:
-            +textInput('family')#family
-        label(for='genre')
-            span Genre:
-            +textInput('genre')#genre
-        label(for='age')
-            span Âge:
-            +textInput('age')#age
-        .autoex.autoex40
-            +spanareaInput('description')(placeholder='Description')
+        +textLabelled('character_name', 'Nom:', 'character_name')
+        +textLabelled('clan', 'Clan:', 'clan')
+        +textLabelled('family', 'Famille:', 'family')
+        +textLabelled('genre', 'Genre:', 'genre')
+        +textLabelled('age', 'Âge:', 'age')
+        
+        +caracbar('caracs')
+
+
     .col3
         span HonorBox

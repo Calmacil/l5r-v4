@@ -257,6 +257,143 @@
   box-shadow: 0 5px 8px -6px #000;
 }
 
+.charactersheet .caracbar {
+  width: 100%;
+  padding-top: 10px;
+}
+.charactersheet .caracbar > .elem {
+  flex-direction: column;
+  align-content: center;
+  width: 20%;
+}
+.charactersheet .caracbar > .elem > label {
+  justify-content: flex-end;
+  margin-bottom: 3px;
+}
+.charactersheet .caracbar > .elem > label > input[type=number] {
+  border: solid 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+.charactersheet .caracbar > .elem > label > span {
+  font-variant: small-caps;
+}
+.charactersheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2), .charactersheet .caracbar > .elem:last-of-type > label:nth-of-type(1) {
+  flex-direction: row-reverse;
+}
+.charactersheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2) > input[type=number], .charactersheet .caracbar > .elem:last-of-type > label:nth-of-type(1) > input[type=number] {
+  height: 30px;
+  width: 30px;
+  margin-top: -5px;
+  z-index: 2;
+  background: white;
+  font-size: 1.2em;
+}
+.charactersheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2) > span, .charactersheet .caracbar > .elem:last-of-type > label:nth-of-type(1) > span {
+  margin-left: -5px;
+  padding-left: 8px;
+  width: calc(100% - 40px);
+  border-radius: 0 10px 10px 0;
+  font-size: calc(100% + 1px);
+  font-weight: bold;
+}
+.charactersheet .caracbar > .elem:last-of-type {
+  padding-top: 23px;
+}
+.charactersheet .caracbar > .elem:nth-of-type(1) input[type=number] {
+  border-color: #363;
+  color: #363;
+}
+.charactersheet .caracbar > .elem:nth-of-type(1):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+  color: #363;
+}
+.charactersheet .caracbar > .elem:nth-of-type(1):not(:last-of-type) label:nth-of-type(2) > span {
+  color: white;
+  background-color: #363;
+}
+.charactersheet .caracbar > .elem:nth-of-type(1):last-of-type label:nth-of-type(1) > span {
+  color: white;
+  background-color: #363;
+}
+.charactersheet .caracbar > .elem:nth-of-type(1):last-of-type label:nth-of-type(2) > span {
+  color: #363;
+}
+.charactersheet .caracbar > .elem:nth-of-type(2) input[type=number] {
+  border-color: #68a;
+  color: #68a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(2):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+  color: #68a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(2):not(:last-of-type) label:nth-of-type(2) > span {
+  color: white;
+  background-color: #68a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(2):last-of-type label:nth-of-type(1) > span {
+  color: white;
+  background-color: #68a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(2):last-of-type label:nth-of-type(2) > span {
+  color: #68a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(3) input[type=number] {
+  border-color: #36a;
+  color: #36a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(3):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+  color: #36a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(3):not(:last-of-type) label:nth-of-type(2) > span {
+  color: white;
+  background-color: #36a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(3):last-of-type label:nth-of-type(1) > span {
+  color: white;
+  background-color: #36a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(3):last-of-type label:nth-of-type(2) > span {
+  color: #36a;
+}
+.charactersheet .caracbar > .elem:nth-of-type(4) input[type=number] {
+  border-color: #a63;
+  color: #a63;
+}
+.charactersheet .caracbar > .elem:nth-of-type(4):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+  color: #a63;
+}
+.charactersheet .caracbar > .elem:nth-of-type(4):not(:last-of-type) label:nth-of-type(2) > span {
+  color: white;
+  background-color: #a63;
+}
+.charactersheet .caracbar > .elem:nth-of-type(4):last-of-type label:nth-of-type(1) > span {
+  color: white;
+  background-color: #a63;
+}
+.charactersheet .caracbar > .elem:nth-of-type(4):last-of-type label:nth-of-type(2) > span {
+  color: #a63;
+}
+.charactersheet .caracbar > .elem:nth-of-type(5) input[type=number] {
+  border-color: #999;
+  color: #999;
+}
+.charactersheet .caracbar > .elem:nth-of-type(5):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+  color: #999;
+}
+.charactersheet .caracbar > .elem:nth-of-type(5):not(:last-of-type) label:nth-of-type(2) > span {
+  color: white;
+  background-color: #999;
+}
+.charactersheet .caracbar > .elem:nth-of-type(5):last-of-type label:nth-of-type(1) > span {
+  color: white;
+  background-color: #999;
+}
+.charactersheet .caracbar > .elem:nth-of-type(5):last-of-type label:nth-of-type(2) > span {
+  color: #999;
+}
+
 .charactersheet .tab {
   width: 100%;
   height: calc(100% - 60px);
