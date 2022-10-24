@@ -1,7 +1,8 @@
 mixin caracbar(id)
     div(id=id).caracbar
         .elem
-            +numberLabelled('constitution', 'Constitution', 'constitution', 2)
+            +numberLabelled('constitution', 'Consti.', 'constitution', 2, '{{jet=[[@{constitution}d10k@{constitution}!10]]}}')
+            //-+rollButton('Consti', '{{jet=[[@{constitution}d10k@{constitution}!10]]}}')
             +numberLabelled('earth', 'Terre', 'earth', 2)(readonly)
             +numberLabelled('will', 'Volonté', 'will', 2)
 
@@ -13,12 +14,12 @@ mixin caracbar(id)
         .elem
             +numberLabelled('strength', 'Force', 'strength', 2)
             +numberLabelled('water', 'Eau', 'water', 2)(readonly)
-            +numberLabelled('perception', 'Perception', 'perception', 2)
+            +numberLabelled('perception', 'Percep.', 'perception', 2)
 
         .elem
             +numberLabelled('agility', 'Agilité', 'agility', 2)
             +numberLabelled('fire', 'Feu', 'fire', 2)(readonly)
-            +numberLabelled('intelligence', 'Intelligence', 'intelligence', 2)
+            +numberLabelled('intelligence', 'Intel.', 'intelligence', 2)
 
         .elem.elemVoid
             +numberLabelled('void', 'Vide', 'void', 2)

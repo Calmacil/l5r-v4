@@ -1,8 +1,54 @@
-.charactersheet
+.charsheet
     .dicebox
         width: calc(100% - 20px)
+        background-color: #ffc5
         height: $diceboxHeight
         border-bottom: 1px solid lightgrey
         margin: 0 10px 10px 10px
         padding-bottom: 5px
         box-shadow: 0 5px 8px -6px #000
+
+        h3
+            text-align: center
+            font-size: 12px
+            margin: auto
+
+        &> div > .explodeOnWrapper
+            border-radius: 10px
+            align-content: center
+            width: calc(100% - 15px)
+            &> label 
+                width: 25%
+                padding: 0
+                margin: 0
+                &> input[type=radio]
+                    @include toggleable(25px, $fontHeader, true)
+                    &~ span::before
+                        text-align: center
+                        font-size: 14px
+                        color: grey
+                        text-shadow: 1px 1px 1px black
+                    &:checked ~ span::before
+                        color: black
+
+        &> div > label > input[type=checkbox]
+            @include toggleable(25px, $fontStandard, false)
+            &~ span
+                margin-left: 22px
+                &::before
+                    border-radius: 20px
+                    width: 16px
+                    height: 16px
+                    border: 2px solid black
+                    margin-left: -22px
+
+        &> div:not(:first-of-type)
+            padding-top: 8px
+        &> div:nth-of-type(3) > label
+            &> span
+                width: 30%
+            &> input[type=text]
+                width: 70%
+                height: 22px
+                border: 1px lightgrey dotted
+                background: #fff5

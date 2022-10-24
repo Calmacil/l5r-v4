@@ -1,2 +1,17 @@
 .dicebox
-    h2 Boîte à dés!
+    .col3
+        h3 Explose sur...
+        div.explodeOnWrapper
+            +rdButton('explodeOn', 7, 7)
+            +rdButton('explodeOn', 8, 8)
+            +rdButton('explodeOn', 9, 9)
+            +rdButton('explodeOn', 10, 10)(checked)
+
+    .col3
+        +cbButton('hasFocus', 'Spécialité', 1)
+        +cbButton('askDiff', 'Demander diff?', 1)
+
+    .col3
+        +textLabelled('rollMod', 'Modif. ?', 'rollMod')
+        span Jet libre
+            +actButton('freeRoll', '{{pool=?{Formule ?}}}')

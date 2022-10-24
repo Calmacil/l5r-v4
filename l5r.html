@@ -36,7 +36,37 @@
   </div>
   <div class="main-container">
     <div class="dicebox">
-      <h2>Boîte à dés!</h2>
+      <div class="col3">
+        <h3>Explose sur...</h3>
+        <div class="explodeOnWrapper">
+          <label>
+            <input name="attr_explodeOn" value="7" type="radio"><span title="7"></span>
+          </label>
+          <label>
+            <input name="attr_explodeOn" value="8" type="radio"><span title="8"></span>
+          </label>
+          <label>
+            <input name="attr_explodeOn" value="9" type="radio"><span title="9"></span>
+          </label>
+          <label>
+            <input name="attr_explodeOn" value="10" type="radio" checked><span title="10"></span>
+          </label>
+        </div>
+      </div>
+      <div class="col3">
+        <label>
+          <input name="attr_hasFocus" value="1" type="checkbox"><span>Spécialité</span>
+        </label>
+        <label>
+          <input name="attr_askDiff" value="1" type="checkbox"><span>Demander diff?</span>
+        </label>
+      </div>
+      <div class="col3">
+        <label for="rollMod"><span>Modif. ?</span>
+          <input name="attr_rollMod" type="text" value="" id="rollMod">
+        </label><span>Jet libre
+          <button name="act_freeRoll" type="action" value="{{pool=?{Formule ?}}}"></button></span>
+      </div>
     </div>
     <input name="attr_activeTab" type="hidden" value="1">
     <div class="tab tab1">
@@ -58,7 +88,8 @@
         </label>
           <div class="caracbar" id="caracs">
             <div class="elem">
-              <label for="constitution"><span>Constitution</span>
+              <label for="constitution"><span>Consti.
+                  <button name="act_constitution" type="action" value="{{jet=[[@{constitution}d10k@{constitution}!10]]}}"></button></span>
                 <input name="attr_constitution" type="number" value="2" id="constitution">
               </label>
               <label for="earth"><span>Terre</span>
@@ -86,7 +117,7 @@
               <label for="water"><span>Eau</span>
                 <input name="attr_water" type="number" value="2" id="water" readonly>
               </label>
-              <label for="perception"><span>Perception</span>
+              <label for="perception"><span>Percep.</span>
                 <input name="attr_perception" type="number" value="2" id="perception">
               </label>
             </div>
@@ -97,7 +128,7 @@
               <label for="fire"><span>Feu</span>
                 <input name="attr_fire" type="number" value="2" id="fire" readonly>
               </label>
-              <label for="intelligence"><span>Intelligence</span>
+              <label for="intelligence"><span>Intel.</span>
                 <input name="attr_intelligence" type="number" value="2" id="intelligence">
               </label>
             </div>
@@ -139,7 +170,17 @@
     </div>
   </div>
 </div>
-<script type="text/worker">on('sheet:opened change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', function()
+<rolltemplate class="sheet-rolltemplate-base">
+  <div class="sheet-header">
+    <h1>{{charname}}</h1>
+  </div>
+  <div class="sheet-results">
+    <h4>{{title}} : {{displayRoll}}</h4>
+    <h4>{{roll}}</h4>
+  </div>
+</rolltemplate>
+<script type="text/worker">
+  on('sheet:opened change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', function()
 {
     getAttrs(['constitution', 'will', 'awareness', 'reflex', 'force', 'perception', 'agility', 'intelligence'], function(v)
     {
@@ -150,5 +191,47 @@
             fire: Math.min(v['agility'], v['intelligence'])
         })
     })
+});function doRoll(pool, kept, mod, title, template='base')
+{
+    var rollString = `&{template:${template}} `
+    getAttrs(['character_name', 'hasFocus', 'explodeOn'], function(v)
+    {
+        rollString += `{{charname=${v.character_name}}} `
+
+        rollString += `{{roll=[[{`
+        for (let i = 0; i < pool; i++) {
+            if (i) rollString += ', '
+            rollString += `1d10!>${v.explodeOn}`
+            if ("1" === v.hasFocus)
+                rollString += `r1`
+        }
+        rollString += `}k${kept}+${mod}]]}} `
+
+        rollString += `{{title=${title}}} `
+
+        rollString += `{{displayRoll=${pool}g${kept}`
+        if (mod > 0)
+            rollString += `+${mod}`
+        else if (mod < 0)
+            rollString += mod
+        rollString += `}} `
+
+        console.warn(rollString)
+        startRoll(rollString, function(result) {
+            // Do stuff later
+            finishRoll(result.rollId)
+        })
+
+    })
+}
+
+on('clicked:constitution', function()
+{
+    console.log("COUCOU")
+});
+
+on('clicked:freeRoll', function()
+{
+    doRoll(8, 3, 0, 'Ramoloss')
 })
 </script>

@@ -9,4 +9,4 @@ on('sheet:opened change:constitution change:will change:awareness change:reflex 
             fire: Math.min(v['agility'], v['intelligence'])
         })
     })
-})
+});

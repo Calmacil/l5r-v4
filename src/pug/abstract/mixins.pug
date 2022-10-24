@@ -9,9 +9,11 @@ mixin textLabelled(name, label, id, value='')
 mixin numberInput(name, value='')
   input(name=`attr_${name}` type='number' value=value)&attributes(attributes)
 
-mixin numberLabelled(name, label, id, value='')
+mixin numberLabelled(name, label, id, value='', roll=null)
   label(for=id)
     span!= label
+      if (roll)
+        +actButton(name, roll)
     +numberInput(name, value)(id=id)&attributes(attributes)
 
 mixin textareaInput(name, value='')
@@ -40,7 +42,7 @@ mixin cbButton(name, label, value=null)
       input(name=`attr_${name}` value=value type='checkbox')&attributes(attributes)
     else
       input(name=name type='checkbox')&attributes(attributes)
-    span(title=label)
+    span!= label
 
 mixin rdButton(name, label, value='')
   label

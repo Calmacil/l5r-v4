@@ -1,11 +1,16 @@
 $imgRepo: "https://raw.githubusercontent.com/Calmacil/l5r-v4/master"
 $diceboxHeight: 60px
+$menuWidth: 180px
 $numberTabs: 8
+
+$activeColor: #f008
+$checkedColor: #99a
 
 // Fonts
 $fontHeader: "Permanent Marker"
 $fontHandwriting: "Patrick Hand"
 $fontStandard: "Arial"
+$fontDice: "dicefontd10"
 
 // element colors
 $colEarth: #363
@@ -13,3 +18,33 @@ $colAir: #68a
 $colWater: #36a
 $colFire: #a63
 $colVoid: #999
+
+// Used for checkboxes and radio buttons
+@mixin toggleable($height, $font, $withLabel:false)
+    position: absolute
+    width: calc(25% - 33px)
+    opacity: 0
+    height: $height
+    &~ span
+        width: 100%
+        vertical-align: center
+        &::before
+            display: flex
+            content: attr(title)
+            justify-content: center
+            font-family: $font
+            @if $withLabel
+                width: 100%
+                height: $height - 6px
+                line-height: $height - 4px
+            @else
+                margin-top: -5px
+                margin-right: 4px
+    &:checked ~ span::before
+        @if $withLabel
+            text-decoration: underline
+            text-decoration-color: $activeColor
+            text-decoration-thickness: 2px
+        @else 
+            background-color: $checkedColor
+            box-shadow: 0 0 5px inset black

@@ -1,56 +1,55 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
-.charactersheet {
+.charsheet {
   background-image: url("https://raw.githubusercontent.com/Calmacil/l5r-v4/master/img/appierriz.png");
   background-size: 100%;
   background-repeat: no-repeat;
   min-width: 700px;
   min-height: 300px;
-  display: flex !important;
   flex-direction: column;
 }
-.charactersheet .itemcontrol {
+.charsheet .itemcontrol {
   z-index: 2;
 }
-.charactersheet .btn {
+.charsheet .btn {
   border-radius: 0;
 }
-.charactersheet img,
-.charactersheet div,
-.charactersheet span,
-.charactersheet input[type=number],
-.charactersheet input[type=text],
-.charactersheet textarea,
-.charactersheet select,
-.charactersheet h1,
-.charactersheet h2,
-.charactersheet label,
-.charactersheet button[type=roll],
-.charactersheet button[type=action] {
+.charsheet img,
+.charsheet div,
+.charsheet span,
+.charsheet input[type=number],
+.charsheet input[type=text],
+.charsheet textarea,
+.charsheet select,
+.charsheet h1,
+.charsheet h2,
+.charsheet label,
+.charsheet button[type=roll],
+.charsheet button[type=action] {
   display: flex;
 }
-.charactersheet input[type=number],
-.charactersheet input[type=text],
-.charactersheet select,
-.charactersheet textarea {
+.charsheet input[type=number],
+.charsheet input[type=text],
+.charsheet select,
+.charsheet textarea {
   color: black;
 }
-.charactersheet input[type=text],
-.charactersheet input[type=number],
-.charactersheet select {
+.charsheet input[type=text],
+.charsheet input[type=number],
+.charsheet select {
   padding: 0;
   margin: 0;
   border-radius: 0;
 }
-.charactersheet input[type=number]::-webkit-outer-spin-button, .charactersheet input[type=number]::-webkit-inner-spin-button {
+.charsheet input[type=number]::-webkit-outer-spin-button, .charsheet input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.charactersheet input[type=number],
-.charactersheet input[type=text] {
+.charsheet input[type=number],
+.charsheet input[type=text] {
   -moz-appearance: textfield;
   border-radius: 0;
 }
-.charactersheet textarea {
+.charsheet textarea {
   border: none;
   width: 100%;
   padding: 0;
@@ -58,18 +57,18 @@
   border-radius: 0;
   margin: 0;
 }
-.charactersheet .repcontrol {
+.charsheet .repcontrol {
   display: flex;
   width: 100%;
   justify-content: space-between;
   flex-direction: row-reverse;
 }
-.charactersheet .repcontrol > .btn {
+.charsheet .repcontrol > .btn {
   padding-bottom: 0;
   border-radius: 0;
   border: 1px solid green;
 }
-.charactersheet div.autoex {
+.charsheet div.autoex {
   line-height: 1.4em;
   min-width: 1.4em;
   cursor: text;
@@ -77,7 +76,7 @@
   position: relative;
   width: 100%;
 }
-.charactersheet div.autoex > span, .charactersheet div.autoex > textarea {
+.charsheet div.autoex > span, .charsheet div.autoex > textarea {
   display: block;
   font-family: inherit;
   font-size: inherit;
@@ -91,10 +90,10 @@
   padding-right: 2px;
   border-bottom: solid 1px lightgray;
 }
-.charactersheet div.autoex > span {
+.charsheet div.autoex > span {
   visibility: hidden;
 }
-.charactersheet div.autoex > textarea {
+.charsheet div.autoex > textarea {
   z-index: 1;
   position: absolute;
   top: 0;
@@ -104,7 +103,7 @@
   resize: none;
   margin: 0;
 }
-.charactersheet div.autoex > textarea::placeholder {
+.charsheet div.autoex > textarea::placeholder {
   font-family: "Contrail One";
   color: rgba(87, 89, 87, 0.8549019608);
   font-style: italic;
@@ -112,25 +111,25 @@
   font-size: 95%;
   font-weight: normal;
 }
-.charactersheet div.autoex.autoex22 {
+.charsheet div.autoex.autoex22 {
   min-height: 22px;
 }
-.charactersheet div.autoex.autoex24 {
+.charsheet div.autoex.autoex24 {
   min-height: 24px;
 }
-.charactersheet div.autoex.autoex26 {
+.charsheet div.autoex.autoex26 {
   min-height: 26px;
 }
-.charactersheet div.autoex.autoex28 {
+.charsheet div.autoex.autoex28 {
   min-height: 28px;
 }
-.charactersheet div.autoex.autoex40 {
+.charsheet div.autoex.autoex40 {
   min-height: 40px;
 }
-.charactersheet div.autoex.autoex100 {
+.charsheet div.autoex.autoex100 {
   min-height: 100px;
 }
-.charactersheet .container {
+.charsheet .container {
   width: 100%;
   flex-wrap: wrap;
   align-self: flex-start;
@@ -141,45 +140,45 @@
   padding: 0;
   margin: 0;
 }
-.charactersheet .container .main-container {
-  width: calc(100% - 187.5px - 10px);
+.charsheet .container .main-container {
+  width: calc(100% - 180px - 10px);
   flex-direction: column;
   margin: 0;
   padding: 0;
 }
 
-.charactersheet div.col3 {
+.charsheet div.col3 {
   width: 33.3333333333%;
   flex-wrap: wrap;
 }
-.charactersheet div.col2 {
+.charsheet div.col2 {
   width: 50%;
   flex-wrap: wrap;
 }
-.charactersheet div.col40 {
+.charsheet div.col40 {
   width: calc(40% - 10px);
   flex-wrap: wrap;
   align-content: flex-start;
 }
-.charactersheet div.col60 {
+.charsheet div.col60 {
   width: calc(60% - 10px);
   flex-wrap: wrap;
   align-content: flex-start;
 }
-.charactersheet div.col2T1 {
+.charsheet div.col2T1 {
   width: 66.6666666667%;
   flex-wrap: wrap;
 }
-.charactersheet .tab {
+.charsheet .tab {
   display: none;
 }
-.charactersheet input[name=attr_activeTab][value="8"] ~ div.tab8, .charactersheet input[name=attr_activeTab][value="7"] ~ div.tab7, .charactersheet input[name=attr_activeTab][value="6"] ~ div.tab6, .charactersheet input[name=attr_activeTab][value="5"] ~ div.tab5, .charactersheet input[name=attr_activeTab][value="4"] ~ div.tab4, .charactersheet input[name=attr_activeTab][value="3"] ~ div.tab3, .charactersheet input[name=attr_activeTab][value="2"] ~ div.tab2, .charactersheet input[name=attr_activeTab][value="1"] ~ div.tab1, .charactersheet input[name=attr_activeTab][value="0"] ~ div.tab0 {
+.charsheet input[name=attr_activeTab][value="8"] ~ div.tab8, .charsheet input[name=attr_activeTab][value="7"] ~ div.tab7, .charsheet input[name=attr_activeTab][value="6"] ~ div.tab6, .charsheet input[name=attr_activeTab][value="5"] ~ div.tab5, .charsheet input[name=attr_activeTab][value="4"] ~ div.tab4, .charsheet input[name=attr_activeTab][value="3"] ~ div.tab3, .charsheet input[name=attr_activeTab][value="2"] ~ div.tab2, .charsheet input[name=attr_activeTab][value="1"] ~ div.tab1, .charsheet input[name=attr_activeTab][value="0"] ~ div.tab0 {
   display: flex;
 }
-.charactersheet label {
+.charsheet label {
   font-size: 12px;
 }
-.charactersheet label > span {
+.charsheet label > span {
   font-weight: normal;
   font-family: "Arial";
   font-size: inherit;
@@ -187,7 +186,7 @@
   padding-top: 5px;
   padding-right: 3px;
 }
-.charactersheet label > input[type=text], .charactersheet label > input[type=number] {
+.charsheet label > input[type=text], .charsheet label > input[type=number] {
   font-weight: normal;
   font-size: calc(1em + 2px);
   font-style: italic;
@@ -199,7 +198,7 @@
 }
 
 .charactersheet .menu {
-  width: 187.5px;
+  width: 180px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -227,50 +226,148 @@
 }
 .charactersheet .menu > div > label > input[type=radio] ~ span {
   width: 100%;
+  vertical-align: center;
 }
 .charactersheet .menu > div > label > input[type=radio] ~ span::before {
   display: flex;
   content: attr(title);
+  justify-content: center;
+  font-family: "Permanent Marker";
   width: 100%;
   height: 24px;
   line-height: 26px;
-  justify-content: center;
-  font-family: "Permanent Marker";
+}
+.charactersheet .menu > div > label > input[type=radio]:checked ~ span::before {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 0, 0, 0.5333333333);
+  text-decoration-thickness: 2px;
+}
+.charactersheet .menu > div > label > input[type=radio] ~ span::before {
   background-image: linear-gradient(to right, rgba(34, 34, 40, 0.9333333333) 60%, #eeeeff);
   color: white;
   text-shadow: 1px 1px 2px black;
   border-radius: 10px;
 }
 .charactersheet .menu > div > label > input[type=radio]:checked ~ span::before {
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 0, 0, 0.5333333333);
-  text-decoration-thickness: 2px;
   background-image: linear-gradient(to left, rgba(34, 34, 40, 0.9333333333) 60%, #eeeeff);
 }
 
-.charactersheet .dicebox {
+.charsheet .dicebox {
   width: calc(100% - 20px);
+  background-color: rgba(255, 255, 204, 0.3333333333);
   height: 60px;
   border-bottom: 1px solid lightgrey;
   margin: 0 10px 10px 10px;
   padding-bottom: 5px;
   box-shadow: 0 5px 8px -6px #000;
 }
+.charsheet .dicebox h3 {
+  text-align: center;
+  font-size: 12px;
+  margin: auto;
+}
+.charsheet .dicebox > div > .explodeOnWrapper {
+  border-radius: 10px;
+  align-content: center;
+  width: calc(100% - 15px);
+}
+.charsheet .dicebox > div > .explodeOnWrapper > label {
+  width: 25%;
+  padding: 0;
+  margin: 0;
+}
+.charsheet .dicebox > div > .explodeOnWrapper > label > input[type=radio] {
+  position: absolute;
+  width: calc(25% - 33px);
+  opacity: 0;
+  height: 25px;
+}
+.charsheet .dicebox > div > .explodeOnWrapper > label > input[type=radio] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .dicebox > div > .explodeOnWrapper > label > input[type=radio] ~ span::before {
+  display: flex;
+  content: attr(title);
+  justify-content: center;
+  font-family: "Permanent Marker";
+  width: 100%;
+  height: 19px;
+  line-height: 21px;
+}
+.charsheet .dicebox > div > .explodeOnWrapper > label > input[type=radio]:checked ~ span::before {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 0, 0, 0.5333333333);
+  text-decoration-thickness: 2px;
+}
+.charsheet .dicebox > div > .explodeOnWrapper > label > input[type=radio] ~ span::before {
+  text-align: center;
+  font-size: 14px;
+  color: grey;
+  text-shadow: 1px 1px 1px black;
+}
+.charsheet .dicebox > div > .explodeOnWrapper > label > input[type=radio]:checked ~ span::before {
+  color: black;
+}
+.charsheet .dicebox > div > label > input[type=checkbox] {
+  position: absolute;
+  width: calc(25% - 33px);
+  opacity: 0;
+  height: 25px;
+}
+.charsheet .dicebox > div > label > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .dicebox > div > label > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: attr(title);
+  justify-content: center;
+  font-family: "Arial";
+  margin-top: -5px;
+  margin-right: 4px;
+}
+.charsheet .dicebox > div > label > input[type=checkbox]:checked ~ span::before {
+  background-color: #99a;
+  box-shadow: 0 0 5px inset black;
+}
+.charsheet .dicebox > div > label > input[type=checkbox] ~ span {
+  margin-left: 22px;
+}
+.charsheet .dicebox > div > label > input[type=checkbox] ~ span::before {
+  border-radius: 20px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  margin-left: -22px;
+}
+.charsheet .dicebox > div:not(:first-of-type) {
+  padding-top: 8px;
+}
+.charsheet .dicebox > div:nth-of-type(3) > label > span {
+  width: 30%;
+}
+.charsheet .dicebox > div:nth-of-type(3) > label > input[type=text] {
+  width: 70%;
+  height: 22px;
+  border: 1px lightgrey dotted;
+  background: rgba(255, 255, 255, 0.3333333333);
+}
 
-.charactersheet .caracbar {
+.charsheet .caracbar {
   width: 100%;
   padding-top: 10px;
 }
-.charactersheet .caracbar > .elem {
+.charsheet .caracbar > .elem {
   flex-direction: column;
   align-content: center;
   width: 20%;
 }
-.charactersheet .caracbar > .elem > label {
+.charsheet .caracbar > .elem > label {
   justify-content: flex-end;
   margin-bottom: 3px;
 }
-.charactersheet .caracbar > .elem > label > input[type=number] {
+.charsheet .caracbar > .elem > label > input[type=number] {
   border: solid 2px;
   width: 22px;
   height: 22px;
@@ -278,13 +375,13 @@
   text-align: center;
   font-weight: bold;
 }
-.charactersheet .caracbar > .elem > label > span {
+.charsheet .caracbar > .elem > label > span {
   font-variant: small-caps;
 }
-.charactersheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2), .charactersheet .caracbar > .elem:last-of-type > label:nth-of-type(1) {
+.charsheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2), .charsheet .caracbar > .elem:last-of-type > label:nth-of-type(1) {
   flex-direction: row-reverse;
 }
-.charactersheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2) > input[type=number], .charactersheet .caracbar > .elem:last-of-type > label:nth-of-type(1) > input[type=number] {
+.charsheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2) > input[type=number], .charsheet .caracbar > .elem:last-of-type > label:nth-of-type(1) > input[type=number] {
   height: 30px;
   width: 30px;
   margin-top: -5px;
@@ -292,7 +389,7 @@
   background: white;
   font-size: 1.2em;
 }
-.charactersheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2) > span, .charactersheet .caracbar > .elem:last-of-type > label:nth-of-type(1) > span {
+.charsheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2) > span, .charsheet .caracbar > .elem:last-of-type > label:nth-of-type(1) > span {
   margin-left: -5px;
   padding-left: 8px;
   width: calc(100% - 40px);
@@ -300,116 +397,131 @@
   font-size: calc(100% + 1px);
   font-weight: bold;
 }
-.charactersheet .caracbar > .elem:last-of-type {
+.charsheet .caracbar > .elem:last-of-type {
   padding-top: 23px;
 }
-.charactersheet .caracbar > .elem:nth-of-type(1) input[type=number] {
+.charsheet .caracbar > .elem:nth-of-type(1) input[type=number] {
   border-color: #363;
   color: #363;
 }
-.charactersheet .caracbar > .elem:nth-of-type(1):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+.charsheet .caracbar > .elem:nth-of-type(1):not(:last-of-type) label:not(:nth-of-type(2)) > span {
   color: #363;
 }
-.charactersheet .caracbar > .elem:nth-of-type(1):not(:last-of-type) label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(1):not(:last-of-type) label:nth-of-type(2) > span {
   color: white;
   background-color: #363;
 }
-.charactersheet .caracbar > .elem:nth-of-type(1):last-of-type label:nth-of-type(1) > span {
+.charsheet .caracbar > .elem:nth-of-type(1):last-of-type label:nth-of-type(1) > span {
   color: white;
   background-color: #363;
 }
-.charactersheet .caracbar > .elem:nth-of-type(1):last-of-type label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(1):last-of-type label:nth-of-type(2) > span {
   color: #363;
 }
-.charactersheet .caracbar > .elem:nth-of-type(2) input[type=number] {
+.charsheet .caracbar > .elem:nth-of-type(2) input[type=number] {
   border-color: #68a;
   color: #68a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(2):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+.charsheet .caracbar > .elem:nth-of-type(2):not(:last-of-type) label:not(:nth-of-type(2)) > span {
   color: #68a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(2):not(:last-of-type) label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(2):not(:last-of-type) label:nth-of-type(2) > span {
   color: white;
   background-color: #68a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(2):last-of-type label:nth-of-type(1) > span {
+.charsheet .caracbar > .elem:nth-of-type(2):last-of-type label:nth-of-type(1) > span {
   color: white;
   background-color: #68a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(2):last-of-type label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(2):last-of-type label:nth-of-type(2) > span {
   color: #68a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(3) input[type=number] {
+.charsheet .caracbar > .elem:nth-of-type(3) input[type=number] {
   border-color: #36a;
   color: #36a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(3):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+.charsheet .caracbar > .elem:nth-of-type(3):not(:last-of-type) label:not(:nth-of-type(2)) > span {
   color: #36a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(3):not(:last-of-type) label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(3):not(:last-of-type) label:nth-of-type(2) > span {
   color: white;
   background-color: #36a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(3):last-of-type label:nth-of-type(1) > span {
+.charsheet .caracbar > .elem:nth-of-type(3):last-of-type label:nth-of-type(1) > span {
   color: white;
   background-color: #36a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(3):last-of-type label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(3):last-of-type label:nth-of-type(2) > span {
   color: #36a;
 }
-.charactersheet .caracbar > .elem:nth-of-type(4) input[type=number] {
+.charsheet .caracbar > .elem:nth-of-type(4) input[type=number] {
   border-color: #a63;
   color: #a63;
 }
-.charactersheet .caracbar > .elem:nth-of-type(4):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+.charsheet .caracbar > .elem:nth-of-type(4):not(:last-of-type) label:not(:nth-of-type(2)) > span {
   color: #a63;
 }
-.charactersheet .caracbar > .elem:nth-of-type(4):not(:last-of-type) label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(4):not(:last-of-type) label:nth-of-type(2) > span {
   color: white;
   background-color: #a63;
 }
-.charactersheet .caracbar > .elem:nth-of-type(4):last-of-type label:nth-of-type(1) > span {
+.charsheet .caracbar > .elem:nth-of-type(4):last-of-type label:nth-of-type(1) > span {
   color: white;
   background-color: #a63;
 }
-.charactersheet .caracbar > .elem:nth-of-type(4):last-of-type label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(4):last-of-type label:nth-of-type(2) > span {
   color: #a63;
 }
-.charactersheet .caracbar > .elem:nth-of-type(5) input[type=number] {
+.charsheet .caracbar > .elem:nth-of-type(5) input[type=number] {
   border-color: #999;
   color: #999;
 }
-.charactersheet .caracbar > .elem:nth-of-type(5):not(:last-of-type) label:not(:nth-of-type(2)) > span {
+.charsheet .caracbar > .elem:nth-of-type(5):not(:last-of-type) label:not(:nth-of-type(2)) > span {
   color: #999;
 }
-.charactersheet .caracbar > .elem:nth-of-type(5):not(:last-of-type) label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(5):not(:last-of-type) label:nth-of-type(2) > span {
   color: white;
   background-color: #999;
 }
-.charactersheet .caracbar > .elem:nth-of-type(5):last-of-type label:nth-of-type(1) > span {
+.charsheet .caracbar > .elem:nth-of-type(5):last-of-type label:nth-of-type(1) > span {
   color: white;
   background-color: #999;
 }
-.charactersheet .caracbar > .elem:nth-of-type(5):last-of-type label:nth-of-type(2) > span {
+.charsheet .caracbar > .elem:nth-of-type(5):last-of-type label:nth-of-type(2) > span {
   color: #999;
 }
 
-.charactersheet .tab {
+.charsheet button[type=action] {
+  border: 0;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  padding-left: 3px;
+}
+.charsheet button[type=action]::before {
+  font-family: "dicefontd10";
+  content: "j";
+  font-size: 22px;
+  margin-top: -4px;
+}
+
+.charsheet .tab {
   width: 100%;
   height: calc(100% - 60px);
   align-items: flex-start;
 }
-.charactersheet .tab label {
+.charsheet .tab label {
   line-height: 18px;
   height: 20px;
 }
 
-.charactersheet .tab1 #identity > label:first-of-type {
+.charsheet .tab1 #identity > label:first-of-type {
   font-size: 18px;
   align-items: space-between;
   width: calc(100% - 10px);
 }
-.charactersheet .tab1 #identity > label:not(:first-of-type) {
+.charsheet .tab1 #identity > label:not(:first-of-type) {
   width: calc(50% - 10px);
 }
 
