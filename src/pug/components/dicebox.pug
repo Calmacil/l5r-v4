@@ -2,6 +2,7 @@
     .col3
         h3 Explose sur...
         div.explodeOnWrapper
+            +rdButton('explodeOn', '-', 0)
             +rdButton('explodeOn', 7, 7)
             +rdButton('explodeOn', 8, 8)
             +rdButton('explodeOn', 9, 9)
@@ -12,6 +13,6 @@
         +cbButton('askDiff', 'Demander diff?', 1)
 
     .col3
-        +textLabelled('rollMod', 'Modif. ?', 'rollMod')
+        +textLabelled('rollMod', 'Jet/Modif. ?', 'rollMod')
         span Jet libre
-            +actButton('freeRoll', '{{pool=?{Formule ?}}}')
+            +actButton('freeRoll', '')

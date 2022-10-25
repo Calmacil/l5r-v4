@@ -345,10 +345,10 @@
   padding-top: 8px;
 }
 .charsheet .dicebox > div:nth-of-type(3) > label > span {
-  width: 30%;
+  width: 40%;
 }
 .charsheet .dicebox > div:nth-of-type(3) > label > input[type=text] {
-  width: 70%;
+  width: 60%;
   height: 22px;
   border: 1px lightgrey dotted;
   background: rgba(255, 255, 255, 0.3333333333);
