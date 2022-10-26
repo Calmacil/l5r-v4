@@ -36,12 +36,13 @@ function poolToString(pool)
     try {
         let res = `${pool.thrown}g${pool.kept}`
         if (pool.mod > 0) {
-            rollString += `+${pool.mod}`
+            res += `+${pool.mod}`
         } else if (pool.mod < 0) {
-            rollString += pool.mod
+            res += pool.mod
         }
         return res
     } catch (e) {
+        console.error(e)
         return 'Error !'
     }
 }
@@ -62,9 +63,35 @@ function sumPools(...pools)
     return sum
 }
 
+/**
+ * Flattens a dice pool so that the number of dice never exceeds 10
+ * @param {object} pool The initial pool
+ * @returns The converted pool
+ */
 function flattenPool(pool)
 {
-    // TODO later
+    // thrown dice over 10 are converted to rolled dice (2 to 1)
+    while (pool.kept < 10 && pool.thrown > 11) {
+        pool.kept += 1
+        pool.thrown -= 2
+    }
+
+    let overThrown = Math.max(pool.thrown - 10, 0)
+    let overKept = Math.max(pool.kept - 10, 0)
+
+    // remaining thrown dice over 10 are converted to bonus
+    if (overThrown) {
+        pool.thrown = 10;
+        pool.mod += 2 * overThrown
+    }
+
+    // kept dice over 10 are converted to bonus
+    if (overKept) {
+        pool.kept = 10
+        pool.mod += 2 * overKept
+    }
+
+    return pool
 }
 
 /**
@@ -77,8 +104,10 @@ function flattenPool(pool)
  */
 function doRoll(pool, title, template='base')
 {
+    pool = flattenPool(pool)
     var rollString = `&{template:${template}} `
-    getAttrs(['character_name', 'hasFocus', 'explodeOn'], function(v)
+
+    getAttrs(['character_name', 'hasFocus', 'explodeOn', 'character_avatar'], function(v)
     {
         rollString += `{{charname=${v.character_name}}} `
 
@@ -86,7 +115,7 @@ function doRoll(pool, title, template='base')
         for (let i = 0; i < pool.thrown; i++) {
             if (i) rollString += ', '
             rollString += `1d10`
-            if (v.explodeOn)
+            if (parseInt(v.explodeOn)||0)
                 rollString += `!>${v.explodeOn}`
             if ("1" === v.hasFocus)
                 rollString += `ro1`
@@ -97,6 +126,7 @@ function doRoll(pool, title, template='base')
 
         rollString += `{{displayRoll=${poolToString(pool)}}} `
 
+        console.log(rollString)
         startRoll(rollString, function(result) {
             // Do stuff later
             finishRoll(result.rollId)
@@ -105,17 +135,24 @@ function doRoll(pool, title, template='base')
     })
 }
 
-on('clicked:constitution', function()
-{
-    console.log("COUCOU")
-});
-
 on('clicked:freeRoll', function()
 {
     getAttrs(['rollMod'], function(v){
         let pool = parsePoolString(v.rollMod)
         doRoll(pool, 'Jet libre')
         // TODO: see to set this last instruction configurable
-        setAttrs({rollMod: ''})
+        //setAttrs({rollMod: ''})
     })
 })
+
+
+on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air clicked:awareness clicked:strength clicked:water clicked:perception clicked:agility clicked:fire clicked:intelligence clicked:void', function(e)
+{
+    let rolledAttribute = e.htmlAttributes.value.split(',')[0]
+    let rollTitle = e.htmlAttributes.value.split(',')[1]
+    getAttrs([rolledAttribute], function(v)
+    {
+        let pool = createPool(v[rolledAttribute])
+        doRoll(pool, rollTitle)
+    })
+});

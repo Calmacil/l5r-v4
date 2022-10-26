@@ -1,26 +1,25 @@
 mixin caracbar(id)
     div(id=id).caracbar
         .elem
-            +numberLabelled('constitution', 'Consti.', 'constitution', 2, '{{jet=[[@{constitution}d10k@{constitution}!10]]}}')
-            //-+rollButton('Consti', '{{jet=[[@{constitution}d10k@{constitution}!10]]}}')
-            +numberLabelled('earth', 'Terre', 'earth', 2)(readonly)
-            +numberLabelled('will', 'Volonté', 'will', 2)
+            +numberLabelled('constitution', 'Consti.', 'constitution', 2, 'constitution,Constitution')
+            +numberLabelled('earth', 'Terre', 'earth', 2, 'earth,Terre')(readonly)
+            +numberLabelled('will', 'Volonté', 'will', 2, 'will,Volonté')
 
         .elem
-            +numberLabelled('reflex', 'Réflexes', 'reflex', 2)
-            +numberLabelled('air', 'Air', 'air', 2)(readonly)
-            +numberLabelled('awareness', 'Intuition', 'awareness', 2)
+            +numberLabelled('reflex', 'Réflexes', 'reflex', 2, 'reflex,Réflexes')
+            +numberLabelled('air', 'Air', 'air', 2, 'air,Air')(readonly)
+            +numberLabelled('awareness', 'Intuition', 'awareness', 2, 'awareness,Intuition')
 
         .elem
-            +numberLabelled('strength', 'Force', 'strength', 2)
-            +numberLabelled('water', 'Eau', 'water', 2)(readonly)
-            +numberLabelled('perception', 'Percep.', 'perception', 2)
+            +numberLabelled('strength', 'Force', 'strength', 2, 'strength,Force')
+            +numberLabelled('water', 'Eau', 'water', 2, 'water,Eau')(readonly)
+            +numberLabelled('perception', 'Percep.', 'perception', 2, 'perception,Perception')
 
         .elem
-            +numberLabelled('agility', 'Agilité', 'agility', 2)
-            +numberLabelled('fire', 'Feu', 'fire', 2)(readonly)
-            +numberLabelled('intelligence', 'Intel.', 'intelligence', 2)
+            +numberLabelled('agility', 'Agilité', 'agility', 2, 'agility,Agilité')
+            +numberLabelled('fire', 'Feu', 'fire', 2, 'fire,Feu')(readonly)
+            +numberLabelled('intelligence', 'Intel.', 'intelligence', 2, 'intelligence,Intelligence')
 
         .elem.elemVoid
-            +numberLabelled('void', 'Vide', 'void', 2)
+            +numberLabelled('void', 'Vide', 'void', 2, 'void,Vide')
             +numberLabelled('voidUsed', 'Utilisé', 'voidUsed', 0)

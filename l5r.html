@@ -92,51 +92,63 @@
           <div class="caracbar" id="caracs">
             <div class="elem">
               <label for="constitution"><span>Consti.
-                  <button name="act_constitution" type="action" value="{{jet=[[@{constitution}d10k@{constitution}!10]]}}"></button></span>
+                  <button name="act_constitution" type="action" value="constitution,Constitution"></button></span>
                 <input name="attr_constitution" type="number" value="2" id="constitution">
               </label>
-              <label for="earth"><span>Terre</span>
+              <label for="earth"><span>Terre
+                  <button name="act_earth" type="action" value="earth,Terre"></button></span>
                 <input name="attr_earth" type="number" value="2" id="earth" readonly>
               </label>
-              <label for="will"><span>Volonté</span>
+              <label for="will"><span>Volonté
+                  <button name="act_will" type="action" value="will,Volonté"></button></span>
                 <input name="attr_will" type="number" value="2" id="will">
               </label>
             </div>
             <div class="elem">
-              <label for="reflex"><span>Réflexes</span>
+              <label for="reflex"><span>Réflexes
+                  <button name="act_reflex" type="action" value="reflex,Réflexes"></button></span>
                 <input name="attr_reflex" type="number" value="2" id="reflex">
               </label>
-              <label for="air"><span>Air</span>
+              <label for="air"><span>Air
+                  <button name="act_air" type="action" value="air,Air"></button></span>
                 <input name="attr_air" type="number" value="2" id="air" readonly>
               </label>
-              <label for="awareness"><span>Intuition</span>
+              <label for="awareness"><span>Intuition
+                  <button name="act_awareness" type="action" value="awareness,Intuition"></button></span>
                 <input name="attr_awareness" type="number" value="2" id="awareness">
               </label>
             </div>
             <div class="elem">
-              <label for="strength"><span>Force</span>
+              <label for="strength"><span>Force
+                  <button name="act_strength" type="action" value="strength,Force"></button></span>
                 <input name="attr_strength" type="number" value="2" id="strength">
               </label>
-              <label for="water"><span>Eau</span>
+              <label for="water"><span>Eau
+                  <button name="act_water" type="action" value="water,Eau"></button></span>
                 <input name="attr_water" type="number" value="2" id="water" readonly>
               </label>
-              <label for="perception"><span>Percep.</span>
+              <label for="perception"><span>Percep.
+                  <button name="act_perception" type="action" value="perception,Perception"></button></span>
                 <input name="attr_perception" type="number" value="2" id="perception">
               </label>
             </div>
             <div class="elem">
-              <label for="agility"><span>Agilité</span>
+              <label for="agility"><span>Agilité
+                  <button name="act_agility" type="action" value="agility,Agilité"></button></span>
                 <input name="attr_agility" type="number" value="2" id="agility">
               </label>
-              <label for="fire"><span>Feu</span>
+              <label for="fire"><span>Feu
+                  <button name="act_fire" type="action" value="fire,Feu"></button></span>
                 <input name="attr_fire" type="number" value="2" id="fire" readonly>
               </label>
-              <label for="intelligence"><span>Intel.</span>
+              <label for="intelligence"><span>Intel.
+                  <button name="act_intelligence" type="action" value="intelligence,Intelligence"></button></span>
                 <input name="attr_intelligence" type="number" value="2" id="intelligence">
               </label>
             </div>
             <div class="elem elemVoid">
-              <label for="void"><span>Vide</span>
+              <label for="void"><span>Vide
+                  <button name="act_void" type="action" value="void,Vide"></button></span>
                 <input name="attr_void" type="number" value="2" id="void">
               </label>
               <label for="voidUsed"><span>Utilisé</span>
@@ -177,9 +189,12 @@
   <div class="sheet-header">
     <h1>{{charname}}</h1>
   </div>
+  <div class="sheet-arrow-container">
+    <div class="sheet-arrow-right"></div>
+  </div>
   <div class="sheet-results">
     <h4>{{title}} : {{displayRoll}}</h4>
-    <h4>{{roll}}</h4>
+    <h4>Résultat: <span class="rollresult">{{roll}}</span></h4>
   </div>
 </rolltemplate>
 <script type="text/worker">
@@ -232,12 +247,13 @@ function poolToString(pool)
     try {
         let res = `${pool.thrown}g${pool.kept}`
         if (pool.mod > 0) {
-            rollString += `+${pool.mod}`
+            res += `+${pool.mod}`
         } else if (pool.mod < 0) {
-            rollString += pool.mod
+            res += pool.mod
         }
         return res
     } catch (e) {
+        console.error(e)
         return 'Error !'
     }
 }
@@ -258,9 +274,35 @@ function sumPools(...pools)
     return sum
 }
 
+/**
+ * Flattens a dice pool so that the number of dice never exceeds 10
+ * @param {object} pool The initial pool
+ * @returns The converted pool
+ */
 function flattenPool(pool)
 {
-    // TODO later
+    // thrown dice over 10 are converted to rolled dice (2 to 1)
+    while (pool.kept < 10 && pool.thrown > 11) {
+        pool.kept += 1
+        pool.thrown -= 2
+    }
+
+    let overThrown = Math.max(pool.thrown - 10, 0)
+    let overKept = Math.max(pool.kept - 10, 0)
+
+    // remaining thrown dice over 10 are converted to bonus
+    if (overThrown) {
+        pool.thrown = 10;
+        pool.mod += 2 * overThrown
+    }
+
+    // kept dice over 10 are converted to bonus
+    if (overKept) {
+        pool.kept = 10
+        pool.mod += 2 * overKept
+    }
+
+    return pool
 }
 
 /**
@@ -273,8 +315,10 @@ function flattenPool(pool)
  */
 function doRoll(pool, title, template='base')
 {
+    pool = flattenPool(pool)
     var rollString = `&{template:${template}} `
-    getAttrs(['character_name', 'hasFocus', 'explodeOn'], function(v)
+
+    getAttrs(['character_name', 'hasFocus', 'explodeOn', 'character_avatar'], function(v)
     {
         rollString += `{{charname=${v.character_name}}} `
 
@@ -282,7 +326,7 @@ function doRoll(pool, title, template='base')
         for (let i = 0; i < pool.thrown; i++) {
             if (i) rollString += ', '
             rollString += `1d10`
-            if (v.explodeOn)
+            if (parseInt(v.explodeOn)||0)
                 rollString += `!>${v.explodeOn}`
             if ("1" === v.hasFocus)
                 rollString += `ro1`
@@ -293,6 +337,7 @@ function doRoll(pool, title, template='base')
 
         rollString += `{{displayRoll=${poolToString(pool)}}} `
 
+        console.log(rollString)
         startRoll(rollString, function(result) {
             // Do stuff later
             finishRoll(result.rollId)
@@ -301,18 +346,26 @@ function doRoll(pool, title, template='base')
     })
 }
 
-on('clicked:constitution', function()
-{
-    console.log("COUCOU")
-});
-
 on('clicked:freeRoll', function()
 {
     getAttrs(['rollMod'], function(v){
         let pool = parsePoolString(v.rollMod)
         doRoll(pool, 'Jet libre')
         // TODO: see to set this last instruction configurable
-        setAttrs({rollMod: ''})
+        //setAttrs({rollMod: ''})
     })
 })
+
+
+on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air clicked:awareness clicked:strength clicked:water clicked:perception clicked:agility clicked:fire clicked:intelligence clicked:void', function(e)
+{
+    let rolledAttribute = e.htmlAttributes.value.split(',')[0]
+    let rollTitle = e.htmlAttributes.value.split(',')[1]
+    getAttrs([rolledAttribute], function(v)
+    {
+        let pool = createPool(v[rolledAttribute])
+        doRoll(pool, rollTitle)
+    })
+});
+
 </script>

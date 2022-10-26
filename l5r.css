@@ -397,6 +397,10 @@
   font-size: calc(100% + 1px);
   font-weight: bold;
 }
+.charsheet .caracbar > .elem:not(:last-of-type) > label:nth-of-type(2) > span > button[type=action], .charsheet .caracbar > .elem:last-of-type > label:nth-of-type(1) > span > button[type=action] {
+  background: none;
+  margin-top: -3px;
+}
 .charsheet .caracbar > .elem:last-of-type {
   padding-top: 23px;
 }
@@ -523,6 +527,39 @@
 }
 .charsheet .tab1 #identity > label:not(:first-of-type) {
   width: calc(50% - 10px);
+}
+
+.sheet-rolltemplate-base {
+  width: 100%;
+  padding: 5px;
+  background: #fef68e;
+  box-shadow: 0 0 8px black inset;
+}
+.sheet-rolltemplate-base > .sheet-header {
+  padding: 5px;
+}
+.sheet-rolltemplate-base > .sheet-header > h1 {
+  font-family: "Patrick Hand";
+  font-style: italic;
+  font-size: 18px;
+  text-align: center;
+  line-height: 26px;
+}
+.sheet-rolltemplate-base .sheet-arrow-container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.sheet-rolltemplate-base .sheet-arrow-right {
+  border-top: solid 2px transparent;
+  border-bottom: solid 2px transparent;
+  border-left: solid 180px rgba(255, 0, 0, 0.5333333333);
+}
+.sheet-rolltemplate-base > .sheet-results {
+  padding: 5px;
+  text-align: center;
+}
+.sheet-rolltemplate-base > .sheet-results .inlinerollresult {
+  border: none;
 }
 
 /*# sourceMappingURL=l5r.css.map */

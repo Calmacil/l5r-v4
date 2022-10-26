@@ -1,0 +1,28 @@
+.sheet-rolltemplate-base
+    width: 100%
+    padding: 5px
+    background: #fef68e
+    box-shadow: 0 0 8px black inset
+
+    &> .sheet-header
+        padding: 5px
+        &> h1
+            font-family: $fontHandwriting
+            font-style: italic
+            font-size: 18px
+            text-align: center
+            line-height: 26px
+    & .sheet-arrow-container
+        padding-left: 15px
+        padding-right: 15px
+    .sheet-arrow-right
+        border-top: solid 2px transparent
+        border-bottom: solid 2px transparent
+        border-left: solid 180px $activeColor
+
+    &> .sheet-results
+        padding: 5px
+        text-align: center
+
+        .inlinerollresult
+            border: none
