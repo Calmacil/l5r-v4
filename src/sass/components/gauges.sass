@@ -1,0 +1,55 @@
+input[type=number] 
+    &~ .gauge
+        width: 100%
+        height: 5px
+        background: white
+
+    &[value^="0"], &[value^="1"]
+        ~ .gauge > .innerGauge
+            background: linear-gradient(to right, red 15%, white)
+    &[value^="2"], &[value^="3"]
+        ~ .gauge > .innerGauge
+            background: linear-gradient(to right, orange 25%, white)
+    &[value^="4"], &[value^="5"]
+        ~ .gauge > .innerGauge
+            background: linear-gradient(to right, yellow 25%, white)
+    &[value^="6"], &[value^="7"]
+        ~ .gauge > .innerGauge
+            background: linear-gradient(to right, green 25%, white)
+    &[value^="8"], &[value^="9"], &[value="10"]
+        ~ .gauge > .innerGauge
+            background: linear-gradient(to right, blue 25%, white)
+
+    @for $i from 0 through 100
+        $val: calc($i / 10)
+        &[value="#{$val}"] ~ .gauge > .innerGauge
+            width: calc($i * 1%)
+
+input[type=range].progressbar
+    width: 100%
+    -webkit-appearance: none
+    font: inherit
+    outline: none
+    background: white
+    height: 5px
+    border: none
+    padding: 0
+    &:disabled
+        cursor: default
+    &::-moz-range-thumb,
+    &::-webkit-slider-thumb
+        background: transparent
+        border-color: transparent
+        color: transparent
+        height: 5px
+        width: 0
+    &::-moz-range-progress
+        background: green
+        height: 5px
+    &::-moz-range-track,
+    &::-webkit-slider-runnable-track
+        width: 100%
+        background: red
+        height: 5px
+        border: none
+        border-radius: 0

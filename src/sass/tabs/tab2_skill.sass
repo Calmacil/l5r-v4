@@ -1,0 +1,114 @@
+$cb_width: 30px
+$skill_width: 150px
+$trait_width: 60px
+$rank_width: 35px
+$roll_width: 45px
+$focus_width: calc(100% - $cb_width - $skill_width - $trait_width - $rank_width - $roll_width - 53px)
+
+$skill_height: 24px
+
+.charsheet .tab2
+    flex-direction: column
+    .skillsList
+        width: 100%
+        margin-top: 16px 
+        flex-wrap: wrap
+
+        &> span
+            font-family: $fontStandard
+            font-weight: bold
+            border-bottom: 3px double black
+            text-align: center
+            padding: 4px
+            &:not(:first-of-type)
+                border-left: 1px dotted gray
+            &:nth-of-type(1)
+                width: $cb_width
+            &:nth-of-type(2)
+                width: $skill_width
+            &:nth-of-type(3)
+                width: $focus_width
+            &:nth-of-type(4)
+                width: $trait_width
+            &:nth-of-type(5)
+                width: $rank_width
+            &:nth-of-type(6)
+                width: $roll_width
+
+        &> .repcontainer
+            width: 100%
+            flex-wrap: wrap
+            &> .repitem
+                width: 100%
+                flex-wrap: wrap
+                border-bottom: 1px solid lightgray
+                &> .itemcontrol
+                    height: 24px
+                    &> .btn
+                        padding-top: 2px
+                        padding-bottom: 2px
+
+                &> label:first-of-type 
+                    width: 10px
+                    padding-right: 0
+                    margin-bottom: 0
+                    height: 24px
+                    &> input[type=checkbox]
+                        @include expandSwitch($skill_height)
+                &> label:nth-of-type(2)
+                    width: 20px
+                    padding-left: 4px
+                    padding-right: 4px
+                    margin-bottom: 0
+                    height: 24px
+                    &> input[type=checkbox]
+                        @include toggleable($skill_height, $fontStandard, false, 20px)
+                        &~ span::before
+                            margin-top: 0
+                            border-radius: 15px
+                            width: 12px
+                            height: 12px
+                            border: 2px solid black
+                &> input[type=text]
+                    border: none
+                    border-left: 1px dotted gray
+                    padding: 5px
+                    font-family: $fontHandwriting
+                    height: 24px
+                    &:nth-of-type(1)
+                        width: calc($skill_width + 9px)
+                    &:nth-of-type(2)
+                        width: calc($focus_width + 9px)
+                &> select
+                    border: none
+                    border-left: 1px dotted gray
+                    background: transparent
+                    font-family: $fontHandwriting
+                    width: calc($trait_width + 9px)
+                    height: 24px
+                &> input[type=number]
+                    border: none
+                    border-left: 1px dotted gray
+                    font-family: $fontHandwriting
+                    text-align: center
+                    width: calc($rank_width + 9px)
+                    height: 24px
+                &> span[name=attr_roll]
+                    border-left: 1px dotted gray
+                    font-family: $fontHandwriting
+                    width: calc($roll_width - 20px)
+                    height: 24px
+
+                &> textarea
+                    display: none
+                    height: 4em
+                    width: 100%
+                    padding: 4px
+                    border-top: 1px dotted gray
+                    font-family: $fontHandwriting
+                &> input[type=hidden][value="1"] ~ textarea
+                    display: block
+
+                &> button[type=action]
+                    margin-top: 8px
+                    background: transparent

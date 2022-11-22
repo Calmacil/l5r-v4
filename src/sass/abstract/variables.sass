@@ -20,9 +20,9 @@ $colFire: #a63
 $colVoid: #999
 
 // Used for checkboxes and radio buttons
-@mixin toggleable($height, $font, $withLabel:false)
+@mixin toggleable($height, $font, $withLabel:false, $width: calc(25% - 33px))
     position: absolute
-    width: calc(25% - 33px)
+    width: $width
     opacity: 0
     height: $height
     &~ span
@@ -48,3 +48,18 @@ $colVoid: #999
         @else 
             background-color: $checkedColor
             box-shadow: 0 0 5px inset black
+
+@mixin expandSwitch($height)
+    position: absolute
+    width: 10px
+    opacity: 0
+    height: $height
+    &~ span
+        width: 100%
+        vertical-align: center
+        &::before
+            display: flex
+            content: '►'
+            justify-content: center
+    &:checked ~ span::before
+        content: '▼'

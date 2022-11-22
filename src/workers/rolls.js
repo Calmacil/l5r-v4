@@ -146,7 +146,7 @@ on('clicked:freeRoll', function()
 })
 
 
-on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air clicked:awareness clicked:strength clicked:water clicked:perception clicked:agility clicked:fire clicked:intelligence clicked:void', function(e)
+on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air clicked:awareness clicked:strength clicked:water clicked:perception clicked:agility clicked:fire clicked:intelligence clicked:void clicked:honor', function(e)
 {
     let rolledAttribute = e.htmlAttributes.value.split(',')[0]
     let rollTitle = e.htmlAttributes.value.split(',')[1]

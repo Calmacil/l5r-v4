@@ -156,11 +156,144 @@
               </label>
             </div>
           </div>
+        <h3>Description</h3>
+        <textarea name="attr_description">Description</textarea>
       </div>
-      <div class="col3"><span>HonorBox</span></div>
+      <div class="col3">
+        <div class="xpbox">
+          <label><span>XP. total</span>
+            <input name="attr_xp_total" type="number" value="">
+          </label>
+          <input name="attr_xp_spent" type="hidden" value="">
+          <label for="@{xp_total} - @{xp_spent}"><span>(Restant)</span>
+            <input name="attr_xp_remain" type="number" value="" id="@{xp_total} - @{xp_spent}" readonly>
+          </label>
+          <label><span>Réputation</span>
+            <input name="attr_reputation" type="number" value="" readonly>
+          </label>
+          <label><span>(Rang)</span>
+            <input name="attr_reputation_rank" type="number" value="" readonly>
+          </label>
+        </div>
+        <div class="honorbox">
+          <label for="honor"><span>Honneur
+              <button name="act_honor" type="action" value="honor,Honneur"></button></span>
+            <input name="attr_honor" type="number" value="3.5" id="honor" min="0" max="10" step="0.1">
+          </label>
+          <label for="status"><span>Statut</span>
+            <input name="attr_status" type="number" value="1.0" id="status" min="0" max="10" step="0.1">
+          </label>
+          <label for="glory"><span>Gloire</span>
+            <input name="attr_glory" type="number" value="1.0" id="glory" min="0" max="10" step="0.1">
+          </label>
+          <label for="infamy"><span>Infamie</span>
+            <input name="attr_infamy" type="number" value="0.0" id="infamy" min="0" max="10" step="0.1">
+          </label>
+          <label for="taint"><span>Souillure</span>
+            <input name="attr_taint" type="number" value="0.0" id="taint" min="0" max="10" step="0.1">
+          </label>
+          <label for="shadow"><span>Ombre</span>
+            <input name="attr_shadow" type="number" value="0.0" id="shadow" min="0" max="10" step="0.1">
+          </label>
+        </div>
+      </div>
     </div>
     <div class="tab tab2">
-      <h1>Compétences</h1>
+        <div class="caracbar">
+          <div class="elem">
+            <label for="constitution"><span>Consti.
+                <button name="act_constitution" type="action" value="constitution,Constitution"></button></span>
+              <input name="attr_constitution" type="number" value="2" id="constitution">
+            </label>
+            <label for="earth"><span>Terre
+                <button name="act_earth" type="action" value="earth,Terre"></button></span>
+              <input name="attr_earth" type="number" value="2" id="earth" readonly>
+            </label>
+            <label for="will"><span>Volonté
+                <button name="act_will" type="action" value="will,Volonté"></button></span>
+              <input name="attr_will" type="number" value="2" id="will">
+            </label>
+          </div>
+          <div class="elem">
+            <label for="reflex"><span>Réflexes
+                <button name="act_reflex" type="action" value="reflex,Réflexes"></button></span>
+              <input name="attr_reflex" type="number" value="2" id="reflex">
+            </label>
+            <label for="air"><span>Air
+                <button name="act_air" type="action" value="air,Air"></button></span>
+              <input name="attr_air" type="number" value="2" id="air" readonly>
+            </label>
+            <label for="awareness"><span>Intuition
+                <button name="act_awareness" type="action" value="awareness,Intuition"></button></span>
+              <input name="attr_awareness" type="number" value="2" id="awareness">
+            </label>
+          </div>
+          <div class="elem">
+            <label for="strength"><span>Force
+                <button name="act_strength" type="action" value="strength,Force"></button></span>
+              <input name="attr_strength" type="number" value="2" id="strength">
+            </label>
+            <label for="water"><span>Eau
+                <button name="act_water" type="action" value="water,Eau"></button></span>
+              <input name="attr_water" type="number" value="2" id="water" readonly>
+            </label>
+            <label for="perception"><span>Percep.
+                <button name="act_perception" type="action" value="perception,Perception"></button></span>
+              <input name="attr_perception" type="number" value="2" id="perception">
+            </label>
+          </div>
+          <div class="elem">
+            <label for="agility"><span>Agilité
+                <button name="act_agility" type="action" value="agility,Agilité"></button></span>
+              <input name="attr_agility" type="number" value="2" id="agility">
+            </label>
+            <label for="fire"><span>Feu
+                <button name="act_fire" type="action" value="fire,Feu"></button></span>
+              <input name="attr_fire" type="number" value="2" id="fire" readonly>
+            </label>
+            <label for="intelligence"><span>Intel.
+                <button name="act_intelligence" type="action" value="intelligence,Intelligence"></button></span>
+              <input name="attr_intelligence" type="number" value="2" id="intelligence">
+            </label>
+          </div>
+          <div class="elem elemVoid">
+            <label for="void"><span>Vide
+                <button name="act_void" type="action" value="void,Vide"></button></span>
+              <input name="attr_void" type="number" value="2" id="void">
+            </label>
+            <label for="voidUsed"><span>Utilisé</span>
+              <input name="attr_voidUsed" type="number" value="0" id="voidUsed">
+            </label>
+          </div>
+        </div>
+      <div class="skillsList"><span title="École">E.</span><span>Compétence</span><span>Spécialités</span><span>Trait</span><span>Rang</span><span>Jet</span>
+        <fieldset class="repeating_skills">
+          <label>
+            <input name="attr_expand" value="1" type="checkbox"><span> </span>
+          </label>
+          <label>
+            <input name="schoolSkill" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_name" type="text" value="">
+          <input name="attr_focus" type="text" value="">
+          <select name="attr_trait">
+            <option value="" selected></option>
+            <option value="@{agility}">Agilité</option>
+            <option value="@{constitution}">Constitution</option>
+            <option value="@{strength}">Force</option>
+            <option value="@{intelligence}">Intelligence</option>
+            <option value="@{awareness}">Intuition</option>
+            <option value="@{perception}">Perception</option>
+            <option value="@{reflex}">Réflexes</option>
+            <option value="@{will}">Volonté</option>
+            <option value="@{void}">Vide</option>
+          </select>
+          <input name="attr_rank" type="number" value="0" min="0" max="10"><span name="attr_roll"></span>
+          <button name="act_skillRoll" type="action" value=""></button>
+          <input name="attr_expand" type="hidden" value="">
+          <textarea name="attr_habilities" placeholder="Capacités de maîtrise, bonus..."></textarea>
+        </fieldset>
+      </div>
     </div>
     <div class="tab tab3">
       <h1>Combat</h1>
@@ -357,7 +490,7 @@ on('clicked:freeRoll', function()
 })
 
 
-on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air clicked:awareness clicked:strength clicked:water clicked:perception clicked:agility clicked:fire clicked:intelligence clicked:void', function(e)
+on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air clicked:awareness clicked:strength clicked:water clicked:perception clicked:agility clicked:fire clicked:intelligence clicked:void clicked:honor', function(e)
 {
     let rolledAttribute = e.htmlAttributes.value.split(',')[0]
     let rollTitle = e.htmlAttributes.value.split(',')[1]

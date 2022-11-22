@@ -9,6 +9,22 @@
         
         +caracbar('caracs')
 
+        h3 Description
+        +textareaInput('description', 'Description')
+
 
     .col3
-        span HonorBox
+        div.xpbox
+            +numberLabelled('xp_total', 'XP. total')
+            +hiddenInput('xp_spent')
+            +numberLabelled('xp_remain', '(Restant)', '@{xp_total} - @{xp_spent}')(readonly)
+            +numberLabelled('reputation', 'Réputation')(readonly)
+            +numberLabelled('reputation_rank', '(Rang)')(readonly)
+        div.honorbox
+            +numberLabelled('honor', 'Honneur', 'honor', '3.5', 'honor,Honneur')(min=0, max=10, step=0.1)
+            +numberLabelled('status', 'Statut', 'status', '1.0')(min=0, max=10, step=0.1)
+            +numberLabelled('glory', 'Gloire', 'glory', '1.0')(min=0, max=10, step=0.1)
+            +numberLabelled('infamy', 'Infamie', 'infamy', '0.0')(min=0, max=10, step=0.1)
+            +numberLabelled('taint', 'Souillure', 'taint', '0.0')(min=0, max=10, step=0.1)
+            +numberLabelled('shadow', 'Ombre', 'shadow', '0.0')(min=0, max=10, step=0.1)
+

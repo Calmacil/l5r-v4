@@ -9,12 +9,18 @@ mixin textLabelled(name, label, id, value='')
 mixin numberInput(name, value='')
   input(name=`attr_${name}` type='number' value=value)&attributes(attributes)
 
-mixin numberLabelled(name, label, id, value='', roll=null)
+mixin numberLabelled(name, label, id, value='', roll=null, withGauge=false)
   label(for=id)
     span!= label
-      if (roll)
+      if (roll !== null)
         +actButton(name, roll)
     +numberInput(name, value)(id=id)&attributes(attributes)
+    if (withGauge === true)
+      .gauge
+        .innerGauge
+
+mixin rangeInput(name, value='', min=0, max=10, step=1)
+  input(name=`attr_${name}`, type='range', value=value, min=min, max=max, step=step, readonly)&attributes(attributes)
 
 mixin textareaInput(name, value='')
   textarea(name=`attr_${name}`)&attributes(attributes)= value
@@ -38,13 +44,27 @@ mixin actButton(name, value='')
 
 mixin cbButton(name, label, value=null)
   label(class!=attributes.class)
-    if value
+    if value !== null
       input(name=`attr_${name}` value=value type='checkbox')&attributes(attributes)
     else
       input(name=name type='checkbox')&attributes(attributes)
-    span!= label
+    if label
+      span!= label
 
 mixin rdButton(name, label, value='')
   label
     input(name=`attr_${name}`, value=value, type='radio')&attributes(attributes)
     span(title=label)
+
+mixin gauge(name)
+  .gauge
+    +hiddenInput(`gauge_${name}`)
+    - for (let i = 0; i <= 10; i++)
+      +cbButton(`gauge_${name}`, null, i)
+
+mixin select(name)
+  select(name=`attr_${name}`, defaultOption=null)
+    if !defaultOption
+      option(value='', selected)!= defaultOption
+    if block
+      block

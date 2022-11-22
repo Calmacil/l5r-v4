@@ -6,3 +6,37 @@
             width: calc(100% - 10px)
         &> label:not(:first-of-type)
             width: calc(50% - 10px)
+
+        &> textarea
+            border: 1px solid lightgray
+            box-shadow: 0 0 8px lightgray inset
+            border-radius: 5px
+
+    .xpbox
+        width: 100%
+        flex-flow: row wrap
+        align-items: flex-start
+        &> label
+            width: calc(50% - 10px)
+            
+
+            &> input[type=number]
+                width: 30px
+
+    .honorbox
+        width: 90%
+        margin-left: 5%
+        margin-top: 15px
+        flex-flow: row wrap
+        align-items: flex-start
+        padding: 5px
+        background: #fef68e
+        box-shadow: 0 0 8px black inset
+        &> label
+            width: 100%
+            display: flex
+            flex-direction: row
+            flex-wrap: wrap
+
+        button[type=action]
+            background: transparent
