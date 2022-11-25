@@ -278,17 +278,18 @@
           <input name="attr_focus" type="text" value="">
           <select name="attr_trait">
             <option value="" selected></option>
-            <option value="@{agility}">Agilité</option>
-            <option value="@{constitution}">Constitution</option>
-            <option value="@{strength}">Force</option>
-            <option value="@{intelligence}">Intelligence</option>
-            <option value="@{awareness}">Intuition</option>
-            <option value="@{perception}">Perception</option>
-            <option value="@{reflex}">Réflexes</option>
-            <option value="@{will}">Volonté</option>
-            <option value="@{void}">Vide</option>
+            <option value="agility">Agilité</option>
+            <option value="constitution">Constitution</option>
+            <option value="strength">Force</option>
+            <option value="intelligence">Intelligence</option>
+            <option value="awareness">Intuition</option>
+            <option value="perception">Perception</option>
+            <option value="reflex">Réflexes</option>
+            <option value="will">Volonté</option>
+            <option value="void">Vide</option>
           </select>
-          <input name="attr_rank" type="number" value="0" min="0" max="10"><span name="attr_roll"></span>
+          <input name="attr_rank" type="number" value="0" min="0" max="10">
+          <input name="attr_roll" type="text" value="" readonly>
           <button name="act_skillRoll" type="action" value=""></button>
           <input name="attr_expand" type="hidden" value="">
           <textarea name="attr_habilities" placeholder="Capacités de maîtrise, bonus..."></textarea>
@@ -331,7 +332,7 @@
   </div>
 </rolltemplate>
 <script type="text/worker">
-  on('sheet:opened change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', function()
+  function updateRings()
 {
     getAttrs(['constitution', 'will', 'awareness', 'reflex', 'force', 'perception', 'agility', 'intelligence'], function(v)
     {
@@ -342,7 +343,38 @@
             fire: Math.min(v['agility'], v['intelligence'])
         })
     })
-});/**
+}
+
+on('change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', updateRings);function updateSkill(rowId)
+{
+    let rowTrait = 'repeating_skills_' + rowId + '_trait'
+    let rowRank = 'repeating_skills_' + rowId + '_rank'
+    let rowRoll = 'repeating_skills_' + rowId + '_roll'
+
+    getAttrs([rowTrait, rowRank, 'agility', 'awareness', 'constitution', 'intelligence', 'perception', 'reflex', 'strength', 'will', 'void'], (v) => {
+        let rank = parseInt(v[rowRank])||0
+        let traitValue = parseInt(v[v[rowTrait]])||0
+        
+        let roll = poolToString(createPool(traitValue + rank, traitValue))
+        let toSet = []
+        toSet[rowRoll] = roll
+        setAttrs(toSet)
+    })
+}
+
+function updateAllSkills()
+{
+    getSectionIDs('skills', (idarray) => {
+        for (let i = 0; i < idarray.length; i++) {
+            updateSkill(idarray[i])
+        }
+    })
+}
+
+on('change:repeating_skills:trait change:repeating_skills:rank', (evi) => {
+    let rowId = evi.sourceAttribute.split('_')[2]
+    updateSkill(rowId)
+})/**
  * Creates a dice pool
  * @param {int} thrown Number of dice thrown
  * @param {int} kept Number of dice kept
@@ -500,5 +532,9 @@ on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air c
         doRoll(pool, rollTitle)
     })
 });
-
+  on('sheet:opened', function()
+{
+    updateRings()
+    updateAllSkills()
+})
 </script>

@@ -63,3 +63,10 @@ $colVoid: #999
             justify-content: center
     &:checked ~ span::before
         content: '▼'
+
+@mixin textareaLined($h1, $h2)
+    line-height: $h1
+    padding-block: 0
+    padding-left: $h1
+    padding-right: $h1
+    background: repeating-linear-gradient(to bottom, transparent 0 $h2, lightgray $h2 calc($h2 + 1px), transparent calc($h2 + 1px) $h1) 50% 0 / calc(100% - $h1 * 2 ) 100% no-repeat

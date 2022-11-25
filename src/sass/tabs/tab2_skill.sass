@@ -69,46 +69,42 @@ $skill_height: 24px
                             width: 12px
                             height: 12px
                             border: 2px solid black
-                &> input[type=text]
-                    border: none
-                    border-left: 1px dotted gray
-                    padding: 5px
-                    font-family: $fontHandwriting
-                    height: 24px
-                    &:nth-of-type(1)
-                        width: calc($skill_width + 9px)
-                    &:nth-of-type(2)
-                        width: calc($focus_width + 9px)
+                &> input,
                 &> select
                     border: none
                     border-left: 1px dotted gray
+                    font-family: $fontHandwriting
+                    height: 24px
+
+                &> input
+                    &:nth-of-type(1)
+                        padding: 5px
+                        width: calc($skill_width + 9px)
+                    &:nth-of-type(2)
+                        padding: 5px
+                        width: calc($focus_width + 9px)
+                    &:nth-of-type(3)
+                        text-align: center
+                        width: calc($rank_width + 9px)
+                    &:nth-of-type(4)
+                        padding: 5px
+                        width: calc($roll_width - 11px)
+                        cursor: default
+                        background: #eee9
+                &> select
                     background: transparent
-                    font-family: $fontHandwriting
                     width: calc($trait_width + 9px)
-                    height: 24px
-                &> input[type=number]
-                    border: none
-                    border-left: 1px dotted gray
-                    font-family: $fontHandwriting
-                    text-align: center
-                    width: calc($rank_width + 9px)
-                    height: 24px
-                &> span[name=attr_roll]
-                    border-left: 1px dotted gray
-                    font-family: $fontHandwriting
-                    width: calc($roll_width - 20px)
-                    height: 24px
 
                 &> textarea
                     display: none
                     height: 4em
                     width: 100%
-                    padding: 4px
                     border-top: 1px dotted gray
                     font-family: $fontHandwriting
+                    @include textareaLined(1.4em, 1.2em)
                 &> input[type=hidden][value="1"] ~ textarea
                     display: block
 
                 &> button[type=action]
                     margin-top: 8px
-                    background: transparent
+                    background: #eee9

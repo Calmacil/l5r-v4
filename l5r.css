@@ -532,6 +532,13 @@
   border: 1px solid lightgray;
   box-shadow: 0 0 8px lightgray inset;
   border-radius: 5px;
+  font-family: "Patrick Hand";
+  padding: 4px;
+  line-height: 1.2em;
+  padding-block: 0;
+  padding-left: 1.2em;
+  padding-right: 1.2em;
+  background: repeating-linear-gradient(to bottom, transparent 0 1em, lightgray 1em calc(1em + 1px), transparent calc(1em + 1px) 1.2em) 50% 0/calc(100% - 2.4em) 100% no-repeat;
 }
 .charsheet .tab1 .xpbox {
   width: 100%;
@@ -676,55 +683,52 @@
   height: 12px;
   border: 2px solid black;
 }
-.charsheet .tab2 .skillsList > .repcontainer > .repitem > input[type=text] {
+.charsheet .tab2 .skillsList > .repcontainer > .repitem > input, .charsheet .tab2 .skillsList > .repcontainer > .repitem > select {
   border: none;
   border-left: 1px dotted gray;
-  padding: 5px;
   font-family: "Patrick Hand";
   height: 24px;
 }
-.charsheet .tab2 .skillsList > .repcontainer > .repitem > input[type=text]:nth-of-type(1) {
+.charsheet .tab2 .skillsList > .repcontainer > .repitem > input:nth-of-type(1) {
+  padding: 5px;
   width: 159px;
 }
-.charsheet .tab2 .skillsList > .repcontainer > .repitem > input[type=text]:nth-of-type(2) {
+.charsheet .tab2 .skillsList > .repcontainer > .repitem > input:nth-of-type(2) {
+  padding: 5px;
   width: calc(100% - 30px - 150px - 60px - 35px - 45px - 53px + 9px);
 }
-.charsheet .tab2 .skillsList > .repcontainer > .repitem > select {
-  border: none;
-  border-left: 1px dotted gray;
-  background: transparent;
-  font-family: "Patrick Hand";
-  width: 69px;
-  height: 24px;
-}
-.charsheet .tab2 .skillsList > .repcontainer > .repitem > input[type=number] {
-  border: none;
-  border-left: 1px dotted gray;
-  font-family: "Patrick Hand";
+.charsheet .tab2 .skillsList > .repcontainer > .repitem > input:nth-of-type(3) {
   text-align: center;
   width: 44px;
-  height: 24px;
 }
-.charsheet .tab2 .skillsList > .repcontainer > .repitem > span[name=attr_roll] {
-  border-left: 1px dotted gray;
-  font-family: "Patrick Hand";
-  width: 25px;
-  height: 24px;
+.charsheet .tab2 .skillsList > .repcontainer > .repitem > input:nth-of-type(4) {
+  padding: 5px;
+  width: 34px;
+  cursor: default;
+  background: rgba(238, 238, 238, 0.6);
+}
+.charsheet .tab2 .skillsList > .repcontainer > .repitem > select {
+  background: transparent;
+  width: 69px;
 }
 .charsheet .tab2 .skillsList > .repcontainer > .repitem > textarea {
   display: none;
   height: 4em;
   width: 100%;
-  padding: 4px;
   border-top: 1px dotted gray;
   font-family: "Patrick Hand";
+  line-height: 1.4em;
+  padding-block: 0;
+  padding-left: 1.4em;
+  padding-right: 1.4em;
+  background: repeating-linear-gradient(to bottom, transparent 0 1.2em, lightgray 1.2em calc(1.2em + 1px), transparent calc(1.2em + 1px) 1.4em) 50% 0/calc(100% - 2.8em) 100% no-repeat;
 }
 .charsheet .tab2 .skillsList > .repcontainer > .repitem > input[type=hidden][value="1"] ~ textarea {
   display: block;
 }
 .charsheet .tab2 .skillsList > .repcontainer > .repitem > button[type=action] {
   margin-top: 8px;
-  background: transparent;
+  background: rgba(238, 238, 238, 0.6);
 }
 
 .sheet-rolltemplate-base {

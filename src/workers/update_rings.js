@@ -1,4 +1,4 @@
-on('sheet:opened change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', function()
+function updateRings()
 {
     getAttrs(['constitution', 'will', 'awareness', 'reflex', 'force', 'perception', 'agility', 'intelligence'], function(v)
     {
@@ -9,4 +9,6 @@ on('sheet:opened change:constitution change:will change:awareness change:reflex 
             fire: Math.min(v['agility'], v['intelligence'])
         })
     })
-});
+}
+
+on('change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', updateRings);

@@ -14,17 +14,17 @@
             +textInput('name')
             +textInput('focus')
             +select('trait', '-')
-                option(value='@{agility}') Agilité
-                option(value='@{constitution}') Constitution
-                option(value='@{strength}') Force
-                option(value='@{intelligence}') Intelligence
-                option(value='@{awareness}') Intuition
-                option(value='@{perception}') Perception
-                option(value='@{reflex}') Réflexes
-                option(value='@{will}') Volonté
-                option(value='@{void}') Vide
+                option(value='agility') Agilité
+                option(value='constitution') Constitution
+                option(value='strength') Force
+                option(value='intelligence') Intelligence
+                option(value='awareness') Intuition
+                option(value='perception') Perception
+                option(value='reflex') Réflexes
+                option(value='will') Volonté
+                option(value='void') Vide
             +numberInput('rank', 0)(min=0, max=10)
-            span(name='attr_roll')
+            +textInput('roll')(readonly)
             +actButton('skillRoll')
             +hiddenInput('expand')
             +textareaInput('habilities')(placeholder='Capacités de maîtrise, bonus...')
