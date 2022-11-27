@@ -31,6 +31,11 @@ function parsePoolString(rollString)
     return createPool(result[1], result[2], result[3])
 }
 
+/**
+ * 
+ * @param {object} pool The pool
+ * @returns The Roll and Keep pool string
+ */
 function poolToString(pool)
 {
     try {
@@ -96,9 +101,7 @@ function flattenPool(pool)
 
 /**
  * Rolls a dice pool
- * @param {int} pool        The number of dice thrown
- * @param {int} kept        The number of dice kept
- * @param {int} mod         A numeric modificator to the total result
+ * @param {object} pool        The number of dice thrown
  * @param {string} title    The displayed roll title
  * @param {string} template The Rolltemplate ID
  */
@@ -150,9 +153,33 @@ on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air c
 {
     let rolledAttribute = e.htmlAttributes.value.split(',')[0]
     let rollTitle = e.htmlAttributes.value.split(',')[1]
-    getAttrs([rolledAttribute], function(v)
+    getAttrs([rolledAttribute, 'rollMod'], function(v)
     {
         let pool = createPool(v[rolledAttribute])
+        let rollMod = v['rollMod']
+        let modPool = parsePoolString(rollMod)
+        pool.thrown += modPool.thrown
+        pool.kept += modPool.kept
+        pool.mod += modPool.mod
         doRoll(pool, rollTitle)
+    })
+});
+
+
+on('clicked:repeating_skills:skillroll', function (e)
+{
+    let skillId = e.sourceAttribute.split('_')[2]
+    let skillname = 'repeating_skills_' + skillId + '_name'
+    let skillroll = 'repeating_skills_' + skillId + '_roll'
+    getAttrs([skillroll, skillname, 'rollMod'], function(v) {
+        let roll = v[skillroll]
+        let name = v[skillname]
+        let rollMod = v['rollMod']
+        let pool = parsePoolString(roll)
+        let modPool = parsePoolString(rollMod)
+        pool.thrown += modPool.thrown
+        pool.kept += modPool.kept
+        pool.mod += modPool.mod
+        doRoll(pool, name)
     })
 });

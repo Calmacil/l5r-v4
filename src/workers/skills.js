@@ -1,3 +1,7 @@
+/**
+ * Updates the roll value of a single skill
+ * @param {string} rowId The ID of the skill row
+ */
 function updateSkill(rowId)
 {
     let rowTrait = 'repeating_skills_' + rowId + '_trait'
@@ -8,13 +12,16 @@ function updateSkill(rowId)
         let rank = parseInt(v[rowRank])||0
         let traitValue = parseInt(v[v[rowTrait]])||0
         
-        let roll = poolToString(createPool(traitValue + rank, traitValue))
+        let roll = poolToString(flattenPool(createPool(traitValue + rank, traitValue)))
         let toSet = []
         toSet[rowRoll] = roll
         setAttrs(toSet)
     })
 }
 
+/**
+ * Updates roll value of all skills
+ */
 function updateAllSkills()
 {
     getSectionIDs('skills', (idarray) => {
