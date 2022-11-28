@@ -24,7 +24,9 @@ include pug/abstract/mixins.pug
 include pug/rolltemplates/base.pug
 
 script(type='text/worker')
+    include workers/insight.js
     include workers/update_rings.js
     include workers/skills.js
+    include workers/init.js
     include workers/rolls.js
     include workers/onstart.js

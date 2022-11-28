@@ -8,6 +8,7 @@ function updateRings()
             water: Math.min(v['force'], v['perception']),
             fire: Math.min(v['agility'], v['intelligence'])
         })
+        updateInsight()
     })
 }
 

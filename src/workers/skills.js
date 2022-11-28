@@ -34,4 +34,5 @@ function updateAllSkills()
 on('change:repeating_skills:trait change:repeating_skills:rank', (evi) => {
     let rowId = evi.sourceAttribute.split('_')[2]
     updateSkill(rowId)
-})
+    updateInsight()
+});

@@ -169,10 +169,10 @@
             <input name="attr_xp_remain" type="number" value="" id="@{xp_total} - @{xp_spent}" readonly>
           </label>
           <label><span>Réputation</span>
-            <input name="attr_reputation" type="number" value="" readonly>
+            <input name="attr_insight" type="number" value="" readonly>
           </label>
           <label><span>(Rang)</span>
-            <input name="attr_reputation_rank" type="number" value="" readonly>
+            <input name="attr_insight_rank" type="number" value="" readonly>
           </label>
         </div>
         <div class="honorbox">
@@ -297,7 +297,47 @@
       </div>
     </div>
     <div class="tab tab3">
-      <h1>Combat</h1>
+      <div class="col2T1">
+        <div class="col3" id="init">
+          <h3>Initiative</h3>
+          <label for="baseInit"><span>Base</span>
+            <input name="attr_baseInit" type="text" value="" id="baseInit" readonly>
+          </label>
+          <label for="modInit"><span>Modificateurs</span>
+            <input name="attr_modInit" type="text" value="" id="modInit">
+          </label>
+          <label for="totalInit"><span>Total</span>
+            <input name="attr_totalInit" type="text" value="" id="totalInit" readonly>
+          </label>
+          <div><span>Rapide:</span>
+            <button name="act_quickAdv" type="action" value="1"></button>
+          </div>
+          <div><span>Initiative !</span>
+            <button name="act_Jet d'Initiative" type="action" value=""></button>
+          </div>
+        </div>
+        <div class="col3" id="movement">
+          <h3>Mouvement</h3><span>Coucou</span>
+        </div>
+        <div class="col3" id="armor">
+          <h3>Armure</h3>
+        </div>
+      </div>
+      <div class="col3" id="health">
+        <h3>Santé</h3>
+      </div>
+      <div class="col2" id="guard">
+        <h3>Posture</h3>
+      </div>
+      <div class="col2" id="states">
+        <h3>États</h3>
+      </div>
+      <div class="col2T1" id="weapons">
+        <h3>Armes</h3>
+      </div>
+      <div class="col3" id="inventory">
+        <h3>Inventaire</h3>
+      </div>
     </div>
     <div class="tab tab4">
       <h1>Avantages et désavantages</h1>
@@ -332,7 +372,45 @@
   </div>
 </rolltemplate>
 <script type="text/worker">
-  function updateRings()
+  function updateInsightRank()
+{
+    getAttrs(['insight'], function(v)
+    {
+        let insight = parseInt(v.insight)||0;
+        let insight_rank = Math.max(Math.floor((insight - 100) / 25), 0)
+        setAttrs({
+            insight_rank: insight_rank
+        })
+    })
+}
+
+function updateInsight()
+{
+    getSectionIDs('skills', function(idarray)
+    {
+        let fields = ['earth', 'air', 'water', 'fire', 'void']
+        idarray.forEach(id => fields.push(`repeating_skills_${id}_rank`))
+
+
+        getAttrs(fields, function(v)
+        {
+            let r_earth = parseInt(v.earth)||0
+            let r_air = parseInt(v.air)||0
+            let r_water = parseInt(v.water)||0
+            let r_fire = parseInt(v.fire)||0
+            let r_void = parseInt(v.void)||0
+
+            let insight = 10 * (r_air + r_earth + r_water + r_fire + r_void)
+            idarray.forEach(id => {
+                insight += parseInt(v[`repeating_skills_${id}_rank`])||0
+            })
+            setAttrs({
+                insight: insight
+            })
+            updateInsightRank()
+        })
+    })
+}function updateRings()
 {
     getAttrs(['constitution', 'will', 'awareness', 'reflex', 'force', 'perception', 'agility', 'intelligence'], function(v)
     {
@@ -342,6 +420,7 @@
             water: Math.min(v['force'], v['perception']),
             fire: Math.min(v['agility'], v['intelligence'])
         })
+        updateInsight()
     })
 }
 
@@ -381,6 +460,31 @@ function updateAllSkills()
 on('change:repeating_skills:trait change:repeating_skills:rank', (evi) => {
     let rowId = evi.sourceAttribute.split('_')[2]
     updateSkill(rowId)
+    updateInsight()
+});
+  /**
+ * Updates init attributes
+ */
+function updateInit()
+{
+    getAttrs(['insight_rank', 'reflex', 'modinit'], v => {
+        let reflex = parseInt(v.reflex)||0
+        let insight_rank = parseInt(v.insight_rank)||0
+
+        let base_init = createPool(reflex + insight_rank, reflex)
+
+        let modinit = parsePoolString(v.modinit)
+        let total_init = sumPools(base_init, modinit)
+
+        setAttrs({
+            baseInit: flattenPool(poolToString(base_init)),
+            totalInit: flattenPool(poolToString(total_init))
+        })
+    })
+}
+
+on('change:reflex change:modinit change:insight_rank', evi => {
+    updateInit()
 })/**
  * Creates a dice pool
  * @param {int} thrown Number of dice thrown
@@ -569,5 +673,7 @@ on('clicked:repeating_skills:skillroll', function (e)
 {
     updateRings()
     updateAllSkills()
+    updateInsight()
+    updateInit()
 })
 </script>

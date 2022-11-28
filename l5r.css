@@ -196,6 +196,14 @@
   border: 0;
   border-bottom: solid 1px lightgray;
 }
+.charsheet h3 {
+  font-family: "Patrick Hand";
+  font-style: italic;
+  text-align: center;
+  background: linear-gradient(to right, rgba(34, 34, 40, 0.9333333333) 60%, #eeeeff);
+  color: white;
+  width: 100%;
+}
 
 .charactersheet .menu {
   width: 180px;
@@ -729,6 +737,22 @@
 .charsheet .tab2 .skillsList > .repcontainer > .repitem > button[type=action] {
   margin-top: 8px;
   background: rgba(238, 238, 238, 0.6);
+}
+
+.charsheet .tab3 {
+  flex-wrap: wrap;
+}
+.charsheet .tab3 div#init label {
+  width: 100%;
+}
+.charsheet .tab3 div#init label > span {
+  width: 65%;
+}
+.charsheet .tab3 div#init label > input[type=text] {
+  width: 35%;
+}
+.charsheet .tab3 div#init > div {
+  width: 100%;
 }
 
 .sheet-rolltemplate-base {

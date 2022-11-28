@@ -1,2 +1,28 @@
 .tab.tab3
-    h1 Combat
+    div.col2T1
+        div#init.col3
+            h3 Initiative
+            +textLabelled('baseInit', 'Base', 'baseInit')(readonly)
+            +textLabelled('modInit', 'Modificateurs', 'modInit')
+            +textLabelled('totalInit', 'Total', 'totalInit')(readonly)
+            div
+                span Rapide:
+                +actButton('quickAdv', 1)
+            div
+                span Initiative !
+                +actButton('Jet d\'Initiative')
+        div#movement.col3
+            h3 Mouvement
+            span Coucou
+        div#armor.col3
+            h3 Armure
+    div#health.col3
+        h3 Santé
+    div#guard.col2
+        h3 Posture
+    div#states.col2
+        h3 États
+    div#weapons.col2T1
+        h3 Armes
+    div#inventory.col3
+        h3 Inventaire
