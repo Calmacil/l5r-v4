@@ -105,7 +105,7 @@ function flattenPool(pool)
  * @param {string} title    The displayed roll title
  * @param {string} template The Rolltemplate ID
  */
-function doRoll(pool, title, template='base')
+function doRoll(pool, title, template='base', init=false)
 {
     pool = flattenPool(pool)
     var rollString = `&{template:${template}} `
@@ -123,7 +123,10 @@ function doRoll(pool, title, template='base')
             if ("1" === v.hasFocus)
                 rollString += `ro1`
         }
-        rollString += `}k${pool.kept}+${pool.mod}]]}} `
+        rollString += `}k${pool.kept}+${pool.mod} `
+        if (init === true)
+            rollString += `&{tracker}`
+        rollString +=`]]}} `
 
         rollString += `{{title=${title}}} `
 
@@ -177,9 +180,20 @@ on('clicked:repeating_skills:skillroll', function (e)
         let rollMod = v['rollMod']
         let pool = parsePoolString(roll)
         let modPool = parsePoolString(rollMod)
-        pool.thrown += modPool.thrown
-        pool.kept += modPool.kept
-        pool.mod += modPool.mod
+        pool = sumPools(pool, modPool)
         doRoll(pool, name)
     })
 });
+
+/**
+ * Roll init
+ */
+on('clicked:initroll', function(e) {
+    getAttrs(['totalinit', 'rollmod'], v => {
+        let pool = parsePoolString(v.totalinit)
+        let mod = parsePoolString(v.rollMod)
+        console.log(pool)
+        doRoll(pool, 'Initiative !', 'base', true)
+    })
+});
+

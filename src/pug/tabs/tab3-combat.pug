@@ -7,17 +7,31 @@
             +textLabelled('totalInit', 'Total', 'totalInit')(readonly)
             div
                 span Rapide:
-                +actButton('quickAdv', 1)
+                //-+actButton('quickAdv', 1)
+                +rollButton('quickInit', '[[@{reflex} &{tracker:+}]]')
             div
                 span Initiative !
-                +actButton('Jet d\'Initiative')
+                +actButton('initRoll')
         div#movement.col3
             h3 Mouvement
-            span Coucou
         div#armor.col3
             h3 Armure
     div#health.col3
-        h3 Santé
+        h3 
+            span Santé
+            span
+                +numberInput('hp')
+                | /
+                +numberInput('hp_max')(readonly)
+        span Rang
+        span Malus
+        span Total
+        span Actuel
+        fieldset.repeating_health
+            +textInput('rank')(readonly)
+            +textInput('malus')(readonly)
+            +numberInput('total')(readonly)
+            +numberInput('current')(readonly)
     div#guard.col2
         h3 Posture
     div#states.col2

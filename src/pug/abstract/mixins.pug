@@ -35,7 +35,7 @@ mixin hiddenInput(name, value='')
 
 
 mixin rollButton(name, value='', label=false)
-  button(name=`roll_${name}` title!=attributes.title type='roll' value!=value)
+  button(name=`roll_${name}` title!=attributes.title type='roll' value!=value).roll
     if (label)
       span #{label}
 

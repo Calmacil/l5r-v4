@@ -1,5 +1,6 @@
 .charsheet .tab3
     flex-wrap: wrap
+    align-content: start
 
     div#init
         label
@@ -10,3 +11,49 @@
                 width: 35%
         &> div
             width: 100%
+
+    div#health
+        h3 
+            display: flex
+            padding-left: 15%
+            flex-wrap: no-wrap
+            flex-direction: row
+            &> span
+                display: flex
+                width: 30%
+                &> input
+                    background: transparent
+                    border: none
+                    border-bottom: 1px dotted white
+                    height: 95%
+                    text-align: center
+                    color: white
+        &> span
+            display: inline
+            border-bottom: 1px dotted gray
+            border-right: 1px dotted gray
+            text-align: center
+            font-family: $fontHandwriting
+            font-weight: bold
+            &:first-of-type
+                width: calc(40% - 2px)
+                border-left: 1px dotted gray
+            &:not(:first-of-type)
+                width: calc(20% - 1px)
+
+        &> fieldset.repeating_health
+            width: 100%
+        &> .repcontainer
+            width: 100%
+            flex-wrap: wrap
+            &> .repitem
+                width: 100%
+                &> input
+                    border: none
+                    border-right: 1px dotted gray
+                    border-bottom: 1px dotted lightgray
+                    &:first-of-type
+                        width: calc(40%)
+                        border-left: 1px dotted gray
+                    &:not(:first-of-type)
+                        width: calc(20%)

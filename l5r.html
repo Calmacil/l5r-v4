@@ -310,21 +310,30 @@
             <input name="attr_totalInit" type="text" value="" id="totalInit" readonly>
           </label>
           <div><span>Rapide:</span>
-            <button name="act_quickAdv" type="action" value="1"></button>
+            <button class="roll" name="roll_quickInit" type="roll" value="[[@{reflex} &{tracker:+}]]">
+            </button>
           </div>
           <div><span>Initiative !</span>
-            <button name="act_Jet d'Initiative" type="action" value=""></button>
+            <button name="act_initRoll" type="action" value=""></button>
           </div>
         </div>
         <div class="col3" id="movement">
-          <h3>Mouvement</h3><span>Coucou</span>
+          <h3>Mouvement</h3>
         </div>
         <div class="col3" id="armor">
           <h3>Armure</h3>
         </div>
       </div>
       <div class="col3" id="health">
-        <h3>Santé</h3>
+        <h3> <span>Santé</span><span>
+            <input name="attr_hp" type="number" value="">/
+            <input name="attr_hp_max" type="number" value="" readonly></span></h3><span>Rang</span><span>Malus</span><span>Total</span><span>Actuel</span>
+        <fieldset class="repeating_health">
+          <input name="attr_rank" type="text" value="" readonly>
+          <input name="attr_malus" type="text" value="" readonly>
+          <input name="attr_total" type="number" value="" readonly>
+          <input name="attr_current" type="number" value="" readonly>
+        </fieldset>
       </div>
       <div class="col2" id="guard">
         <h3>Posture</h3>
@@ -592,7 +601,7 @@ function flattenPool(pool)
  * @param {string} title    The displayed roll title
  * @param {string} template The Rolltemplate ID
  */
-function doRoll(pool, title, template='base')
+function doRoll(pool, title, template='base', init=false)
 {
     pool = flattenPool(pool)
     var rollString = `&{template:${template}} `
@@ -610,7 +619,10 @@ function doRoll(pool, title, template='base')
             if ("1" === v.hasFocus)
                 rollString += `ro1`
         }
-        rollString += `}k${pool.kept}+${pool.mod}]]}} `
+        rollString += `}k${pool.kept}+${pool.mod} `
+        if (init === true)
+            rollString += `&{tracker}`
+        rollString +=`]]}} `
 
         rollString += `{{title=${title}}} `
 
@@ -664,12 +676,24 @@ on('clicked:repeating_skills:skillroll', function (e)
         let rollMod = v['rollMod']
         let pool = parsePoolString(roll)
         let modPool = parsePoolString(rollMod)
-        pool.thrown += modPool.thrown
-        pool.kept += modPool.kept
-        pool.mod += modPool.mod
+        pool = sumPools(pool, modPool)
         doRoll(pool, name)
     })
-});on('sheet:opened', function()
+});
+
+/**
+ * Roll init
+ */
+on('clicked:initroll', function(e) {
+    getAttrs(['totalinit', 'rollmod'], v => {
+        let pool = parsePoolString(v.totalinit)
+        let mod = parsePoolString(v.rollMod)
+        console.log(pool)
+        doRoll(pool, 'Initiative !', 'base', true)
+    })
+});
+
+  on('sheet:opened', function()
 {
     updateRings()
     updateAllSkills()
