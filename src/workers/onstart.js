@@ -4,4 +4,7 @@ on('sheet:opened', function()
     updateAllSkills()
     updateInsight()
     updateInit()
+
+    prepareHealthRows()
+    updateHealthMonitorDisplay()
 })

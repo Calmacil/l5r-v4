@@ -785,7 +785,7 @@
   font-weight: bold;
 }
 .charsheet .tab3 div#health > span:first-of-type {
-  width: calc(40% - 2px);
+  width: calc(60% - 2px);
   border-left: 1px dotted gray;
 }
 .charsheet .tab3 div#health > span:not(:first-of-type) {
@@ -806,12 +806,18 @@
   border-right: 1px dotted gray;
   border-bottom: 1px dotted lightgray;
 }
-.charsheet .tab3 div#health > .repcontainer > .repitem > input:first-of-type {
-  width: 40%;
+.charsheet .tab3 div#health > .repcontainer > .repitem > input:nth-of-type(2) {
+  width: 60%;
   border-left: 1px dotted gray;
 }
-.charsheet .tab3 div#health > .repcontainer > .repitem > input:not(:first-of-type) {
+.charsheet .tab3 div#health > .repcontainer > .repitem > input:not(:nth-of-type(2)) {
   width: 20%;
+}
+.charsheet .tab3 div#health > .repcontainer > .repitem > input[type=hidden][value="1"] ~ input:nth-of-type(2) {
+  background: radial-gradient(rgba(170, 0, 0, 0.5333333333) 5%, rgba(0, 0, 0, 0));
+}
+.charsheet .tab3 div#health > .repcontrol {
+  display: none;
 }
 
 .sheet-rolltemplate-base {

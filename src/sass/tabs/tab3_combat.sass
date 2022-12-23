@@ -36,7 +36,7 @@
             font-family: $fontHandwriting
             font-weight: bold
             &:first-of-type
-                width: calc(40% - 2px)
+                width: calc(60% - 2px)
                 border-left: 1px dotted gray
             &:not(:first-of-type)
                 width: calc(20% - 1px)
@@ -52,8 +52,13 @@
                     border: none
                     border-right: 1px dotted gray
                     border-bottom: 1px dotted lightgray
-                    &:first-of-type
-                        width: calc(40%)
+                    &:nth-of-type(2)
+                        width: calc(60%)
                         border-left: 1px dotted gray
-                    &:not(:first-of-type)
+                    &:not(:nth-of-type(2))
                         width: calc(20%)
+                    &[type=hidden][value="1"] ~ input
+                        &:nth-of-type(2)
+                            background: radial-gradient($bloodColor 5%, #0000)
+        &> .repcontrol
+            display: none

@@ -22,3 +22,4 @@ function updateInit()
 on('change:reflex change:modinit change:insight_rank', evi => {
     updateInit()
 })
+

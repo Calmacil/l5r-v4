@@ -105,12 +105,12 @@ function flattenPool(pool)
  * @param {string} title    The displayed roll title
  * @param {string} template The Rolltemplate ID
  */
-function doRoll(pool, title, template='base', init=false)
+function doRoll(pool, title, template='base', woundmalus=true, init=false)
 {
     pool = flattenPool(pool)
     var rollString = `&{template:${template}} `
 
-    getAttrs(['character_name', 'hasFocus', 'explodeOn', 'character_avatar'], function(v)
+    getAttrs(['character_name', 'hasFocus', 'explodeOn', 'woundmalus'], function(v)
     {
         rollString += `{{charname=${v.character_name}}} `
 
@@ -124,6 +124,8 @@ function doRoll(pool, title, template='base', init=false)
                 rollString += `ro1`
         }
         rollString += `}k${pool.kept}+${pool.mod} `
+        if (true === woundmalus)
+            rollString += `+ ${parseInt(v.woundmalus)||0} `
         if (init === true)
             rollString += `&{tracker}`
         rollString +=`]]}} `
@@ -193,7 +195,7 @@ on('clicked:initroll', function(e) {
         let pool = parsePoolString(v.totalinit)
         let mod = parsePoolString(v.rollMod)
         console.log(pool)
-        doRoll(pool, 'Initiative !', 'base', true)
+        doRoll(pool, 'Initiative !', 'base', false, true)
     })
 });
 

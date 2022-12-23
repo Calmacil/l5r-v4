@@ -23,15 +23,15 @@
                 +numberInput('hp')
                 | /
                 +numberInput('hp_max')(readonly)
+                +hiddenInput('woundmalus', 0)
         span Rang
         span Malus
         span Total
-        span Actuel
         fieldset.repeating_health
+            +hiddenInput('highlight', 0)
             +textInput('rank')(readonly)
             +textInput('malus')(readonly)
             +numberInput('total')(readonly)
-            +numberInput('current')(readonly)
     div#guard.col2
         h3 Posture
     div#states.col2
