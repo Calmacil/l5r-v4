@@ -333,7 +333,26 @@
           </label>
         </div>
         <div class="col3" id="armor">
+          <h3>Défense</h3>
+          <label for="baseDefense"><span>Déf. base</span>
+            <input name="attr_baseDefense" type="number" value="" id="baseDefense" readonly>
+          </label>
+          <label for="fullDefense"><span>Déf. actuelle</span>
+            <input name="attr_fullDefense" type="number" value="" id="fullDefense" readonly>
+          </label>
           <h3>Armure</h3>
+          <label for="armorName"><span>Armure</span>
+            <input name="attr_armorName" type="text" value="" id="armorName">
+          </label>
+          <label for="armorDef"><span>Def. bonus</span>
+            <input name="attr_armorDef" type="number" value="" id="armorDef">
+          </label>
+          <label for="armorRed"><span>Réduction</span>
+            <input name="attr_reduction" type="number" value="" id="armorRed">
+          </label>
+          <label>
+            <input name="attr_armorEquipped" value="1" type="checkbox"><span>Équipé?</span>
+          </label>
         </div>
       </div>
       <div class="col3" id="health">
@@ -536,6 +555,33 @@ on('change:water change:waterMod', e => {
     computeMove()
 })
 
+  /**
+ * Updates defenses stats
+ */
+function updateDefense() {
+    getAttrs(['reflex', 'armorDef', 'armorEquipped'], v => {
+        let reflex = parseInt(v.reflex)||0
+        let armorDef = parseInt(v.armorDef)||0
+        let isEquipped = parseInt(v.armorEquipped)||0
+
+        let baseDef = 5 * (reflex + 2)
+        let fullDef = baseDef
+
+        if (1 === isEquipped) {
+            fullDef += armorDef
+        }
+
+        setAttrs({
+            baseDefense: baseDef,
+            fullDefense: fullDef
+        })
+    })
+}
+
+on('change:reflex change:armorDef change:armorEquipped', e => {
+    updateDefense()
+})
+
   var healthRows = []
 
 /**
@@ -650,7 +696,32 @@ function prepareHealthRows()
     prepareHealthRowStd()
 }
 
-on('change:hp', v => {
+/**
+ * Inflicts wounds taking the Reduction value into account
+ * @param {int} oldHp the previous HP value
+ * @param {int} newHp the new theoric HP value
+ */
+function woundsWithArmour(oldHp, newHp)
+{
+    getAttrs(['armorEquipped', 'reduction'], v => {
+        let isEquipped = parseInt(v.armorEquipped)||0
+        let reduction = parseInt(v.reduction)||0
+        let trueHp = newHp
+
+        if (oldHp > newHp && 1 === isEquipped) {
+            trueHp += reduction
+            if (trueHp > oldHp) trueHp = oldHp
+        }
+        setAttrs({
+            hp: trueHp
+        })
+    })
+}
+
+on('change:hp', evi => {
+    if (evi.sourceType === 'sheetworker') {
+        woundsWithArmour(parseInt(evi.previousValue)||0, parseInt(evi.newValue)||0)
+    }
     updateHealthMonitorDisplay()
 })/**
  * Creates a dice pool
@@ -863,5 +934,6 @@ on('clicked:initroll', function(e) {
     prepareHealthRows()
     updateHealthMonitorDisplay()
     computeMove()
+    updateDefense()
 })
 </script>

@@ -19,7 +19,14 @@
             +textLabelled('maxMove', 'Max / round', 'maxMove')(readonly)
             +numberLabelled('waterMod', 'Mod. Eau', 'modMove', 0)
         div#armor.col3
+            h3 Défense
+            +numberLabelled('baseDefense', 'Déf. base', 'baseDefense')(readonly)
+            +numberLabelled('fullDefense', 'Déf. actuelle', 'fullDefense')(readonly)
             h3 Armure
+            +textLabelled('armorName', 'Armure', 'armorName')
+            +numberLabelled('armorDef', 'Def. bonus', 'armorDef')
+            +numberLabelled('reduction', 'Réduction', 'armorRed')
+            +cbButton('armorEquipped', 'Équipé?', 1)
     div#health.col3
         h3 
             span Santé

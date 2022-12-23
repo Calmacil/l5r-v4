@@ -112,6 +112,31 @@ function prepareHealthRows()
     prepareHealthRowStd()
 }
 
-on('change:hp', v => {
+/**
+ * Inflicts wounds taking the Reduction value into account
+ * @param {int} oldHp the previous HP value
+ * @param {int} newHp the new theoric HP value
+ */
+function woundsWithArmour(oldHp, newHp)
+{
+    getAttrs(['armorEquipped', 'reduction'], v => {
+        let isEquipped = parseInt(v.armorEquipped)||0
+        let reduction = parseInt(v.reduction)||0
+        let trueHp = newHp
+
+        if (oldHp > newHp && 1 === isEquipped) {
+            trueHp += reduction
+            if (trueHp > oldHp) trueHp = oldHp
+        }
+        setAttrs({
+            hp: trueHp
+        })
+    })
+}
+
+on('change:hp', evi => {
+    if (evi.sourceType === 'sheetworker') {
+        woundsWithArmour(parseInt(evi.previousValue)||0, parseInt(evi.newValue)||0)
+    }
     updateHealthMonitorDisplay()
 })
