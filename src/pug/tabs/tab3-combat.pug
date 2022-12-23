@@ -14,6 +14,10 @@
                 +actButton('initRoll')
         div#movement.col3
             h3 Mouvement
+            +textLabelled('freeMove', 'Mvt. gratuit', 'freeMove')(readonly)
+            +textLabelled('simpleMove', 'Mvt. simple', 'simpleMove')(readonly)
+            +textLabelled('maxMove', 'Max / round', 'maxMove')(readonly)
+            +numberLabelled('waterMod', 'Mod. Eau', 'modMove', 0)
         div#armor.col3
             h3 Armure
     div#health.col3

@@ -746,16 +746,20 @@
   flex-wrap: wrap;
   align-content: start;
 }
-.charsheet .tab3 div#init label {
+.charsheet .tab3 div#init label,
+.charsheet .tab3 div#movement label {
   width: 100%;
 }
-.charsheet .tab3 div#init label > span {
+.charsheet .tab3 div#init label > span,
+.charsheet .tab3 div#movement label > span {
   width: 65%;
 }
-.charsheet .tab3 div#init label > input[type=text] {
+.charsheet .tab3 div#init label > input[type=text],
+.charsheet .tab3 div#movement label > input[type=text] {
   width: 35%;
 }
-.charsheet .tab3 div#init > div {
+.charsheet .tab3 div#init > div,
+.charsheet .tab3 div#movement > div {
   width: 100%;
 }
 .charsheet .tab3 div#health h3 {

@@ -7,4 +7,5 @@ on('sheet:opened', function()
 
     prepareHealthRows()
     updateHealthMonitorDisplay()
+    computeMove()
 })

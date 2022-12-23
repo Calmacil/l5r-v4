@@ -319,6 +319,18 @@
         </div>
         <div class="col3" id="movement">
           <h3>Mouvement</h3>
+          <label for="freeMove"><span>Mvt. gratuit</span>
+            <input name="attr_freeMove" type="text" value="" id="freeMove" readonly>
+          </label>
+          <label for="simpleMove"><span>Mvt. simple</span>
+            <input name="attr_simpleMove" type="text" value="" id="simpleMove" readonly>
+          </label>
+          <label for="maxMove"><span>Max / round</span>
+            <input name="attr_maxMove" type="text" value="" id="maxMove" readonly>
+          </label>
+          <label for="modMove"><span>Mod. Eau</span>
+            <input name="attr_waterMod" type="number" value="0" id="modMove">
+          </label>
         </div>
         <div class="col3" id="armor">
           <h3>Armure</h3>
@@ -495,6 +507,33 @@ function updateInit()
 
 on('change:reflex change:modinit change:insight_rank', evi => {
     updateInit()
+})
+
+  /**
+ * Computes the movement distances
+ */
+function computeMove()
+{
+    getAttrs(['water', 'waterMod'], v => {
+        let water = parseInt(v.water)||0
+        let waterMod = parseInt(v.waterMod)||0
+
+        let factor = water + waterMod
+
+        if (factor < 1) {
+            factor = 1
+        }
+
+        setAttrs({
+            freeMove: `${factor * 1.5} m`,
+            simpleMove: `${factor * 3} m`,
+            maxMove: `${factor * 6} m`
+        })
+    })
+}
+
+on('change:water change:waterMod', e => {
+    computeMove()
 })
 
   var healthRows = []
@@ -823,5 +862,6 @@ on('clicked:initroll', function(e) {
 
     prepareHealthRows()
     updateHealthMonitorDisplay()
+    computeMove()
 })
 </script>
