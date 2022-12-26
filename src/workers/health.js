@@ -140,3 +140,4 @@ on('change:hp', evi => {
     }
     updateHealthMonitorDisplay()
 })
+

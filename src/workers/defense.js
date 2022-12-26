@@ -10,7 +10,7 @@ function updateDefense() {
         let baseDef = 5 * (reflex + 2)
         let fullDef = baseDef
 
-        if (1 === isEquipped) {
+        if (isEquipped) {
             fullDef += armorDef
         }
 

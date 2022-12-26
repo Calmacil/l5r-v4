@@ -316,6 +316,10 @@
           <div><span>Initiative !</span>
             <button name="act_initRoll" type="action" value=""></button>
           </div>
+          <h3>Récupération</h3>
+          <label for="regenBase"><span>Récup. base</span>
+            <input name="attr_regenBase" type="text" value="(@{constitution}*2+@{insight_rank})" id="regenBase" disabled>
+          </label>
         </div>
         <div class="col3" id="movement">
           <h3>Mouvement</h3>
@@ -331,8 +335,6 @@
           <label for="modMove"><span>Mod. Eau</span>
             <input name="attr_waterMod" type="number" value="0" id="modMove">
           </label>
-        </div>
-        <div class="col3" id="armor">
           <h3>Défense</h3>
           <label for="baseDefense"><span>Déf. base</span>
             <input name="attr_baseDefense" type="number" value="" id="baseDefense" readonly>
@@ -340,6 +342,8 @@
           <label for="fullDefense"><span>Déf. actuelle</span>
             <input name="attr_fullDefense" type="number" value="" id="fullDefense" readonly>
           </label>
+        </div>
+        <div class="col3" id="armor">
           <h3>Armure</h3>
           <label for="armorName"><span>Armure</span>
             <input name="attr_armorName" type="text" value="" id="armorName">
@@ -349,6 +353,9 @@
           </label>
           <label for="armorRed"><span>Réduction</span>
             <input name="attr_reduction" type="number" value="" id="armorRed">
+          </label>
+          <label for="armorMalus"><span>Malus Agi.</span>
+            <input name="attr_armorMalus" type="number" value="" id="armorMalus">
           </label>
           <label>
             <input name="attr_armorEquipped" value="1" type="checkbox"><span>Équipé?</span>
@@ -374,10 +381,49 @@
         <h3>États</h3>
       </div>
       <div class="col2T1" id="weapons">
-        <h3>Armes</h3>
+        <h3>Armes</h3><span>Arme</span><span>Compétence</span><span>B Atk</span><span>J Atk</span><span title="Spécialité">S</span><span title="Force max">F</span><span>Dégâts</span>
+        <fieldset class="repeating_weapons">
+          <label>
+            <input name="attr_expand" value="1" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_name" type="text" value="">
+          <select name="attr_skill">
+            <option value="" selected></option>
+            <option value="chaine">Armes à chaînes</option>
+            <option value="hast">Armes d'hast</option>
+            <option value="lourd">Armes lourdes</option>
+            <option value="naturel">Armes naturelles</option>
+            <option value="baton">Bâtons</option>
+            <option value="couteau">Couteaux</option>
+            <option value="ventail">Éventails de guerre</option>
+            <option value="kenjutsu">Kenjutsu</option>
+            <option value="kyujutsu">Kyujutsu</option>
+            <option value="lance">Lances</option>
+            <option value="ninjutsu">Ninjutsu</option>
+            <option value="iaijutsu">Iaijutsu</option>
+            <option value="jiujutsu">Jiujutsu</option>
+          </select>
+          <input name="attr_attackbonus" type="text" value="0g0">
+          <input name="attr_attack" type="text" value="0g0">
+          <button name="act_attackroll" type="action" value=""></button>
+          <label>
+            <input name="attr_hasfocus" value="1" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_maxstr" type="number" value="">
+          <input name="attr_damage" type="text" value="0g0">
+          <button name="act_damageroll" type="action" value=""></button>
+          <input name="attr_expand" type="hidden" value="">
+          <textarea name="attr_notes" placeholder="Notes"></textarea>
+        </fieldset>
       </div>
       <div class="col3" id="inventory">
-        <h3>Inventaire</h3>
+        <h3>Inventaire</h3><span>Objet</span><span title="Porté ?">P?</span>
+        <fieldset class="repeating_inventory">
+          <input name="attr_name" type="text" value="">
+          <label>
+            <input name="equipped" type="checkbox"><span> </span>
+          </label>
+        </fieldset>
       </div>
     </div>
     <div class="tab tab4">
@@ -465,7 +511,11 @@ function updateInsight()
     })
 }
 
-on('change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', updateRings);/**
+on('change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', v => {
+    updateRings()
+    updateAllSkills()
+    updateAllAtkRolls()
+});/**
  * Updates the roll value of a single skill
  * @param {string} rowId The ID of the skill row
  */
@@ -502,6 +552,7 @@ on('change:repeating_skills:trait change:repeating_skills:rank', (evi) => {
     let rowId = evi.sourceAttribute.split('_')[2]
     updateSkill(rowId)
     updateInsight()
+    updateAllAtkRolls()
 });
   /**
  * Updates init attributes
@@ -567,7 +618,7 @@ function updateDefense() {
         let baseDef = 5 * (reflex + 2)
         let fullDef = baseDef
 
-        if (1 === isEquipped) {
+        if (isEquipped) {
             fullDef += armorDef
         }
 
@@ -723,7 +774,67 @@ on('change:hp', evi => {
         woundsWithArmour(parseInt(evi.previousValue)||0, parseInt(evi.newValue)||0)
     }
     updateHealthMonitorDisplay()
-})/**
+})
+
+  function fetchCombatSkillRoll(searchStringId, atkRollId) {
+    var theTrait = 'agility'
+    var toGet = ['agility', 'reflex', searchStringId];
+    getSectionIDs('skills', idarray => {
+        for (let i = 0; i < idarray.length; i++) {
+            let id = idarray[i]
+            let skillNameId = `repeating_skills_${id}_name`
+            let skillRollId = 'repeating_skills_' + id + '_roll'
+            toGet.push(skillNameId)
+            toGet.push(skillRollId)
+
+        }
+
+        console.log(toGet)
+        getAttrs(toGet, v => {
+            let atkRoll = undefined
+            for (let i = 0; i < idarray.length; i++) {
+                let id = idarray[i]
+                let skillNameId = `repeating_skills_${id}_name`
+                let skillRollId = 'repeating_skills_' + id + '_roll'
+                let skillName = v[skillNameId]
+                let skillRoll = v[skillRollId]
+                let searchString = v[searchStringId]
+                if (searchString === 'kyujutsu') theTrait = 'reflex'
+
+                console.log(searchString, ' [in] ', skillName)
+
+                if (skillName.toLowerCase().indexOf(searchString) > -1) {
+                    atkRoll = skillRoll;
+                }
+            }
+
+            if (atkRoll === undefined) {
+                atkRoll = poolToString(createPool(v[theTrait]))
+            }
+            console.log(atkRoll)
+            let data = {}
+            data[atkRollId] = atkRoll
+
+            setAttrs(data);
+        })
+    })
+}
+
+
+function updateAllAtkRolls() {
+    getSectionIDs('weapons', idarray => {
+        for(let i = 0; i < idarray.length; i++) {
+            let wpnId = idarray[i]
+
+            let wpnSearchstring = `repeating_weapons_${wpnId}_skill`
+            let wpnAtkRollId = `repeating_weapons_${wpnId}_attack`
+
+            fetchCombatSkillRoll(wpnSearchstring, wpnAtkRollId)
+        }
+    })
+}
+
+  /**
  * Creates a dice pool
  * @param {int} thrown Number of dice thrown
  * @param {int} kept Number of dice kept
@@ -926,6 +1037,8 @@ on('clicked:initroll', function(e) {
 
   on('sheet:opened', function()
 {
+    // remove when dev is finished
+    console.clear()
     updateRings()
     updateAllSkills()
     updateInsight()
@@ -935,5 +1048,7 @@ on('clicked:initroll', function(e) {
     updateHealthMonitorDisplay()
     computeMove()
     updateDefense()
+
+    updateAllAtkRolls()
 })
 </script>

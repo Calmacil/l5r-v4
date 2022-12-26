@@ -607,7 +607,7 @@
   width: 150px;
 }
 .charsheet .tab2 .skillsList > span:nth-of-type(3) {
-  width: calc(100% - 30px - 150px - 60px - 35px - 45px - 53px);
+  width: calc(100% - 30px - 150px - 60px - 35px - 55px - 53px);
 }
 .charsheet .tab2 .skillsList > span:nth-of-type(4) {
   width: 60px;
@@ -616,7 +616,7 @@
   width: 35px;
 }
 .charsheet .tab2 .skillsList > span:nth-of-type(6) {
-  width: 45px;
+  width: 55px;
 }
 .charsheet .tab2 .skillsList > .repcontainer {
   width: 100%;
@@ -706,7 +706,7 @@
 }
 .charsheet .tab2 .skillsList > .repcontainer > .repitem > input:nth-of-type(2) {
   padding: 5px;
-  width: calc(100% - 30px - 150px - 60px - 35px - 45px - 53px + 9px);
+  width: calc(100% - 30px - 150px - 60px - 35px - 55px - 53px + 9px);
 }
 .charsheet .tab2 .skillsList > .repcontainer > .repitem > input:nth-of-type(3) {
   text-align: center;
@@ -714,7 +714,7 @@
 }
 .charsheet .tab2 .skillsList > .repcontainer > .repitem > input:nth-of-type(4) {
   padding: 5px;
-  width: 34px;
+  width: 44px;
   cursor: default;
   background: rgba(238, 238, 238, 0.6);
 }
@@ -875,6 +875,220 @@
 }
 .charsheet .tab3 div#health > .repcontrol {
   display: none;
+}
+.charsheet .tab3 div#weapons > span {
+  font-family: "Arial";
+  font-weight: bold;
+  border-bottom: 3px double black;
+  border-left: 1px dotted gray;
+  align-content: center;
+  padding: 2px;
+}
+.charsheet .tab3 div#weapons > span:nth-of-type(1) {
+  width: calc(100% - 90px - 35px - 55px - 25px - 25px - 55px - 35px);
+}
+.charsheet .tab3 div#weapons > span:nth-of-type(2) {
+  width: 90px;
+}
+.charsheet .tab3 div#weapons > span:nth-of-type(3) {
+  width: 35px;
+}
+.charsheet .tab3 div#weapons > span:nth-of-type(4) {
+  width: 55px;
+}
+.charsheet .tab3 div#weapons > span:nth-of-type(5) {
+  width: 25px;
+}
+.charsheet .tab3 div#weapons > span:nth-of-type(6) {
+  width: 25px;
+}
+.charsheet .tab3 div#weapons > span:nth-of-type(7) {
+  width: 55px;
+}
+.charsheet .tab3 div#weapons > .repcontainer {
+  width: 100%;
+  flex-wrap: wrap;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem {
+  width: 100%;
+  flex-wrap: wrap;
+  border-bottom: 1px solid gray;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:first-of-type {
+  width: 10px;
+  padding-right: 0;
+  margin-bottom: 0;
+  height: 20px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:first-of-type > input[type=checkbox] {
+  position: absolute;
+  width: 10px;
+  opacity: 0;
+  height: 24px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:first-of-type > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:first-of-type > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: "►";
+  justify-content: center;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:first-of-type > input[type=checkbox]:checked ~ span::before {
+  content: "▼";
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text], .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number] {
+  border: none;
+  padding: 2px;
+  font-family: "Patrick Hand";
+  font-style: italic;
+  height: 20px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:not(:first-of-type), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:not(:first-of-type) {
+  border-left: 1px dotted gray;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(1), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(1) {
+  width: calc(100% - 90px - 35px - 55px - 25px - 25px - 55px - 35px - 5px);
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(2), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(2) {
+  width: 40px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(3), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(3) {
+  width: 41px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(4), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(4) {
+  width: 30px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(5), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(5) {
+  width: 41px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > select {
+  border: none;
+  border-left: 1px dotted gray;
+  width: 95px;
+  height: 20px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:not(:first-of-type) {
+  border-left: 1px dotted gray;
+  width: 29px;
+  padding: 0;
+  margin-bottom: 0;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] {
+  position: absolute;
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: attr(title);
+  justify-content: center;
+  font-family: "Arial";
+  margin-top: -5px;
+  margin-right: 4px;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox]:checked ~ span::before {
+  background-color: #99a;
+  box-shadow: 0 0 5px inset black;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] ~ span {
+  padding: 0;
+  margin: 0;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] ~ span::before {
+  margin-top: 2px;
+  margin-left: 5px;
+  border-radius: 15px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid black;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > textarea {
+  line-height: 15px;
+  padding-block: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: repeating-linear-gradient(to bottom, transparent 0 1px, lightgray 1px 2px, transparent 2px 15px) 50% 0/calc(100% - 30px) 100% no-repeat;
+  height: 4em;
+  display: none;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=hidden][value="1"] ~ textarea {
+  display: flex;
+}
+.charsheet .tab3 div#weapons > .repcontainer > .repitem > button[type=action] {
+  margin-top: 5px;
+  margin-left: -5px;
+  margin-right: 5px;
+}
+.charsheet .tab3 div#inventory > span {
+  font-family: "Arial";
+  font-weight: bold;
+  border-bottom: 3px double black;
+  align-content: center;
+  padding: 2px;
+  border-left: 1px solid gray;
+}
+.charsheet .tab3 div#inventory > span:first-of-type {
+  width: calc(100% - 26px);
+}
+.charsheet .tab3 div#inventory > span:last-of-type {
+  width: 16px;
+}
+.charsheet .tab3 div#inventory > .repcontainer {
+  flex-wrap: wrap;
+  width: 100%;
+}
+.charsheet .tab3 div#inventory > .repcontainer > .repitem {
+  border-bottom: 1px solid gray;
+  height: 20px;
+  width: 100%;
+}
+.charsheet .tab3 div#inventory > .repcontainer > .repitem > input[type=text] {
+  border: none;
+  width: calc(100% - 21px);
+  border-left: 1px dotted grey;
+}
+.charsheet .tab3 div#inventory > .repcontainer > .repitem > label {
+  width: 20px;
+  margin: 0;
+  padding: 0;
+  border-left: 1px dotted gray;
+}
+.charsheet .tab3 div#inventory > .repcontainer > .repitem > label > input[type=checkbox] {
+  position: absolute;
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+}
+.charsheet .tab3 div#inventory > .repcontainer > .repitem > label > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab3 div#inventory > .repcontainer > .repitem > label > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: attr(title);
+  justify-content: center;
+  font-family: "Arial";
+  margin-top: -5px;
+  margin-right: 4px;
+}
+.charsheet .tab3 div#inventory > .repcontainer > .repitem > label > input[type=checkbox]:checked ~ span::before {
+  background-color: #99a;
+  box-shadow: 0 0 5px inset black;
+}
+.charsheet .tab3 div#inventory > .repcontainer > .repitem > label > input[type=checkbox] ~ span::before {
+  margin-top: -3px;
+  margin-right: 5px;
+  border-radius: 15px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid black;
 }
 
 .sheet-rolltemplate-base {

@@ -12,4 +12,8 @@ function updateRings()
     })
 }
 
-on('change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', updateRings);
+on('change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', v => {
+    updateRings()
+    updateAllSkills()
+    updateAllAtkRolls()
+});

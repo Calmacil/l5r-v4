@@ -1,3 +1,12 @@
+$skill_width: 90px
+$atkbonus_width: 35px
+$atkroll_width: 55px
+$focus_width: 25px
+$maxstr_width: 25px
+$dmg_width: 55px
+
+$name_width: calc(100% - $skill_width - $atkbonus_width - $atkroll_width - $focus_width - $maxstr_width - $dmg_width - 35px)
+
 .charsheet .tab3
     flex-wrap: wrap
     align-content: start
@@ -89,3 +98,130 @@
                             background: radial-gradient($bloodColor 5%, #0000)
         &> .repcontrol
             display: none
+
+    div#weapons
+        &> span
+            font-family: $fontStandard
+            font-weight: bold
+            border-bottom: 3px double black
+            border-left: 1px dotted gray
+            align-content: center
+            padding: 2px
+            &:nth-of-type(1)
+                width: $name_width
+            &:nth-of-type(2)
+                width: $skill_width
+            &:nth-of-type(3)
+                width: $atkbonus_width
+            &:nth-of-type(4)
+                width: $atkroll_width
+            &:nth-of-type(5)
+                width: $focus_width
+            &:nth-of-type(6)
+                width: $maxstr_width
+            &:nth-of-type(7)
+                width: $dmg_width
+        &> .repcontainer
+            width: 100%
+            flex-wrap: wrap
+            &> .repitem
+                width: 100%
+                flex-wrap: wrap
+                border-bottom: 1px solid gray
+                &> label:first-of-type 
+                    width: 10px
+                    padding-right: 0
+                    margin-bottom: 0
+                    height: 20px
+                    &> input[type=checkbox]
+                        @include expandSwitch($skill_height)
+                &> input[type=text],
+                &> input[type=number]
+                    border: none
+                    padding: 2px
+                    font-family: $fontHandwriting
+                    font-style: italic
+                    height: 20px
+                    &:not(:first-of-type)
+                        border-left: 1px dotted gray
+                    &:nth-of-type(1)
+                        width: calc($name_width - 5px)
+                    &:nth-of-type(2)
+                        width: calc($atkbonus_width + 5px)
+                    &:nth-of-type(3)
+                        width: calc($atkroll_width - 14px)
+                    &:nth-of-type(4)
+                        width: calc($maxstr_width + 5px)
+                    &:nth-of-type(5)
+                        width: calc($dmg_width - 14px)
+                    
+                &> select
+                    border: none
+                    border-left: 1px dotted gray
+                    width: calc($skill_width + 5px)
+                    height: 20px
+                &> label:not(:first-of-type)
+                    border-left: 1px dotted gray
+                    width: calc($focus_width + 4px)
+                    padding: 0
+                    margin-bottom: 0
+                    &> input[type=checkbox]
+                        @include toggleable(20px, $fontStandard, false, 20px)
+                        &~ span
+                            padding: 0
+                            margin: 0
+                        &~ span::before
+                            margin-top: 2px
+                            margin-left: 5px
+                            border-radius: 15px
+                            width: 12px
+                            height: 12px
+                            border: 2px solid black
+                &> textarea
+                    @include textareaLined(15px, 1px)
+                    height: 4em
+                    display: none
+                &> input[type=hidden][value="1"] ~ textarea
+                    display: flex
+                &> button[type=action]
+                    margin-top: 5px
+                    margin-left: -5px
+                    margin-right: 5px
+
+    div#inventory
+        &> span
+            font-family: $fontStandard
+            font-weight: bold
+            border-bottom: 3px double black
+            align-content: center
+            padding: 2px
+            border-left: 1px solid gray
+            &:first-of-type
+                width: calc(100% - 26px)
+            &:last-of-type
+                width: 16px
+        &> .repcontainer
+            flex-wrap: wrap
+            width: 100%
+            &> .repitem
+                border-bottom: 1px solid gray
+                height: 20px
+                width: 100%
+                &> input[type=text]
+                    border: none
+                    width: calc(100% - 21px)
+                    border-left: 1px dotted grey
+                &> label
+                    width: 20px
+                    margin: 0
+                    padding: 0
+                    border-left: 1px dotted gray
+                    &> input[type=checkbox]
+                        @include toggleable(20px, $fontStandard, false, 20px)
+                        &~ span::before
+                            margin-top: -3px
+                            margin-right: 5px
+                            border-radius: 15px
+                            width: 12px
+                            height: 12px
+                            border: 2px solid black

@@ -1,5 +1,7 @@
 on('sheet:opened', function()
 {
+    // remove when dev is finished
+    console.clear()
     updateRings()
     updateAllSkills()
     updateInsight()
@@ -9,4 +11,6 @@ on('sheet:opened', function()
     updateHealthMonitorDisplay()
     computeMove()
     updateDefense()
+
+    updateAllAtkRolls()
 })

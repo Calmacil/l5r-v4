@@ -12,20 +12,23 @@
             div
                 span Initiative !
                 +actButton('initRoll')
+            h3 Récupération
+            +textLabelled('regenBase', 'Récup. base', 'regenBase')(value='(@{constitution}*2+@{insight_rank})' disabled)
         div#movement.col3
             h3 Mouvement
             +textLabelled('freeMove', 'Mvt. gratuit', 'freeMove')(readonly)
             +textLabelled('simpleMove', 'Mvt. simple', 'simpleMove')(readonly)
             +textLabelled('maxMove', 'Max / round', 'maxMove')(readonly)
             +numberLabelled('waterMod', 'Mod. Eau', 'modMove', 0)
-        div#armor.col3
             h3 Défense
             +numberLabelled('baseDefense', 'Déf. base', 'baseDefense')(readonly)
             +numberLabelled('fullDefense', 'Déf. actuelle', 'fullDefense')(readonly)
+        div#armor.col3
             h3 Armure
             +textLabelled('armorName', 'Armure', 'armorName')
             +numberLabelled('armorDef', 'Def. bonus', 'armorDef')
             +numberLabelled('reduction', 'Réduction', 'armorRed')
+            +numberLabelled('armorMalus', 'Malus Agi.', 'armorMalus')
             +cbButton('armorEquipped', 'Équipé?', 1)
     div#health.col3
         h3 
@@ -49,5 +52,43 @@
         h3 États
     div#weapons.col2T1
         h3 Armes
+        span Arme
+        span Compétence
+        span B Atk
+        span J Atk
+        span(title='Spécialité') S
+        span(title='Force max') F
+        span Dégâts
+        fieldset.repeating_weapons
+            +cbButton('expand', ' ', 1)
+            +textInput('name')
+            +select('skill', '-')
+                option(value='chaine') Armes à chaînes
+                option(value='hast') Armes d'hast
+                option(value='lourd') Armes lourdes
+                option(value='naturel') Armes naturelles
+                option(value='baton') Bâtons
+                option(value='couteau') Couteaux
+                option(value='ventail') Éventails de guerre
+                option(value='kenjutsu') Kenjutsu
+                option(value='kyujutsu') Kyujutsu
+                option(value='lance') Lances
+                option(value='ninjutsu') Ninjutsu
+                option(value='iaijutsu') Iaijutsu
+                option(value='jiujutsu') Jiujutsu
+            +textInput('attackbonus', '0g0')
+            +textInput('attack', '0g0')
+            +actButton('attackroll')
+            +cbButton('hasfocus', ' ', '1')
+            +numberInput('maxstr', '')
+            +textInput('damage', '0g0')
+            +actButton('damageroll')
+            +hiddenInput('expand')
+            +textareaInput('notes')(placeholder='Notes')
     div#inventory.col3
         h3 Inventaire
+        span Objet
+        span(title="Porté ?") P?
+        fieldset.repeating_inventory
+            +textInput('name')
+            +cbButton('equipped', ' ')
