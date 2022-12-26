@@ -1091,36 +1091,43 @@
   border: 2px solid black;
 }
 
-.sheet-rolltemplate-base {
+.sheet-rolltemplate-base,
+.sheet-rolltemplate-attack {
   width: 100%;
   padding: 5px;
   background: #fef68e;
   box-shadow: 0 0 8px black inset;
 }
-.sheet-rolltemplate-base > .sheet-header {
+.sheet-rolltemplate-base > .sheet-header,
+.sheet-rolltemplate-attack > .sheet-header {
   padding: 5px;
 }
-.sheet-rolltemplate-base > .sheet-header > h1 {
+.sheet-rolltemplate-base > .sheet-header > h1,
+.sheet-rolltemplate-attack > .sheet-header > h1 {
   font-family: "Patrick Hand";
   font-style: italic;
   font-size: 18px;
   text-align: center;
   line-height: 26px;
 }
-.sheet-rolltemplate-base .sheet-arrow-container {
+.sheet-rolltemplate-base .sheet-arrow-container,
+.sheet-rolltemplate-attack .sheet-arrow-container {
   padding-left: 15px;
   padding-right: 15px;
 }
-.sheet-rolltemplate-base .sheet-arrow-right {
+.sheet-rolltemplate-base .sheet-arrow-right,
+.sheet-rolltemplate-attack .sheet-arrow-right {
   border-top: solid 2px transparent;
   border-bottom: solid 2px transparent;
   border-left: solid 180px rgba(255, 0, 0, 0.5333333333);
 }
-.sheet-rolltemplate-base > .sheet-results {
+.sheet-rolltemplate-base > .sheet-results,
+.sheet-rolltemplate-attack > .sheet-results {
   padding: 5px;
   text-align: center;
 }
-.sheet-rolltemplate-base > .sheet-results .inlinerollresult {
+.sheet-rolltemplate-base > .sheet-results .inlinerollresult,
+.sheet-rolltemplate-attack > .sheet-results .inlinerollresult {
   border: none;
 }
 

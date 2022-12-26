@@ -1,3 +1,8 @@
+/**
+ * Updates a single attack skill roll
+ * @param {string} searchStringId Attribute ID to search for
+ * @param {string} atkRollId The attack roll ID to update
+ */
 function fetchCombatSkillRoll(searchStringId, atkRollId) {
     var theTrait = 'agility'
     var toGet = ['agility', 'reflex', searchStringId];
@@ -11,7 +16,6 @@ function fetchCombatSkillRoll(searchStringId, atkRollId) {
 
         }
 
-        console.log(toGet)
         getAttrs(toGet, v => {
             let atkRoll = undefined
             for (let i = 0; i < idarray.length; i++) {
@@ -23,8 +27,6 @@ function fetchCombatSkillRoll(searchStringId, atkRollId) {
                 let searchString = v[searchStringId]
                 if (searchString === 'kyujutsu') theTrait = 'reflex'
 
-                console.log(searchString, ' [in] ', skillName)
-
                 if (skillName.toLowerCase().indexOf(searchString) > -1) {
                     atkRoll = skillRoll;
                 }
@@ -33,7 +35,6 @@ function fetchCombatSkillRoll(searchStringId, atkRollId) {
             if (atkRoll === undefined) {
                 atkRoll = poolToString(createPool(v[theTrait]))
             }
-            console.log(atkRoll)
             let data = {}
             data[atkRollId] = atkRoll
 
@@ -42,7 +43,9 @@ function fetchCombatSkillRoll(searchStringId, atkRollId) {
     })
 }
 
-
+/**
+ * Updates all attack rolls in the combat tab
+ */
 function updateAllAtkRolls() {
     getSectionIDs('weapons', idarray => {
         for(let i = 0; i < idarray.length; i++) {
