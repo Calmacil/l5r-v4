@@ -573,7 +573,8 @@ function doRoll(pool, title, opts)
             template: 'base',
             woundmalus: true,
             init: false,
-            explodeOn: false
+            explodeOn: false,
+            hasFocus: undefined
         },
         ...opts
     }
@@ -585,6 +586,7 @@ function doRoll(pool, title, opts)
     {
         rollString += `{{charname=${v.character_name}}} `
         let expl = opts.explodeOn === false ? parseInt(v.explodeOn)||0 : parseInt(opts.explodeOn)||0
+        let focus = opts.hasFocus === undefined ? parseInt(v.hasFocus)||0 : parseInt(opts.hasFocus)||0
         
         rollString += `{{roll=[[{`
         for (let i = 0; i < pool.thrown; i++) {
@@ -592,7 +594,7 @@ function doRoll(pool, title, opts)
             rollString += `1d10`
             if (expl)
                 rollString += `!>${expl}`
-            if ("1" === v.hasFocus)
+            if (focus === 1)
                 rollString += `ro1`
         }
         rollString += `}k${pool.kept}+${pool.mod} `
@@ -1055,7 +1057,8 @@ on('clicked:repeating_weapons:attackroll', evi => {
     let atkName = `repeating_weapons_${wpnId}_name`
     let atkRoll = `repeating_weapons_${wpnId}_attack`
     let atkMod = `repeating_weapons_${wpnId}_attackbonus`
-    getAttrs([atkName, atkMod, atkRoll, 'rollmod'], v => {
+    let atkFocus = `repeating_weapons_${wpnId}_hasfocus`
+    getAttrs([atkName, atkMod, atkRoll, atkFocus, 'rollmod'], v => {
         let name = v[atkName]
         let pool = parsePoolString(v[atkRoll])
         let bonus = parsePoolString(v[atkMod])
@@ -1064,7 +1067,7 @@ on('clicked:repeating_weapons:attackroll', evi => {
         pool = sumPools(pool, bonus)
         pool = sumPools(pool, mod)
 
-        doRoll(pool, name, {template: 'base'});
+        doRoll(pool, name, {template: 'base', hasFocus: v[atkFocus]});
     })
 })
 
@@ -1072,7 +1075,7 @@ on('clicked:repeating_weapons:attackroll', evi => {
 on('clicked:repeating_weapons:damageroll', evi => {
     let wpnId = evi.sourceAttribute.split('_')[2]
     let dmgName = `repeating_weapons_${wpnId}_name`
-    let dmgRoll = 'repeating_weapons_' + wpnId + '_damageroll'
+    let dmgRoll = 'repeating_weapons_' + wpnId + '_damage'
     let dmgMaxstr = `repeating_weapons_${wpnId}_maxstr`
     getAttrs([dmgName, dmgName, dmgRoll, dmgMaxstr, 'rollmod', 'strength'], v => {
         let name = `Dégâts (${v[dmgName]})`

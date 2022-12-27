@@ -885,7 +885,7 @@
   padding: 2px;
 }
 .charsheet .tab3 div#weapons > span:nth-of-type(1) {
-  width: calc(100% - 90px - 35px - 55px - 25px - 25px - 55px - 35px);
+  width: calc(100% - 90px - 35px - 55px - 20px - 20px - 55px - 35px);
 }
 .charsheet .tab3 div#weapons > span:nth-of-type(2) {
   width: 90px;
@@ -897,10 +897,10 @@
   width: 55px;
 }
 .charsheet .tab3 div#weapons > span:nth-of-type(5) {
-  width: 25px;
+  width: 20px;
 }
 .charsheet .tab3 div#weapons > span:nth-of-type(6) {
-  width: 25px;
+  width: 20px;
 }
 .charsheet .tab3 div#weapons > span:nth-of-type(7) {
   width: 55px;
@@ -949,7 +949,7 @@
   border-left: 1px dotted gray;
 }
 .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(1), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(1) {
-  width: calc(100% - 90px - 35px - 55px - 25px - 25px - 55px - 35px - 5px);
+  width: calc(100% - 90px - 35px - 55px - 20px - 20px - 55px - 35px - 5px);
 }
 .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(2), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(2) {
   width: 40px;
@@ -958,7 +958,7 @@
   width: 41px;
 }
 .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(4), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(4) {
-  width: 30px;
+  width: 25px;
 }
 .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=text]:nth-of-type(5), .charsheet .tab3 div#weapons > .repcontainer > .repitem > input[type=number]:nth-of-type(5) {
   width: 41px;
@@ -971,7 +971,7 @@
 }
 .charsheet .tab3 div#weapons > .repcontainer > .repitem > label:not(:first-of-type) {
   border-left: 1px dotted gray;
-  width: 29px;
+  width: 24px;
   padding: 0;
   margin-bottom: 0;
 }

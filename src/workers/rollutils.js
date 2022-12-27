@@ -112,7 +112,8 @@ function doRoll(pool, title, opts)
             template: 'base',
             woundmalus: true,
             init: false,
-            explodeOn: false
+            explodeOn: false,
+            hasFocus: undefined
         },
         ...opts
     }
@@ -124,6 +125,7 @@ function doRoll(pool, title, opts)
     {
         rollString += `{{charname=${v.character_name}}} `
         let expl = opts.explodeOn === false ? parseInt(v.explodeOn)||0 : parseInt(opts.explodeOn)||0
+        let focus = opts.hasFocus === undefined ? parseInt(v.hasFocus)||0 : parseInt(opts.hasFocus)||0
         
         rollString += `{{roll=[[{`
         for (let i = 0; i < pool.thrown; i++) {
@@ -131,7 +133,7 @@ function doRoll(pool, title, opts)
             rollString += `1d10`
             if (expl)
                 rollString += `!>${expl}`
-            if ("1" === v.hasFocus)
+            if (focus === 1)
                 rollString += `ro1`
         }
         rollString += `}k${pool.kept}+${pool.mod} `
