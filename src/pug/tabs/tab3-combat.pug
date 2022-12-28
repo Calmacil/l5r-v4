@@ -48,8 +48,22 @@
             +numberInput('total')(readonly)
     div#guard.col2
         h3 Posture
+        +rdButton('guard', 'Attaque (Eau)', 'attack')(checked)
+        +rdButton('guard', 'Assaut (Feu)', 'assault')
+        +rdButton('guard', 'Défense (Terre)', 'defense')
+        +rdButton('guard', 'Esquive (Air)', 'fulldef')
+        +rdButton('guard', 'Centre (Vide)', 'center')
     div#states.col2
         h3 États
+        +cbButton('isFasting', 'À jeun', 1)
+        +cbButton('isProne', 'Au sol', 1)
+        +cbButton('isBlinded', 'Aveuglé', 1)
+        +cbButton('isEntangled', 'Enchevêtré', 1)
+        +cbButton('isEmpoigné', 'Empoigné', 1)
+        +cbButton('isStunned', 'Étourdi', 1)
+        +cbButton('isFatigued', 'Fatigué', 1)
+        +cbButton('isDazed', 'Hébété', 1)
+        +cbButton('isMounted', 'Monté/Hauteur', 1)
     div#weapons.col2T1
         h3 Armes
         span Arme

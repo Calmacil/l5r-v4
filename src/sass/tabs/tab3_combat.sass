@@ -99,6 +99,40 @@ $name_width: calc(100% - $skill_width - $atkbonus_width - $atkroll_width - $focu
         &> .repcontrol
             display: none
 
+    div#guard
+        flex-direction: row
+        justify-content: space-evenly
+        &> label
+            width: 30%
+            &> input[type=radio]
+                @include toggleable(20px, $fontHandwriting, true, 24px)
+                &~ span::before
+                    background: lightgray
+                    border-radius: 8px
+                    font-style: italic
+                    box-shadow: 1px 1px 5px 2px black
+                &:checked ~ span::before
+                    color: white
+                    background: dimgray
+                    text-decoration: none
+                    box-shadow: -1px -1px 5px 2px black
+                    margin-top: 1px
+
+    div#states
+        flex-direction: row
+        justify-content: space-evenly
+        &> label
+            width: 30%
+            &> input[type=checkbox]
+                @include toggleable(20px, $fontHandwriting, false, 20px)
+                &~ span::before
+                    margin-top: 0
+                    border-radius: 15px
+                    width: 12px
+                    height: 12px
+                    border: 2px solid black
+
+
     div#weapons
         &> span
             font-family: $fontStandard
