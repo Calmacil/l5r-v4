@@ -383,10 +383,10 @@
           <input name="attr_guard" value="assault" type="radio"><span title="Assaut (Feu)"></span>
         </label>
         <label>
-          <input name="attr_guard" value="defense" type="radio"><span title="Défense (Terre)"></span>
+          <input name="attr_guard" value="defense" type="radio"><span title="Défense (Air)"></span>
         </label>
         <label>
-          <input name="attr_guard" value="fulldef" type="radio"><span title="Esquive (Air)"></span>
+          <input name="attr_guard" value="fulldef" type="radio"><span title="Esquive (Terre)"></span>
         </label>
         <label>
           <input name="attr_guard" value="center" type="radio"><span title="Centre (Vide)"></span>
@@ -501,6 +501,10 @@
   </div>
 </rolltemplate>
 <script type="text/worker">
+  // Put here consts or vars which have to be initialized before the scripts be executed
+var defenseSkillRank = 0;
+var healthRows = []
+
   /**
  * Creates a dice pool
  * @param {int} thrown Number of dice thrown
@@ -524,6 +528,9 @@ function createPool(thrown=0, kept=null, mod=0)
  */
 function parsePoolString(rollString)
 {
+    if (rollString === undefined) {
+        return undefined
+    }
     let regex = /(\d+)g(\d+)([+-]\d+)?/
     result = regex.exec(rollString)
 
@@ -616,11 +623,12 @@ function doRoll(pool, title, opts)
             woundmalus: true,
             init: false,
             explodeOn: false,
-            hasFocus: undefined
+            hasFocus: undefined,
+            finishCallback: undefined
         },
         ...opts
     }
-    console.warn(opts)
+    
     pool = flattenPool(pool)
     var rollString = `&{template:${opts.template}} `
 
@@ -650,9 +658,10 @@ function doRoll(pool, title, opts)
 
         rollString += `{{displayRoll=${poolToString(pool)}}} `
 
-        console.log(rollString)
         startRoll(rollString, function(result) {
-            // Do stuff later
+            if (opts.finishCallback !== undefined) {
+                opts.finishCallback(result)
+            }
             finishRoll(result.rollId)
         })
 
@@ -699,12 +708,12 @@ function updateInsight()
     })
 }function updateRings()
 {
-    getAttrs(['constitution', 'will', 'awareness', 'reflex', 'force', 'perception', 'agility', 'intelligence'], function(v)
+    getAttrs(['constitution', 'will', 'awareness', 'reflex', 'strength', 'perception', 'agility', 'intelligence'], function(v)
     {
         setAttrs({
             earth: Math.min(v['constitution'], v['will']),
             air: Math.min(v['reflex'], v['awareness']),
-            water: Math.min(v['force'], v['perception']),
+            water: Math.min(v['strength'], v['perception']),
             fire: Math.min(v['agility'], v['intelligence'])
         })
         updateInsight()
@@ -724,12 +733,19 @@ function updateSkill(rowId)
     let rowTrait = 'repeating_skills_' + rowId + '_trait'
     let rowRank = 'repeating_skills_' + rowId + '_rank'
     let rowRoll = 'repeating_skills_' + rowId + '_roll'
+    let rowName = `repeating_skills_${rowId}_name`
 
-    getAttrs([rowTrait, rowRank, 'agility', 'awareness', 'constitution', 'intelligence', 'perception', 'reflex', 'strength', 'will', 'void'], (v) => {
+    getAttrs([rowName, rowTrait, rowRank, 'agility', 'awareness', 'constitution', 'intelligence', 'perception', 'reflex', 'strength', 'will', 'void'], (v) => {
         let rank = parseInt(v[rowRank])||0
         let traitValue = parseInt(v[v[rowTrait]])||0
         
         let roll = poolToString(flattenPool(createPool(traitValue + rank, traitValue)))
+
+        if (v[rowName].indexOf('éfense') || v[rowName].indexOf('efense')) {
+            defenseSkillRank = rank
+            defenseSkillRoll = roll
+        }
+
         let toSet = []
         toSet[rowRoll] = roll
         setAttrs(toSet)
@@ -754,6 +770,19 @@ on('change:repeating_skills:trait change:repeating_skills:rank', (evi) => {
     updateInsight()
     updateAllAtkRolls()
 });
+
+/**
+ * In order to manage the Fulldefense stance
+ */
+on('remove:repeating_skills', evi => {
+    let rowId = evi.sourceAttribute.split('_')[2]
+    let name = evi.removedInfo[`repeating_skills_${rowId}_name`]
+    if (name.indexOf('efense') || name.indexOf('éfense')) {
+        defenseSkillRank = 0
+        defenseSkillRoll = undefined
+    }
+})
+
   /**
  * Updates init attributes
  */
@@ -810,7 +839,7 @@ on('change:water change:waterMod', e => {
  * Updates defenses stats
  */
 function updateDefense() {
-    getAttrs(['reflex', 'armorDef', 'armorEquipped'], v => {
+    getAttrs(['reflex', 'armorDef', 'armorEquipped', 'guard', 'air'], v => {
         let reflex = parseInt(v.reflex)||0
         let armorDef = parseInt(v.armorDef)||0
         let isEquipped = parseInt(v.armorEquipped)||0
@@ -822,20 +851,51 @@ function updateDefense() {
             fullDef += armorDef
         }
 
-        setAttrs({
-            baseDefense: baseDef,
-            fullDefense: fullDef
-        })
+        if (v.guard === 'assault') {
+            fullDef -= 10
+        } else if (v.guard === 'defense') {
+            fullDef += v.air + defenseSkillRank
+        }
+
+        if (v.guard === 'fulldef') {
+            let pool = parsePoolString(defenseSkillRoll);
+            let explodeOn = 10
+            if (pool === undefined) {
+                pool = createPool(v.reflex)
+                explodeOn = 0
+            }
+
+            function onDefRoll(result) {
+                fullDef += Math.floor(result.results.roll.result / 2)
+                setAttrs({
+                    baseDefense: baseDef,
+                    fullDefense: fullDef
+                })
+            }
+
+            doRoll(
+                pool,
+                'Défense (esquive)',
+                {
+                    explodeOn: explodeOn,
+                    finishCallback: onDefRoll
+                }
+            )
+
+        } else {
+            setAttrs({
+                baseDefense: baseDef,
+                fullDefense: fullDef
+            })
+        }
     })
 }
 
-on('change:reflex change:armorDef change:armorEquipped', e => {
+on('change:reflex change:armorDef change:armorEquipped change:guard', e => {
     updateDefense()
 })
 
-  var healthRows = []
-
-/**
+  /**
  * Adds a row to the health array
  * @param {int} idx The index in the table
  * @param {string} label The level's name
@@ -1100,7 +1160,7 @@ on('clicked:repeating_weapons:attackroll', evi => {
     let atkRoll = `repeating_weapons_${wpnId}_attack`
     let atkMod = `repeating_weapons_${wpnId}_attackbonus`
     let atkFocus = `repeating_weapons_${wpnId}_hasfocus`
-    getAttrs([atkName, atkMod, atkRoll, atkFocus, 'rollmod'], v => {
+    getAttrs([atkName, atkMod, atkRoll, atkFocus, 'rollmod', 'guard'], v => {
         let name = v[atkName]
         let pool = parsePoolString(v[atkRoll])
         let bonus = parsePoolString(v[atkMod])
@@ -1108,6 +1168,9 @@ on('clicked:repeating_weapons:attackroll', evi => {
 
         pool = sumPools(pool, bonus)
         pool = sumPools(pool, mod)
+        if (v.guard === 'assault') {
+            pool = sumPools(pool, parsePoolString('2g1'))
+        }
 
         doRoll(pool, name, {template: 'base', hasFocus: v[atkFocus]});
     })

@@ -25,6 +25,7 @@ include pug/rolltemplates/base.pug
 //-include pug/rolltemplates/attack.pug
 
 script(type='text/worker')
+    include workers/warmup.js
     include workers/rollutils.js
     include workers/insight.js
     include workers/update_rings.js

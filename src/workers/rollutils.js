@@ -21,6 +21,9 @@ function createPool(thrown=0, kept=null, mod=0)
  */
 function parsePoolString(rollString)
 {
+    if (rollString === undefined) {
+        return undefined
+    }
     let regex = /(\d+)g(\d+)([+-]\d+)?/
     result = regex.exec(rollString)
 
@@ -113,11 +116,12 @@ function doRoll(pool, title, opts)
             woundmalus: true,
             init: false,
             explodeOn: false,
-            hasFocus: undefined
+            hasFocus: undefined,
+            finishCallback: undefined
         },
         ...opts
     }
-    console.warn(opts)
+    
     pool = flattenPool(pool)
     var rollString = `&{template:${opts.template}} `
 
@@ -147,9 +151,10 @@ function doRoll(pool, title, opts)
 
         rollString += `{{displayRoll=${poolToString(pool)}}} `
 
-        console.log(rollString)
         startRoll(rollString, function(result) {
-            // Do stuff later
+            if (opts.finishCallback !== undefined) {
+                opts.finishCallback(result)
+            }
             finishRoll(result.rollId)
         })
 

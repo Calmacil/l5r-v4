@@ -61,7 +61,7 @@ on('clicked:repeating_weapons:attackroll', evi => {
     let atkRoll = `repeating_weapons_${wpnId}_attack`
     let atkMod = `repeating_weapons_${wpnId}_attackbonus`
     let atkFocus = `repeating_weapons_${wpnId}_hasfocus`
-    getAttrs([atkName, atkMod, atkRoll, atkFocus, 'rollmod'], v => {
+    getAttrs([atkName, atkMod, atkRoll, atkFocus, 'rollmod', 'guard'], v => {
         let name = v[atkName]
         let pool = parsePoolString(v[atkRoll])
         let bonus = parsePoolString(v[atkMod])
@@ -69,6 +69,9 @@ on('clicked:repeating_weapons:attackroll', evi => {
 
         pool = sumPools(pool, bonus)
         pool = sumPools(pool, mod)
+        if (v.guard === 'assault') {
+            pool = sumPools(pool, parsePoolString('2g1'))
+        }
 
         doRoll(pool, name, {template: 'base', hasFocus: v[atkFocus]});
     })

@@ -1,5 +1,3 @@
-var healthRows = []
-
 /**
  * Adds a row to the health array
  * @param {int} idx The index in the table
