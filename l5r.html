@@ -856,17 +856,20 @@ on('change:water change:waterMod', e => {
  * Updates defenses stats
  */
 function updateDefense() {
-    getAttrs(['reflex', 'armorDef', 'armorEquipped', 'guard', 'air', 'isProne', 'isGrappled', 'isStunned'], v => {
+    getAttrs(['reflex', 'armorDef', 'armorEquipped', 'guard', 'air', 'isProne', 'isGrappled', 'isStunned', 'isBlinded'], v => {
         let reflex = parseInt(v.reflex)||0
         let armorDef = parseInt(v.armorDef)||0
         let isEquipped = parseInt(v.armorEquipped)||0
         let isProne = parseInt(v.isProne)||0
         let isGrappled = parseInt(v.isGrappled)||0
         let isStunned = parseInt(v.isStunned)||0
+        let isBlinded = parseInt(v.isBlinded)||0
 
         let baseDef = 5 * (reflex + 2)
         if (isGrappled === 1 || isStunned === 1) {
             baseDef = 5
+        } else if (isBlinded === 1) {
+            baseDef = 5 + reflex
         }
 
         let fullDef = baseDef
@@ -1126,6 +1129,12 @@ function updateAllAtkRolls() {
     })
 }
 
+
+on('change:isProne change:isBlinded change:isGrappled change:isStunned', evi => {
+    console.error('Je veux changer la défense!')
+    updateDefense()
+})
+
   on('clicked:freeRoll', function()
 {
     getAttrs(['rollMod'], function(v){
@@ -1228,22 +1237,24 @@ on('clicked:repeating_weapons:attackroll', evi => {
         let isDazed = parseInt(v.isDazed)||0
         let isFasting = parseInt(v.isFasting)||0
         let fastingDays = parseInt(v.fastingDays)||0
+        let isFatigued = parseInt(v.isFatigued)||0
+        let fatiguedDays = parseInt(v.fatiguedDays)||0
 
         pool = sumPools(pool, bonus)
         pool = sumPools(pool, mod)
         if (v.guard === 'assault') {
-            pool = sumPools(pool, parsePoolString('2g1'))
+            pool = sumPools(pool, createPool(2, 1, 0))
         }
         if (isProne === 1) {
-            pool = sumPools(pool, parsePoolString('-2g1'))
+            pool = sumPools(pool, createPool(-2, 0, 0))
         }
         if (isBlinded === 1) {
-            pool = sumPools(pool, parsePoolString('-1g1'))
+            pool = sumPools(pool, createPool(-1, -1, 0))
             if (v.atkSkill === 'kyujutsu')
-                pool = sumPools(pool, parsePoolString('-2g2'))
+                pool = sumPools(pool, createPool(-2, -2, 0))
         }
         if (isDazed === 1) {
-            pool = sumPools(pool, parsePoolString('-3g0'))
+            pool = sumPools(pool, createPool(-3, 0, 0))
         }
         if (isFasting === 1) {
             pool = sumPools(pool, createPool(0, 0, computeFastingMalus(fastingDays)))

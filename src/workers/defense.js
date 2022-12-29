@@ -2,17 +2,20 @@
  * Updates defenses stats
  */
 function updateDefense() {
-    getAttrs(['reflex', 'armorDef', 'armorEquipped', 'guard', 'air', 'isProne', 'isGrappled', 'isStunned'], v => {
+    getAttrs(['reflex', 'armorDef', 'armorEquipped', 'guard', 'air', 'isProne', 'isGrappled', 'isStunned', 'isBlinded'], v => {
         let reflex = parseInt(v.reflex)||0
         let armorDef = parseInt(v.armorDef)||0
         let isEquipped = parseInt(v.armorEquipped)||0
         let isProne = parseInt(v.isProne)||0
         let isGrappled = parseInt(v.isGrappled)||0
         let isStunned = parseInt(v.isStunned)||0
+        let isBlinded = parseInt(v.isBlinded)||0
 
         let baseDef = 5 * (reflex + 2)
         if (isGrappled === 1 || isStunned === 1) {
             baseDef = 5
+        } else if (isBlinded === 1) {
+            baseDef = 5 + reflex
         }
 
         let fullDef = baseDef

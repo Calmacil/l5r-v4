@@ -100,22 +100,24 @@ on('clicked:repeating_weapons:attackroll', evi => {
         let isDazed = parseInt(v.isDazed)||0
         let isFasting = parseInt(v.isFasting)||0
         let fastingDays = parseInt(v.fastingDays)||0
+        let isFatigued = parseInt(v.isFatigued)||0
+        let fatiguedDays = parseInt(v.fatiguedDays)||0
 
         pool = sumPools(pool, bonus)
         pool = sumPools(pool, mod)
         if (v.guard === 'assault') {
-            pool = sumPools(pool, parsePoolString('2g1'))
+            pool = sumPools(pool, createPool(2, 1, 0))
         }
         if (isProne === 1) {
-            pool = sumPools(pool, parsePoolString('-2g1'))
+            pool = sumPools(pool, createPool(-2, 0, 0))
         }
         if (isBlinded === 1) {
-            pool = sumPools(pool, parsePoolString('-1g1'))
+            pool = sumPools(pool, createPool(-1, -1, 0))
             if (v.atkSkill === 'kyujutsu')
-                pool = sumPools(pool, parsePoolString('-2g2'))
+                pool = sumPools(pool, createPool(-2, -2, 0))
         }
         if (isDazed === 1) {
-            pool = sumPools(pool, parsePoolString('-3g0'))
+            pool = sumPools(pool, createPool(-3, 0, 0))
         }
         if (isFasting === 1) {
             pool = sumPools(pool, createPool(0, 0, computeFastingMalus(fastingDays)))

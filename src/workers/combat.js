@@ -59,3 +59,9 @@ function updateAllAtkRolls() {
     })
 }
 
+
+on('change:isProne change:isBlinded change:isGrappled change:isStunned', evi => {
+    console.error('Je veux changer la défense!')
+    updateDefense()
+})
+
