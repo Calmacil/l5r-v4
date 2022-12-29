@@ -56,12 +56,14 @@
     div#states.col2
         h3 États
         +cbButton('isFasting', 'À jeun', 1)
+            +numberInput('fastingDays', 1)(title='Jours de jeûne')
         +cbButton('isProne', 'Au sol', 1)
         +cbButton('isBlinded', 'Aveuglé', 1)
         +cbButton('isEntangled', 'Enchevêtré', 1)
-        +cbButton('isEmpoigné', 'Empoigné', 1)
+        +cbButton('isGrappled', 'Empoigné', 1)
         +cbButton('isStunned', 'Étourdi', 1)
         +cbButton('isFatigued', 'Fatigué', 1)
+            +numberInput('fatiguedDayes', 1)(title='Jours sans repos')
         +cbButton('isDazed', 'Hébété', 1)
         +cbButton('isMounted', 'Monté/Hauteur', 1)
     div#weapons.col2T1

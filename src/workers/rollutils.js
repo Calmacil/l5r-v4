@@ -161,3 +161,16 @@ function doRoll(pool, title, opts)
     })
 }
 
+/**
+ * Computes the malus inflicted from fasting
+ * @param {int} fastingDays The number of days since the last meal
+ * @returns The fasting malus, as a positive int
+ */
+function computeFastingMalus(fastingDays)
+{
+    fastingDays -=1;
+    if (fastingDays < 0)
+        fastingDays = 0
+    return -5 * fastingDays;
+}
+

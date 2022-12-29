@@ -927,6 +927,11 @@
 .charsheet .tab3 div#states > label {
   width: 30%;
 }
+.charsheet .tab3 div#states > label > input[type=number] {
+  display: none;
+  width: 25px;
+  height: 22px;
+}
 .charsheet .tab3 div#states > label > input[type=checkbox] {
   position: absolute;
   width: 20px;
@@ -955,6 +960,9 @@
   width: 12px;
   height: 12px;
   border: 2px solid black;
+}
+.charsheet .tab3 div#states > label > input[type=checkbox]:checked ~ input[type=number] {
+  display: flex;
 }
 .charsheet .tab3 div#weapons > span {
   font-family: "Arial";

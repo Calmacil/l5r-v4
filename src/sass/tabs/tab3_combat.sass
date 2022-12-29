@@ -123,6 +123,10 @@ $name_width: calc(100% - $skill_width - $atkbonus_width - $atkroll_width - $focu
         justify-content: space-evenly
         &> label
             width: 30%
+            &> input[type=number]
+                display: none
+                width: 25px
+                height: 22px
             &> input[type=checkbox]
                 @include toggleable(20px, $fontHandwriting, false, 20px)
                 &~ span::before
@@ -131,6 +135,8 @@ $name_width: calc(100% - $skill_width - $atkbonus_width - $atkroll_width - $focu
                     width: 12px
                     height: 12px
                     border: 2px solid black
+                &:checked ~ input[type=number]
+                    display: flex
 
 
     div#weapons

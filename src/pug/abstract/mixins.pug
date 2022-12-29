@@ -50,6 +50,8 @@ mixin cbButton(name, label, value=null)
       input(name=name type='checkbox')&attributes(attributes)
     if label
       span!= label
+    if block
+      block
 
 mixin rdButton(name, label, value='')
   label
