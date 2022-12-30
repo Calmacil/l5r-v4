@@ -21,13 +21,21 @@
             padding: 0
             padding-right: 8px
 
-        &> div > label 
-            &> input[type=radio]
-                @include toggleable(30px, $fontHeader, true)
-                &~ span::before
-                        background-image: linear-gradient(to right, #222228ee 60%, #eeff)
-                        color: white
-                        text-shadow: 1px 1px 2px black
-                        border-radius: 10px
-                &:checked ~ span::before
-                    background-image: linear-gradient(to left, #222228ee 60%, #eeff)
+        &> div 
+            &> label
+                &> input[type=radio]
+                    @include toggleable(30px, $fontHeader, true)
+                    &~ span::before
+                            background-image: linear-gradient(to right, #222228ee 60%, #eeff)
+                            color: white
+                            text-shadow: 1px 1px 2px black
+                            border-radius: 10px
+                    &:checked ~ span::before
+                        background-image: linear-gradient(to left, #222228ee 60%, #eeff)
+
+            &> label.menutab6,
+            &> label.menutab8
+                display: none
+            &> input[name="attr_displayMagic"][value="1"] ~ label.menutab6,
+            &> input[name="attr_displayShadowland"][value="1"] ~ label.menutab8
+                display: flex

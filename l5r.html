@@ -3,6 +3,8 @@
   <div class="menu">
     <div class="logo"></div>
     <div class="menuMain">
+      <input name="attr_displayMagic" type="hidden" value="0">
+      <input name="attr_displayShadowland" type="hidden" value="0">
       <label>
         <input name="attr_activeTab" value="1" type="radio" checked><span title="Personnage"></span>
       </label>
@@ -18,14 +20,14 @@
       <label>
         <input name="attr_activeTab" value="5" type="radio"><span title="École &amp; Techniques"></span>
       </label>
-      <label>
-        <input name="attr_activeTab" value="6" type="radio"><span title="Magie"></span>
+      <label class="menutab6">
+        <input class="menutab6" name="attr_activeTab" value="6" type="radio"><span title="Magie"></span>
       </label>
       <label>
         <input name="attr_activeTab" value="7" type="radio"><span title="Histoire &amp; Relations"></span>
       </label>
-      <label>
-        <input name="attr_activeTab" value="8" type="radio"><span title="Outremonde"></span>
+      <label class="menutab8">
+        <input class="menutab8" name="attr_activeTab" value="8" type="radio"><span title="Outremonde"></span>
       </label>
     </div>
     <div class="menuFooter">
@@ -489,10 +491,10 @@
       <div class="col3" id="display">
         <h3>Affichage</h3>
         <label>
-          <input name="attr_display_magic" value="1" type="checkbox"><span>Page de magie</span>
+          <input name="attr_displayMagic" value="1" type="checkbox"><span>Page de magie</span>
         </label>
         <label>
-          <input name="attr_display_shadowland" value="1" type="checkbox"><span>Page de l'Outremonde</span>
+          <input name="attr_displayShadowland" value="1" type="checkbox"><span>Page de l'Outremonde</span>
         </label>
       </div>
       <div class="col2T1">

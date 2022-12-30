@@ -1,14 +1,16 @@
 .menu
     .logo
     .menuMain
+        +hiddenInput('displayMagic', 0)
+        +hiddenInput('displayShadowland', 0)
         +rdButton('activeTab', 'Personnage', 1)(checked)
         +rdButton('activeTab', 'Compétences', 2)
         +rdButton('activeTab', 'Combat', 3)
         +rdButton('activeTab', '(Dés) Avantages', 4)
         +rdButton('activeTab', 'École & Techniques', 5)
-        +rdButton('activeTab', 'Magie', 6)
+        +rdButton('activeTab', 'Magie', 6).menutab6
         +rdButton('activeTab', 'Histoire & Relations', 7)
-        +rdButton('activeTab', 'Outremonde', 8)
+        +rdButton('activeTab', 'Outremonde', 8).menutab8
     .menuFooter
         +rdButton('activeTab', 'Configuration', 0)
         span &copy; Calmacil 2022

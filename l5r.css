@@ -260,6 +260,12 @@
 .charactersheet .menu > div > label > input[type=radio]:checked ~ span::before {
   background-image: linear-gradient(to left, rgba(34, 34, 40, 0.9333333333) 60%, #eeeeff);
 }
+.charactersheet .menu > div > label.menutab6, .charactersheet .menu > div > label.menutab8 {
+  display: none;
+}
+.charactersheet .menu > div > input[name=attr_displayMagic][value="1"] ~ label.menutab6, .charactersheet .menu > div > input[name=attr_displayShadowland][value="1"] ~ label.menutab8 {
+  display: flex;
+}
 
 .charsheet .dicebox {
   width: calc(100% - 20px);
