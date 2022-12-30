@@ -43,13 +43,15 @@ on('clicked:repeating_skills:skillroll', function (e)
     let skillId = e.sourceAttribute.split('_')[2]
     let skillname = 'repeating_skills_' + skillId + '_name'
     let skillroll = 'repeating_skills_' + skillId + '_roll'
-    getAttrs([skillroll, skillname, 'rollMod', 'isDazed', 'isFasting', 'fastingDays'], function(v) {
+    getAttrs([skillroll, skillname, 'rollMod', 'isDazed', 'isFasting', 'fastingDays', 'isFatigued', 'fatiguedDays'], function(v) {
         let roll = v[skillroll]
         let name = v[skillname]
         let rollMod = v['rollMod']
         let isDazed = parseInt(v.isDazed)||0
         let isFasting = parseInt(v.isFasting)||0
         let fastingDays = parseInt(v.fastingDays)||0
+        let isFatigued = parseInt(v.isFatigued)||0
+        let fatiguedDays = parseInt(v.fatiguedDays)||0
         let pool = parsePoolString(roll)
         let modPool = parsePoolString(rollMod)
         pool = sumPools(pool, modPool)
@@ -61,8 +63,13 @@ on('clicked:repeating_skills:skillroll', function (e)
             pool = sumPools(pool, createPool(0, 0, computeFastingMalus(fastingDays)))
         }
         if (isFatigued === 1) {
-            pool = sumPools(pool, createPool(0, 0, (-5 * fatiguedDays)))
+            console.warn(fatiguedDays)
+            let fpool = createPool(0, 0, -5 * fatiguedDays)
+            console.log(fpool)
+            pool = sumPools(pool, fpool)
         }
+
+        console.log(pool)
 
         doRoll(pool, name)
     })
