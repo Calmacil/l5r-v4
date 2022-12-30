@@ -500,8 +500,26 @@
       <div class="col2T1">
         <h3>Santé</h3>
       </div>
-      <div class="col2T1">
+      <div class="col2T1" id="creation">
         <h3>Création de personnages</h3>
+        <label for="startXp"><span>XP de départ</span>
+          <input name="attr_startXp" type="number" value="40" id="startXp" title="40 par défaut, 25 pour le rang 0">
+        </label>
+        <label for="adjustXp"><span>Ajustement XP</span>
+          <input name="attr_adjustXp" type="number" value="114" id="adjustXp" title="114 par défaut, 38 rang 0">
+        </label>
+        <label for="0"><span>Ajustement Réputation</span>
+          <input name="attr_adjustInsight" type="number" value="" id="0">
+        </label>
+        <label><span>Profil de personnage</span>
+          <select name="attr_charProfile">
+            <option value="" selected></option>
+            <option value="rokugan" selected>Rokugani</option>
+            <option value="naga">Naga</option>
+            <option value="nezumi">Nezumi</option>
+            <option value="other">Autre</option>
+          </select>
+        </label>
       </div>
       <div class="col3">
         <h3>Emplacements de sorts</h3>

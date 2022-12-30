@@ -5,7 +5,18 @@
         +cbButton('displayShadowland', "Page de l'Outremonde", 1)
     div.col2T1
         h3 Santé
-    div.col2T1
+    div#creation.col2T1
         h3 Création de personnages
+        +numberLabelled('startXp', 'XP de départ', 'startXp', 40)(title='40 par défaut, 25 pour le rang 0')
+        +numberLabelled('adjustXp', 'Ajustement XP', 'adjustXp', 114)(
+            title='114 par défaut, 38 rang 0')
+        +numberLabelled('adjustInsight', 'Ajustement Réputation', 0)
+        label
+            span Profil de personnage
+            +select('charProfile')
+                option(value='rokugan', selected) Rokugani
+                option(value='naga') Naga
+                option(value='nezumi') Nezumi
+                option(value='other') Autre
     div.col3
         h3 Emplacements de sorts

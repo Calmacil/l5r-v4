@@ -1218,6 +1218,10 @@
   height: 12px;
   border: 2px solid black;
 }
+.charsheet .tab0 div#creation select {
+  height: 22px;
+  width: 100px;
+}
 
 .sheet-rolltemplate-base,
 .sheet-rolltemplate-attack {
