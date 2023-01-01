@@ -1,5 +1,10 @@
+
+/**
+ * Update rings values
+ */
 function updateRings()
 {
+    console.error('Update rings!')
     getAttrs(['constitution', 'will', 'awareness', 'reflex', 'strength', 'perception', 'agility', 'intelligence'], function(v)
     {
         setAttrs({
@@ -12,8 +17,12 @@ function updateRings()
     })
 }
 
-on('change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', v => {
+
+on('change:constitution change:will change:awareness change:reflex change:strength change:perception change:agility change:intelligence change:void', evi => {
+    console.error('ONCHANGE traits values!')
     updateRings()
     updateAllSkills()
     updateAllAtkRolls()
+    updateTraitXp()
 });
+

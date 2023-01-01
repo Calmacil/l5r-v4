@@ -7,10 +7,10 @@
         h3 Santé
     div#creation.col2T1
         h3 Création de personnages
-        +numberLabelled('startXp', 'XP de départ', 'startXp', 40)(title='40 par défaut, 25 pour le rang 0')
-        +numberLabelled('adjustXp', 'Ajustement XP', 'adjustXp', 114)(
+        +numberLabelled('adjustXp', 'Ajustement XP', 'adjustXp', 138)(
             title='114 par défaut, 38 rang 0')
-        +numberLabelled('adjustInsight', 'Ajustement Réputation', 0)
+        +numberLabelled('adjustInsight', 'Ajustement Réputation', 'adjustInsight', 0)
+        
         label
             span Profil de personnage
             +select('charProfile')
@@ -18,5 +18,19 @@
                 option(value='naga') Naga
                 option(value='nezumi') Nezumi
                 option(value='other') Autre
+        div.col2
+            h5 XP Personnage standard
+            ul
+                li Base: 138
+                li Bonus Vide: +6
+                li Double bonus trait: +4
+                li Double bonus Vide: +18
+        div.col2
+            h5 XP Rang 0
+            ul
+                li Base: 54
+                li Bonus Vide: +4
+                li Double bonus trait: +4
+                li Double bonus Vide: +14
     div.col3
         h3 Emplacements de sorts

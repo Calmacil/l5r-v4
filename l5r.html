@@ -37,6 +37,13 @@
     </div>
   </div>
   <div class="main-container">
+    <input name="attr_insightSkill" type="hidden" value="">
+    <input name="attr_insightRing" type="hidden" value="">
+    <input name="attr_xpSkill" type="hidden" value="">
+    <input name="attr_xpTrait" type="hidden" value="">
+    <input name="attr_xpVantages" type="hidden" value="">
+    <input name="attr_voidName" type="hidden" value="Vide">
+    <input name="attr_statusName" type="hidden" value="Status">
     <div class="dicebox">
       <div class="col3">
         <h3>Explose sur...</h3>
@@ -164,11 +171,11 @@
       <div class="col3">
         <div class="xpbox">
           <label><span>XP. total</span>
-            <input name="attr_xp_total" type="number" value="">
+            <input name="attr_xpTotal" type="number" value="">
           </label>
-          <input name="attr_xp_spent" type="hidden" value="">
-          <label for="@{xp_total} - @{xp_spent}"><span>(Restant)</span>
-            <input name="attr_xp_remain" type="number" value="" id="@{xp_total} - @{xp_spent}" readonly>
+          <input name="attr_xpSpent" type="hidden" value="">
+          <label for="0"><span>(Restant)</span>
+            <input name="attr_xpRemain" type="number" value="" id="0" readonly>
           </label>
           <label><span>Réputation</span>
             <input name="attr_insight" type="number" value="" readonly>
@@ -502,14 +509,11 @@
       </div>
       <div class="col2T1" id="creation">
         <h3>Création de personnages</h3>
-        <label for="startXp"><span>XP de départ</span>
-          <input name="attr_startXp" type="number" value="40" id="startXp" title="40 par défaut, 25 pour le rang 0">
-        </label>
         <label for="adjustXp"><span>Ajustement XP</span>
-          <input name="attr_adjustXp" type="number" value="114" id="adjustXp" title="114 par défaut, 38 rang 0">
+          <input name="attr_adjustXp" type="number" value="138" id="adjustXp" title="114 par défaut, 38 rang 0">
         </label>
-        <label for="0"><span>Ajustement Réputation</span>
-          <input name="attr_adjustInsight" type="number" value="" id="0">
+        <label for="adjustInsight"><span>Ajustement Réputation</span>
+          <input name="attr_adjustInsight" type="number" value="0" id="adjustInsight">
         </label>
         <label><span>Profil de personnage</span>
           <select name="attr_charProfile">
@@ -520,6 +524,24 @@
             <option value="other">Autre</option>
           </select>
         </label>
+        <div class="col2">
+          <h5>XP Personnage standard</h5>
+          <ul>
+            <li>Base: 138</li>
+            <li>Bonus Vide: +6</li>
+            <li>Double bonus trait: +4</li>
+            <li>Double bonus Vide: +18</li>
+          </ul>
+        </div>
+        <div class="col2">
+          <h5>XP Rang 0</h5>
+          <ul>
+            <li>Base: 54</li>
+            <li>Bonus Vide: +4</li>
+            <li>Double bonus trait: +4</li>
+            <li>Double bonus Vide: +14</li>
+          </ul>
+        </div>
       </div>
       <div class="col3">
         <h3>Emplacements de sorts</h3>
@@ -722,7 +744,10 @@ function computeFastingMalus(fastingDays)
     return -5 * fastingDays;
 }
 
-  function updateInsightRank()
+  /**
+ * Computes insight rank
+ */
+function updateInsightRank()
 {
     getAttrs(['insight'], function(v)
     {
@@ -734,34 +759,144 @@ function computeFastingMalus(fastingDays)
     })
 }
 
-function updateInsight()
+/**
+ * Updates insight due to rings values
+ */
+function updateInsightRing()
 {
-    getSectionIDs('skills', function(idarray)
-    {
-        let fields = ['earth', 'air', 'water', 'fire', 'void']
-        idarray.forEach(id => fields.push(`repeating_skills_${id}_rank`))
+    console.error('Change insight ring!')
+    getAttrs(['earth', 'air', 'water', 'fire', 'void'], v => {
+        let r_earth = parseInt(v.earth)||0
+        let r_air = parseInt(v.air)||0
+        let r_water = parseInt(v.water)||0
+        let r_fire = parseInt(v.fire)||0
+        let r_void = parseInt(v.void)||0
 
-
-        getAttrs(fields, function(v)
-        {
-            let r_earth = parseInt(v.earth)||0
-            let r_air = parseInt(v.air)||0
-            let r_water = parseInt(v.water)||0
-            let r_fire = parseInt(v.fire)||0
-            let r_void = parseInt(v.void)||0
-
-            let insight = 10 * (r_air + r_earth + r_water + r_fire + r_void)
-            idarray.forEach(id => {
-                insight += parseInt(v[`repeating_skills_${id}_rank`])||0
-            })
-            setAttrs({
-                insight: insight
-            })
-            updateInsightRank()
+        setAttrs({
+            insightRing: (r_air + r_earth + r_fire + r_water + r_void)*10
         })
     })
-}function updateRings()
+}
+
+/**
+ * Updates xp and insight due to skill ranks
+ */
+function updateInsightXpSkill()
 {
+    console.error('Change xp/insight skill!')
+    getSectionIDs('skills', idarray => {
+        let fields = []
+        idarray.forEach(id => fields.push(`repeating_skills_${id}_rank`))
+        getAttrs(fields, v => {
+            let skillXp = 0
+            let skillInsight = 0
+            idarray.forEach(id => {
+                let rank = parseInt(v[`repeating_skills_${id}_rank`])||0
+                skillInsight += rank
+                skillXp += rank * (rank+1) / 2
+            })
+            setAttrs({
+                insightSkill: skillInsight,
+                xpSkill: skillXp
+            })
+        })
+    })
+}
+
+/**
+ * Updates xp due to traits ranks
+ */
+function updateTraitXp()
+{
+    console.error('Change trait xp!')
+    getAttrs(['agility', 'awareness', 'constitution', 'intelligence', 'perception', 'reflex', 'strength', 'will', 'void'], v => {
+        let traitXp = 0
+        let traitRanks = [
+            parseInt(v.agility)||1,
+            parseInt(v.awareness)||1,
+            parseInt(v.constitution)||1,
+            parseInt(v.intelligence)||1,
+            parseInt(v.perception)||1,
+            parseInt(v.reflex)||1,
+            parseInt(v.strength)||1,
+            parseInt(v.will)||1
+        ]
+        let voXp = (parseInt(v.void)||1)
+
+        traitRanks.forEach(rank => {
+            traitXp += 4 * (rank * (rank+1) / 2)
+        })
+        traitXp += 6 * (voXp * (voXp +1) / 2)
+        
+        console.log(traitXp)
+        setAttrs({
+            xpTrait: traitXp
+        })
+    })
+}
+
+/**
+ * Computes total insight
+ */
+function updateInsight()
+{
+    getAttrs(['insightSkill', 'insightRing', 'adjustInsight'], v => {
+        let is = parseInt(v.insightSkill)||0
+        let ir = parseInt(v.insightRing)||0
+        let adj = parseInt(v.adjustInsight)||0
+
+        setAttrs({
+            insight: is + ir + adj
+        })
+    })
+}
+
+function updateXp()
+{
+    console.error('Change spent XP!')
+    getAttrs(['xpSkill', 'xpTrait', 'adjustXp'], v => {
+        // Rank 2 traits/rings + 2 rank 3 traits
+        let xps = parseInt(v.xpSkill)||0
+        let xpt = parseInt(v.xpTrait)||0
+        let adj = parseInt(v.adjustXp)||0
+        console.log(`XPskill: ${xps}, XPTrait: ${xpt}, Adj: ${adj}`)
+        console.log((xps + xpt - adj))
+        setAttrs({
+            xpSpent: xps + xpt - adj
+        })
+    })
+}
+
+
+on('change:adjustInsight change:insightSkill change:insightRing', evi => {
+    updateInsight()
+})
+
+
+on('change:xpSkill change:xpTrait change:adjustXp', evi => {
+    updateXp()
+})
+
+
+on('change:earth change:water change:fire change:air change:void', evi => {
+    updateInsightRing()
+})
+
+on('change:xpTotal change:xpSpent', evi => {
+    getAttrs(['xpTotal', 'xpSpent'], v => {
+        let total = parseInt(v.xpTotal)||0
+        let spent = parseInt(v.xpSpent)||0
+        setAttrs({
+            xpRemain: total - spent
+        })
+    })
+})
+/**
+ * Update rings values
+ */
+function updateRings()
+{
+    console.error('Update rings!')
     getAttrs(['constitution', 'will', 'awareness', 'reflex', 'strength', 'perception', 'agility', 'intelligence'], function(v)
     {
         setAttrs({
@@ -774,11 +909,16 @@ function updateInsight()
     })
 }
 
-on('change:constitution change:will change:awareness change:reflex change:force change:perception change:agility change:intelligence', v => {
+
+on('change:constitution change:will change:awareness change:reflex change:strength change:perception change:agility change:intelligence change:void', evi => {
+    console.error('ONCHANGE traits values!')
     updateRings()
     updateAllSkills()
     updateAllAtkRolls()
-});/**
+    updateTraitXp()
+});
+
+  /**
  * Updates the roll value of a single skill
  * @param {string} rowId The ID of the skill row
  */
@@ -1341,7 +1481,9 @@ on('clicked:repeating_weapons:damageroll', evi => {
     console.clear()
     updateRings()
     updateAllSkills()
-    updateInsight()
+    updateInsightXpSkill()
+    updateInsightRing()
+    updateTraitXp()
     updateInit()
 
     prepareHealthRows()

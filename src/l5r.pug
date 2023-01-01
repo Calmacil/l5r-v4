@@ -6,6 +6,13 @@ include pug/abstract/mixins.pug
     include pug/components/caracs.pug
 
     .main-container
+        +hiddenInput('insightSkill')
+        +hiddenInput('insightRing')
+        +hiddenInput('xpSkill')
+        +hiddenInput('xpTrait')
+        +hiddenInput('xpVantages')
+        +hiddenInput('voidName', 'Vide')
+        +hiddenInput('statusName', 'Status')
 
         include pug/components/dicebox.pug
 
