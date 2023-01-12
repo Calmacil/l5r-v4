@@ -10,7 +10,7 @@ mixin numberInput(name, value='')
   input(name=`attr_${name}` type='number' value=value)&attributes(attributes)
 
 mixin numberLabelled(name, label, id, value='', roll=null, withGauge=false)
-  label(for=id)
+  label(for=id, class!=attributes.class)
     span!= label
       if (roll !== null)
         +actButton(name, roll)

@@ -20,6 +20,8 @@ mixin caracbar(id)
             +numberLabelled('fire', 'Feu', 'fire', 2, 'fire,Feu')(readonly)
             +numberLabelled('intelligence', 'Intel.', 'intelligence', 2, 'intelligence,Intelligence')
 
+        +hiddenInput('hideVoid', 0)
         .elem.elemVoid
-            +numberLabelled('void', 'Vide', 'void', 2, 'void,Vide')
+            +hiddenInput('charProfile')
+            +numberLabelled('void', 'Vide', 'void', 2, 'void,Vide').rokugani
             +numberLabelled('voidUsed', 'Utilisé', 'voidUsed', 0)

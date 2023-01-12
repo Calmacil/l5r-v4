@@ -43,7 +43,7 @@
     <input name="attr_xpTrait" type="hidden" value="">
     <input name="attr_xpVantages" type="hidden" value="">
     <input name="attr_voidName" type="hidden" value="Vide">
-    <input name="attr_statusName" type="hidden" value="Status">
+    <input name="attr_statusName" type="hidden" value="Statut">
     <div class="dicebox">
       <div class="col3">
         <h3>Explose sur...</h3>
@@ -155,10 +155,12 @@
                 <input name="attr_intelligence" type="number" value="2" id="intelligence">
               </label>
             </div>
+            <input name="attr_hideVoid" type="hidden" value="0">
             <div class="elem elemVoid">
-              <label for="void"><span>Vide
+              <input name="attr_charProfile" type="hidden" value="">
+              <label class="rokugani" for="void"><span>Vide
                   <button name="act_void" type="action" value="void,Vide"></button></span>
-                <input name="attr_void" type="number" value="2" id="void">
+                <input class="rokugani" name="attr_void" type="number" value="2" id="void">
               </label>
               <label for="voidUsed"><span>Utilisé</span>
                 <input name="attr_voidUsed" type="number" value="0" id="voidUsed">
@@ -185,6 +187,7 @@
           </label>
         </div>
         <div class="honorbox">
+          <input name="attr_hideHonorGlory" type="hidden" value="0">
           <label for="honor"><span>Honneur
               <button name="act_honor" type="action" value="honor,Honneur"></button></span>
             <input name="attr_honor" type="number" value="3.5" id="honor" min="0" max="10" step="0.1">
@@ -265,10 +268,12 @@
               <input name="attr_intelligence" type="number" value="2" id="intelligence">
             </label>
           </div>
+          <input name="attr_hideVoid" type="hidden" value="0">
           <div class="elem elemVoid">
-            <label for="void"><span>Vide
+            <input name="attr_charProfile" type="hidden" value="">
+            <label class="rokugani" for="void"><span>Vide
                 <button name="act_void" type="action" value="void,Vide"></button></span>
-              <input name="attr_void" type="number" value="2" id="void">
+              <input class="rokugani" name="attr_void" type="number" value="2" id="void">
             </label>
             <label for="voidUsed"><span>Utilisé</span>
               <input name="attr_voidUsed" type="number" value="0" id="voidUsed">
@@ -518,7 +523,7 @@
         <label><span>Profil de personnage</span>
           <select name="attr_charProfile">
             <option value="" selected></option>
-            <option value="rokugan" selected>Rokugani</option>
+            <option value="rokugani" selected>Rokugani</option>
             <option value="naga">Naga</option>
             <option value="nezumi">Nezumi</option>
             <option value="other">Autre</option>
@@ -867,6 +872,34 @@ function updateXp()
     })
 }
 
+function updateCharType()
+{
+    getAttrs(['charProfile'], v => {
+        let profile = v.charProfile
+        let hideHonorGlory = 0
+        let hideVoid = 0
+        let voidName = 'Vide'
+        let statusName = 'Statut'
+        if (profile === 'naga') {
+            voidName = 'Akasha'
+            statusName = 'Caste'
+        } else if (profile === 'nezumi') {
+            voidName = 'Nom'
+            statusName = 'Niche'
+            hideHonorGlory = 1
+        } else if (profile === 'other') {
+            hideVoid = 1
+        }
+
+        setAttrs({
+            voidName: voidName,
+            statusName: statusName,
+            hideHonorGlory: hideHonorGlory,
+            hideVoid: hideVoid
+        })
+    })
+}
+
 
 on('change:adjustInsight change:insightSkill change:insightRing', evi => {
     updateInsight()
@@ -890,6 +923,10 @@ on('change:xpTotal change:xpSpent', evi => {
             xpRemain: total - spent
         })
     })
+})
+
+on('change:charProfile', evi => {
+    updateCharType()
 })
 /**
  * Update rings values
@@ -1479,6 +1516,7 @@ on('clicked:repeating_weapons:damageroll', evi => {
 {
     // remove when dev is finished
     console.clear()
+    updateCharType()
     updateRings()
     updateAllSkills()
     updateInsightXpSkill()

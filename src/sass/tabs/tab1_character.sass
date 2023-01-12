@@ -43,3 +43,7 @@
 
         button[type=action]
             background: transparent
+        input[name="attr_hideHonorGlory"][value="1"]
+            &~ label[for="honor"],
+            &~ label[for="glory"]
+                display: none

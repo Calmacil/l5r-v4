@@ -590,6 +590,9 @@
 .charsheet .tab1 .honorbox button[type=action] {
   background: transparent;
 }
+.charsheet .tab1 .honorbox input[name=attr_hideHonorGlory][value="1"] ~ label[for=honor], .charsheet .tab1 .honorbox input[name=attr_hideHonorGlory][value="1"] ~ label[for=glory] {
+  display: none;
+}
 
 .charsheet .tab2 {
   flex-direction: column;

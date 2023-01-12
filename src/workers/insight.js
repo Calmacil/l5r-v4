@@ -121,6 +121,34 @@ function updateXp()
     })
 }
 
+function updateCharType()
+{
+    getAttrs(['charProfile'], v => {
+        let profile = v.charProfile
+        let hideHonorGlory = 0
+        let hideVoid = 0
+        let voidName = 'Vide'
+        let statusName = 'Statut'
+        if (profile === 'naga') {
+            voidName = 'Akasha'
+            statusName = 'Caste'
+        } else if (profile === 'nezumi') {
+            voidName = 'Nom'
+            statusName = 'Niche'
+            hideHonorGlory = 1
+        } else if (profile === 'other') {
+            hideVoid = 1
+        }
+
+        setAttrs({
+            voidName: voidName,
+            statusName: statusName,
+            hideHonorGlory: hideHonorGlory,
+            hideVoid: hideVoid
+        })
+    })
+}
+
 
 on('change:adjustInsight change:insightSkill change:insightRing', evi => {
     updateInsight()
@@ -144,4 +172,8 @@ on('change:xpTotal change:xpSpent', evi => {
             xpRemain: total - spent
         })
     })
+})
+
+on('change:charProfile', evi => {
+    updateCharType()
 })

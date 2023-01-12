@@ -21,6 +21,7 @@
             +numberLabelled('insight', 'Réputation')(readonly)
             +numberLabelled('insight_rank', '(Rang)')(readonly)
         div.honorbox
+            +hiddenInput('hideHonorGlory', 0)
             +numberLabelled('honor', 'Honneur', 'honor', '3.5', 'honor,Honneur')(min=0, max=10, step=0.1)
             +numberLabelled('status', 'Statut', 'status', '1.0')(min=0, max=10, step=0.1)
             +numberLabelled('glory', 'Gloire', 'glory', '1.0')(min=0, max=10, step=0.1)
