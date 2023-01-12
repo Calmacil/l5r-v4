@@ -1,0 +1,14 @@
++textInput('name')
++select('type')
+    option(value='material') Matériel
+    option(value='mental') Mental
+    option(value='physical') Physique
+    option(value='spiritual') Spirituel
+    option(value='social') Social
+    option(value='ancestor') Ancêtre
+    option(value='legacy') Héritage
++numberInput('cost', 0)
++cbButton('expand', ' ', 1)
++hiddenInput('expand', 0)
++textInput('shortdesc')(placeholder='Description courte').shortdesc
++textareaInput('longdesc')(placeholder='Description longue').longdesc

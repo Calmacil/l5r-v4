@@ -1,5 +1,17 @@
 .tab.tab4
     div.col2
         h3 Avantages
+        +hiddenInput('advantagesXp', 0)
+        span Nom
+        span Type
+        span Coût
+        fieldset.repeating_advantages
+            include /pug/components/vantage.pug
     div.col2
         h3 Désavantages
+        +hiddenInput('advantagesXp', 0)
+        span Nom
+        span Type
+        span Coût
+        fieldset.repeating_disadvantages
+            include /pug/components/vantage.pug

@@ -1191,6 +1191,104 @@
   border: 2px solid black;
 }
 
+.charsheet .tab4 > .col2 > span {
+  font-family: "Arial";
+  font-weight: bold;
+  border-bottom: 3px double black;
+  border-left: 1px dotted gray;
+  align-content: center;
+  padding: 2px;
+}
+.charsheet .tab4 > .col2 > span:first-of-type {
+  width: calc(100% - 65px - 35px - 15px);
+}
+.charsheet .tab4 > .col2 > span:nth-of-type(2) {
+  width: 65px;
+}
+.charsheet .tab4 > .col2 > span:nth-of-type(3) {
+  width: 35px;
+}
+.charsheet .tab4 > .col2 > .repcontainer {
+  width: 100%;
+  flex-wrap: wrap;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem {
+  width: 100%;
+  flex-wrap: wrap;
+  border-bottom: 1px solid gray;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > label:nth-of-type(1) {
+  width: 10px;
+  padding-right: 0;
+  margin-bottom: 0;
+  height: 20px;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > label:nth-of-type(1) > input[type=checkbox] {
+  position: absolute;
+  width: 10px;
+  opacity: 0;
+  height: 20px;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > label:nth-of-type(1) > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > label:nth-of-type(1) > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: "►";
+  justify-content: center;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > label:nth-of-type(1) > input[type=checkbox]:checked ~ span::before {
+  content: "▼";
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=text], .charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=number] {
+  border: none;
+  font-style: italic;
+  background: transparent;
+  border-left: 1px dotted gray;
+  font-family: "Patrick Hand";
+  padding: 2px;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=text]:nth-of-type(1), .charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=number]:nth-of-type(1) {
+  width: calc(100% - 65px - 35px - 15px + 5px);
+  font-weight: bold;
+  border-bottom: dotted 1px gray;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=text]:nth-of-type(2), .charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=number]:nth-of-type(2) {
+  width: 40px;
+  border-bottom: dotted 1px gray;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=text]:nth-of-type(4), .charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=number]:nth-of-type(4) {
+  width: calc(100% - 14px);
+  border-left: none;
+  border-bottom: dotted 1px gray;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > select {
+  border: none;
+  font-style: italic;
+  width: 70px;
+  border-left: 1px dotted gray;
+  border-bottom: dotted 1px gray;
+  font-family: "Patrick Hand";
+  background: transparent;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > textarea {
+  line-height: 15px;
+  padding-block: 0;
+  padding-left: 15px;
+  padding-right: 15px;
+  background: repeating-linear-gradient(to bottom, transparent 0 1px, lightgray 1px 2px, transparent 2px 15px) 50% 0/calc(100% - 30px) 100% no-repeat;
+  height: 4em;
+  font-family: "Patrick Hand";
+  display: none;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=hidden][value="1"] ~ textarea {
+  display: flex;
+}
+.charsheet .tab4 > .col2 > .repcontainer > .repitem > input[type=hidden][value="1"] ~ input.shortdesc {
+  display: none;
+}
+
 .charsheet .tab0 {
   flex-wrap: wrap;
   align-content: start;

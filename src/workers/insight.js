@@ -62,7 +62,6 @@ function updateInsightXpSkill()
  */
 function updateTraitXp()
 {
-    console.error('Change trait xp!')
     getAttrs(['agility', 'awareness', 'constitution', 'intelligence', 'perception', 'reflex', 'strength', 'will', 'void'], v => {
         let traitXp = 0
         let traitRanks = [
@@ -90,6 +89,48 @@ function updateTraitXp()
 }
 
 /**
+ * Updates xp due to advantages
+ */
+function updateAdvantageXp()
+{
+    getSectionIDs('advantages', idarray => {
+        let fields = []
+        idarray.forEach(id => fields.push(`repeating_advantages_${id}_cost`))
+        getAttrs(fields, v => {
+            let advXp = 0
+            idarray.forEach(id => {
+                let xp = parseInt(v[`repeating_advantages_${id}_cost`])||0
+                advXp += xp
+            })
+            setAttrs({
+                xpAdvantages: advXp
+            })
+        })
+    })
+}
+
+/**
+ * Updates xp due to disadvantages
+ */
+function updateDisadvantageXp()
+{
+    getSectionIDs('disadvantages', idarray => {
+        let fields = []
+        idarray.forEach(id => fields.push(`repeating_disadvantages_${id}_cost`))
+        getAttrs(fields, v => {
+            let disXp = 0
+            idarray.forEach(id => {
+                let xp = parseInt(v[`repeating_disadvantages_${id}_cost`])||0
+                disXp += xp
+            })
+            setAttrs({
+                xpDisadvantages: disXp
+            })
+        })
+    })
+}
+
+/**
  * Computes total insight
  */
 function updateInsight()
@@ -108,15 +149,17 @@ function updateInsight()
 function updateXp()
 {
     console.error('Change spent XP!')
-    getAttrs(['xpSkill', 'xpTrait', 'adjustXp'], v => {
+    getAttrs(['xpSkill', 'xpTrait', 'adjustXp', 'xpAdvantages', 'xpDisadvantages'], v => {
         // Rank 2 traits/rings + 2 rank 3 traits
         let xps = parseInt(v.xpSkill)||0
         let xpt = parseInt(v.xpTrait)||0
         let adj = parseInt(v.adjustXp)||0
+        let adxp = parseInt(v.xpAdvantages)||0
+        let dsxp = parseInt(v.xpDisadvantages)||0
         console.log(`XPskill: ${xps}, XPTrait: ${xpt}, Adj: ${adj}`)
-        console.log((xps + xpt - adj))
+        console.log((xps + xpt - adj + adxp - dsxp))
         setAttrs({
-            xpSpent: xps + xpt - adj
+            xpSpent: xps + xpt - adj + adxp - dsxp
         })
     })
 }
@@ -149,13 +192,20 @@ function updateCharType()
     })
 }
 
+on('change:repeating_advantages:cost', evi => {
+    updateAdvantageXp()
+})
+
+on('change:repeating_disadvantages:cost', evi => {
+    updateDisadvantageXp()
+})
 
 on('change:adjustInsight change:insightSkill change:insightRing', evi => {
     updateInsight()
 })
 
 
-on('change:xpSkill change:xpTrait change:adjustXp', evi => {
+on('change:xpSkill change:xpTrait change:adjustXp change:xpAdvantages change:xpDisadvantages', evi => {
     updateXp()
 })
 

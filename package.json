@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm-run-all --parallel compile:sass compile:pug",
     "compile:sass": "sass ./src/l5r.sass ./l5r.css -w --no-charset --style=expanded",
-    "compile:pug": "pug --doctype=html --pretty ./src/l5r.pug -o ./ -w"
+    "compile:pug": "pug --doctype=html --pretty ./src/l5r.pug -b ./src -o ./ -w"
   },
   "author": "Calmacil",
   "license": "ISC",

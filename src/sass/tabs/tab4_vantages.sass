@@ -1,0 +1,75 @@
+$type_width: 65px
+$cost_width: 35px
+$name_width: calc(100% - $type_width - $cost_width - 15px)
+$expand_width: 10px
+$desc_width: calc(100% - 14px)
+
+.charsheet .tab4
+    &> .col2
+        &> span
+            font-family: $fontStandard
+            font-weight: bold
+            border-bottom: 3px double black
+            border-left: 1px dotted gray
+            align-content: center
+            padding: 2px
+            &:first-of-type
+                width: $name_width
+            &:nth-of-type(2)
+                width: $type_width
+            &:nth-of-type(3)
+                width: $cost_width
+        &> .repcontainer
+            width: 100%
+            flex-wrap: wrap
+            &> .repitem
+                width: 100%
+                flex-wrap: wrap
+                border-bottom: 1px solid gray
+                &> label:nth-of-type(1)
+                    width: 10px
+                    padding-right: 0
+                    margin-bottom: 0
+                    height: 20px
+                    &> input[type=checkbox]
+                        @include expandSwitch(20px)
+            
+                &> input[type=text],
+                &> input[type=number]
+                    border: none
+                    font-style: italic
+                    background: transparent
+                    border-left: 1px dotted gray
+                    font-family: $fontHandwriting
+                    padding: 2px
+                    &:nth-of-type(1)
+                        width: calc($name_width + 5px)
+                        font-weight: bold
+                        border-bottom: dotted 1px gray
+                    &:nth-of-type(2)
+                        width: calc($cost_width + 5px)
+                        border-bottom: dotted 1px gray
+                    &:nth-of-type(4)
+                        width: $desc_width
+                        border-left: none
+                        border-bottom: dotted 1px gray
+
+                &> select
+                    border: none
+                    font-style: italic
+                    width: calc($type_width + 5px)
+                    border-left: 1px dotted gray
+                    border-bottom: dotted 1px gray
+                    font-family: $fontHandwriting
+                    background: transparent
+                &> textarea
+                    @include textareaLined(15px, 1px)
+                    height: 4em
+                    font-family: $fontHandwriting
+                    display: none
+
+                &> input[type=hidden][value="1"]
+                    ~ textarea
+                        display: flex
+                    ~ input.shortdesc
+                        display: none

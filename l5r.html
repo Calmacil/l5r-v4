@@ -41,7 +41,8 @@
     <input name="attr_insightRing" type="hidden" value="">
     <input name="attr_xpSkill" type="hidden" value="">
     <input name="attr_xpTrait" type="hidden" value="">
-    <input name="attr_xpVantages" type="hidden" value="">
+    <input name="attr_xpAdvantages" type="hidden" value="">
+    <input name="attr_xpDisadvantages" type="hidden" value="">
     <input name="attr_voidName" type="hidden" value="Vide">
     <input name="attr_statusName" type="hidden" value="Statut">
     <div class="dicebox">
@@ -487,9 +488,51 @@
     <div class="tab tab4">
       <div class="col2">
         <h3>Avantages</h3>
+        <input name="attr_advantagesXp" type="hidden" value="0"><span>Nom</span><span>Type</span><span>Coût</span>
+        <fieldset class="repeating_advantages">
+          <input name="attr_name" type="text" value="">
+          <select name="attr_type">
+            <option value="" selected></option>
+            <option value="material">Matériel</option>
+            <option value="mental">Mental</option>
+            <option value="physical">Physique</option>
+            <option value="spiritual">Spirituel</option>
+            <option value="social">Social</option>
+            <option value="ancestor">Ancêtre</option>
+            <option value="legacy">Héritage</option>
+          </select>
+          <input name="attr_cost" type="number" value="0">
+          <label>
+            <input name="attr_expand" value="1" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_expand" type="hidden" value="0">
+          <input class="shortdesc" name="attr_shortdesc" type="text" value="" placeholder="Description courte">
+          <textarea class="longdesc" name="attr_longdesc" placeholder="Description longue"></textarea>
+        </fieldset>
       </div>
       <div class="col2">
         <h3>Désavantages</h3>
+        <input name="attr_advantagesXp" type="hidden" value="0"><span>Nom</span><span>Type</span><span>Coût</span>
+        <fieldset class="repeating_disadvantages">
+          <input name="attr_name" type="text" value="">
+          <select name="attr_type">
+            <option value="" selected></option>
+            <option value="material">Matériel</option>
+            <option value="mental">Mental</option>
+            <option value="physical">Physique</option>
+            <option value="spiritual">Spirituel</option>
+            <option value="social">Social</option>
+            <option value="ancestor">Ancêtre</option>
+            <option value="legacy">Héritage</option>
+          </select>
+          <input name="attr_cost" type="number" value="0">
+          <label>
+            <input name="attr_expand" value="1" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_expand" type="hidden" value="0">
+          <input class="shortdesc" name="attr_shortdesc" type="text" value="" placeholder="Description courte">
+          <textarea class="longdesc" name="attr_longdesc" placeholder="Description longue"></textarea>
+        </fieldset>
       </div>
     </div>
     <div class="tab tab5">
@@ -818,7 +861,6 @@ function updateInsightXpSkill()
  */
 function updateTraitXp()
 {
-    console.error('Change trait xp!')
     getAttrs(['agility', 'awareness', 'constitution', 'intelligence', 'perception', 'reflex', 'strength', 'will', 'void'], v => {
         let traitXp = 0
         let traitRanks = [
@@ -846,6 +888,48 @@ function updateTraitXp()
 }
 
 /**
+ * Updates xp due to advantages
+ */
+function updateAdvantageXp()
+{
+    getSectionIDs('advantages', idarray => {
+        let fields = []
+        idarray.forEach(id => fields.push(`repeating_advantages_${id}_cost`))
+        getAttrs(fields, v => {
+            let advXp = 0
+            idarray.forEach(id => {
+                let xp = parseInt(v[`repeating_advantages_${id}_cost`])||0
+                advXp += xp
+            })
+            setAttrs({
+                xpAdvantages: advXp
+            })
+        })
+    })
+}
+
+/**
+ * Updates xp due to disadvantages
+ */
+function updateDisadvantageXp()
+{
+    getSectionIDs('disadvantages', idarray => {
+        let fields = []
+        idarray.forEach(id => fields.push(`repeating_disadvantages_${id}_cost`))
+        getAttrs(fields, v => {
+            let disXp = 0
+            idarray.forEach(id => {
+                let xp = parseInt(v[`repeating_disadvantages_${id}_cost`])||0
+                disXp += xp
+            })
+            setAttrs({
+                xpDisadvantages: disXp
+            })
+        })
+    })
+}
+
+/**
  * Computes total insight
  */
 function updateInsight()
@@ -864,15 +948,17 @@ function updateInsight()
 function updateXp()
 {
     console.error('Change spent XP!')
-    getAttrs(['xpSkill', 'xpTrait', 'adjustXp'], v => {
+    getAttrs(['xpSkill', 'xpTrait', 'adjustXp', 'xpAdvantages', 'xpDisadvantages'], v => {
         // Rank 2 traits/rings + 2 rank 3 traits
         let xps = parseInt(v.xpSkill)||0
         let xpt = parseInt(v.xpTrait)||0
         let adj = parseInt(v.adjustXp)||0
+        let adxp = parseInt(v.xpAdvantages)||0
+        let dsxp = parseInt(v.xpDisadvantages)||0
         console.log(`XPskill: ${xps}, XPTrait: ${xpt}, Adj: ${adj}`)
-        console.log((xps + xpt - adj))
+        console.log((xps + xpt - adj + adxp - dsxp))
         setAttrs({
-            xpSpent: xps + xpt - adj
+            xpSpent: xps + xpt - adj + adxp - dsxp
         })
     })
 }
@@ -905,13 +991,20 @@ function updateCharType()
     })
 }
 
+on('change:repeating_advantages:cost', evi => {
+    updateAdvantageXp()
+})
+
+on('change:repeating_disadvantages:cost', evi => {
+    updateDisadvantageXp()
+})
 
 on('change:adjustInsight change:insightSkill change:insightRing', evi => {
     updateInsight()
 })
 
 
-on('change:xpSkill change:xpTrait change:adjustXp', evi => {
+on('change:xpSkill change:xpTrait change:adjustXp change:xpAdvantages change:xpDisadvantages', evi => {
     updateXp()
 })
 
@@ -1525,6 +1618,8 @@ on('clicked:repeating_weapons:damageroll', evi => {
     updateRings()
     updateAllSkills()
     updateInsightXpSkill()
+    updateAdvantageXp()
+    updateDisadvantageXp()
     updateInsightRing()
     updateTraitXp()
     updateInit()
