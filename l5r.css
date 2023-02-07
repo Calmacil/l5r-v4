@@ -1486,6 +1486,13 @@
   background: repeating-linear-gradient(to bottom, transparent 0 1px, lightgray 1px 2px, transparent 2px 19px) 50% 0/calc(100% - 38px) 100% no-repeat;
 }
 
+.charsheet > .tab6 > .spellSlots {
+  width: 100%;
+}
+.charsheet > .tab6 > .spellList {
+  width: 100%;
+}
+
 .charsheet .tab0 {
   flex-wrap: wrap;
   align-content: start;
