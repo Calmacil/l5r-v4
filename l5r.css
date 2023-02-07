@@ -1486,10 +1486,38 @@
   background: repeating-linear-gradient(to bottom, transparent 0 1px, lightgray 1px 2px, transparent 2px 19px) 50% 0/calc(100% - 38px) 100% no-repeat;
 }
 
-.charsheet > .tab6 > .spellSlots {
+.charsheet .tab6 {
+  flex-wrap: wrap;
+}
+.charsheet .tab6 > .spellSlots {
   width: 100%;
 }
-.charsheet > .tab6 > .spellList {
+.charsheet .tab6 > .spellSlots > .spellslot {
+  width: 20%;
+  border-radius: 12px;
+  color: white;
+  font-family: "Patrick Hand";
+  font-style: italic;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > span {
+  font-weight: bold;
+}
+.charsheet .tab6 > .spellSlots > .spellslot.earth {
+  background: #363;
+}
+.charsheet .tab6 > .spellSlots > .spellslot.air {
+  background: #68a;
+}
+.charsheet .tab6 > .spellSlots > .spellslot.water {
+  background: #36a;
+}
+.charsheet .tab6 > .spellSlots > .spellslot.fire {
+  background: #a63;
+}
+.charsheet .tab6 > .spellSlots > .spellslot.void {
+  background: #999;
+}
+.charsheet .tab6 > .spellList {
   width: 100%;
 }
 

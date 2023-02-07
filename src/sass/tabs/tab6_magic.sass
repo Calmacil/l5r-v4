@@ -1,7 +1,26 @@
 .charsheet
-    &> .tab6
+    & .tab6
+        flex-wrap: wrap
         &> .spellSlots
             width: 100%
+            &> .spellslot
+                width: 20%
+                border-radius: 12px
+                color: white
+                font-family: $fontHandwriting
+                font-style: italic
+                &> span
+                    font-weight: bold
+                &.earth
+                    background: $colEarth
+                &.air
+                    background: $colAir
+                &.water
+                    background: $colWater
+                &.fire
+                    background: $colFire
+                &.void
+                    background: $colVoid
 
         &> .spellList
             width: 100%

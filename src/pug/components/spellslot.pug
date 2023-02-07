@@ -1,0 +1,8 @@
+mixin spellSlot(elem, label)
+    div(class!=`spellslot ${elem}`)
+        span!= label
+        .slot
+            +numberInput(`slot_${elem}`)
+            +numberInput(`slot_${elem}_max`)
+        +cbButton(`affinity_${elem}`, 'Affinité')
+        +cbButton(`deficiency_${elem}`, 'Déficience')
