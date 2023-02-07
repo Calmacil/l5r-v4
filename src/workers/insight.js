@@ -131,6 +131,27 @@ function updateDisadvantageXp()
 }
 
 /**
+ * Updates xp due to kata
+ */
+function updateKataXp()
+{
+    getSectionIDs('kata', idarray => {
+        let fields = []
+        idarray.forEach(id => fields.push(`repeating_kata_${id}_mastery`))
+        getAttrs(fields, v => {
+            let kataXp = 0
+            idarray.forEach(id => {
+                let xp = parseInt(v[`repeating_kata_${id}_mastery`])||0
+                kataXp += xp
+            })
+            setAttrs({
+                xpKata: kataXp
+            })
+        })
+    })
+}
+
+/**
  * Computes total insight
  */
 function updateInsight()
@@ -149,17 +170,19 @@ function updateInsight()
 function updateXp()
 {
     console.error('Change spent XP!')
-    getAttrs(['xpSkill', 'xpTrait', 'adjustXp', 'xpAdvantages', 'xpDisadvantages'], v => {
+    getAttrs(['xpSkill', 'xpTrait', 'adjustXp', 'xpAdvantages', 'xpDisadvantages', 'xpKata'], v => {
         // Rank 2 traits/rings + 2 rank 3 traits
         let xps = parseInt(v.xpSkill)||0
         let xpt = parseInt(v.xpTrait)||0
         let adj = parseInt(v.adjustXp)||0
         let adxp = parseInt(v.xpAdvantages)||0
         let dsxp = parseInt(v.xpDisadvantages)||0
+        // beware of the kata/kiho switch
+        let kaxp = parseInt(v.xpKata)||0
         console.log(`XPskill: ${xps}, XPTrait: ${xpt}, Adj: ${adj}`)
-        console.log((xps + xpt - adj + adxp - dsxp))
+        console.log((xps + xpt - adj + adxp - dsxp + kaxp))
         setAttrs({
-            xpSpent: xps + xpt - adj + adxp - dsxp
+            xpSpent: xps + xpt - adj + adxp - dsxp + kaxp
         })
     })
 }
@@ -200,12 +223,16 @@ on('change:repeating_disadvantages:cost', evi => {
     updateDisadvantageXp()
 })
 
+on('change:repeating_kata:mastery add:repeating_kata remove:repeating_kata', evi => {
+    updateKataXp()
+})
+
 on('change:adjustInsight change:insightSkill change:insightRing', evi => {
     updateInsight()
 })
 
 
-on('change:xpSkill change:xpTrait change:adjustXp change:xpAdvantages change:xpDisadvantages', evi => {
+on('change:xpSkill change:xpTrait change:adjustXp change:xpAdvantages change:xpDisadvantages change:xpKata', evi => {
     updateXp()
 })
 

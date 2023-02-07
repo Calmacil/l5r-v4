@@ -1,2 +1,32 @@
 .tab.tab5
-    h1 École et Techniques
+    div.col2
+        h3 Écoles
+        fieldset.repeating_schools
+            +textInput('name')(placeholder='École')
+            +select('type')
+                option(value='base') Base
+                option(value='path') Voie
+                option(value='advanced') Avancée
+            +hiddenInput('type')
+            +schoolRank(1).base.advanced
+            +schoolRank(2).base.advanced
+            +schoolRank(3).base.advanced
+            +schoolRank(4).base
+            +schoolRank(5).base
+            +schoolRank('var').path
+    div#katas.col2
+        h3 Katas / Kihos
+        span Nom
+        span Anneau
+        span Niv.
+        +hiddenInput('xpKata', 0)
+        fieldset.repeating_kata
+            +textInput('name')
+            +select('ring')
+                option(value='air') Air
+                option(value='earth') Terre
+                option(value='fire') Feu
+                option(value='water') Eau
+                option(value='void') Vide
+            +numberInput('mastery', 3)
+            +textareaInput('longdesc')(placeholder='Effets')

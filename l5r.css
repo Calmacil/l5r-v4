@@ -1289,6 +1289,203 @@
   display: none;
 }
 
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer {
+  width: 100%;
+  flex-wrap: wrap;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem {
+  width: 100%;
+  flex-wrap: wrap;
+  border-bottom: 3px double black;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > input[type=text] {
+  width: calc(100% - 60px - 3px);
+  height: 20px;
+  padding-left: 3px;
+  font-weight: bolder;
+  font-style: italic;
+  font-family: "Patrick Hand";
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > select {
+  width: 60px;
+  height: 20px;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > input[type=hidden][value=base] ~ div.schoolTech.base {
+  display: flex;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > input[type=hidden][value=path] ~ div.schoolTech.path {
+  display: flex;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > input[type=hidden][value=advanced] ~ div.schoolTech.advanced {
+  display: flex;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech {
+  display: none;
+  flex-wrap: wrap;
+  width: 100%;
+  border-bottom: 1px dotted gray;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label {
+  margin-bottom: 0;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(1) {
+  width: 10px;
+  padding-right: 3px;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(1) > input[type=checkbox] {
+  position: absolute;
+  width: 10px;
+  opacity: 0;
+  height: 20px;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(1) > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(1) > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: "►";
+  justify-content: center;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(1) > input[type=checkbox]:checked ~ span::before {
+  content: "▼";
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(2) {
+  width: 55px;
+  padding-right: 0;
+  border: solid 1px black;
+  background: gray;
+  height: 16px;
+  font-weight: bold;
+  color: #eee;
+  padding-top: -3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(2) > span {
+  font-family: "Patrick Hand";
+  font-size: 14px;
+  font-style: italic;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(2) > input[type=number] {
+  margin-bottom: -3px;
+  width: 15px;
+  border-bottom: 0;
+  color: #eee;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(3) {
+  height: 20px;
+  width: 20px;
+  margin-top: -3px;
+  padding-right: 0;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(3) > input[type=checkbox] {
+  position: absolute;
+  width: 12px;
+  opacity: 0;
+  height: 20px;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(3) > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(3) > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: attr(title);
+  justify-content: center;
+  font-family: "Arial";
+  margin-top: -5px;
+  margin-right: 4px;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(3) > input[type=checkbox]:checked ~ span::before {
+  background-color: #99a;
+  box-shadow: 0 0 5px inset black;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > label:nth-of-type(3) > input[type=checkbox] ~ span::before {
+  margin-top: 0;
+  border-radius: 15px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid black;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > input:nth-of-type(1) {
+  height: 20px;
+  width: calc(100% - 10px - 12px - 60px - 12px - 3px);
+  font-family: "Patrick Hand";
+  font-style: italic;
+  background: transparent;
+  border: none;
+  padding-left: 3px;
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > textarea {
+  display: none;
+  height: 4em;
+  line-height: 16px;
+  padding-block: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: repeating-linear-gradient(to bottom, transparent 0 1px, lightgray 1px 2px, transparent 2px 16px) 50% 0/calc(100% - 32px) 100% no-repeat;
+  font-family: "Patrick Hand";
+}
+.charsheet .tab5 > div.col2:first-of-type > .repcontainer > .repitem > div.schoolTech > input[type=hidden][value="1"] ~ textarea {
+  display: block;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > span {
+  border-left: dotted gray 1px;
+  border-bottom: double gray 3px;
+  padding: 2px;
+  font-weight: bold;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > span:nth-of-type(1) {
+  width: calc(100% - 25px - 55px - 15px);
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > span:nth-of-type(2) {
+  width: 55px;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > span:nth-of-type(3) {
+  width: 25px;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > .repcontainer {
+  width: 100%;
+  flex-wrap: wrap;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > .repcontainer > .repitem {
+  width: 100%;
+  border-bottom: 3px double black;
+  flex-wrap: wrap;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > .repcontainer > .repitem > input,
+.charsheet .tab5 > div.col2:nth-of-type(2) > .repcontainer > .repitem select {
+  height: 20px;
+  padding: 2px;
+  border: none;
+  border-left: dotted gray 1px;
+  border-bottom: dotted gray 1px;
+  background: transparent;
+  font-family: "Patrick Hand";
+  font-style: italic;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > .repcontainer > .repitem > input:nth-of-type(1) {
+  width: calc(100% - 25px - 55px - 15px + 5px);
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > .repcontainer > .repitem > input:nth-of-type(2) {
+  width: 25px;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > .repcontainer > .repitem > select {
+  width: 60px;
+}
+.charsheet .tab5 > div.col2:nth-of-type(2) > .repcontainer > .repitem > textarea {
+  height: 4em;
+  border-left: dotted gray 1px;
+  font-family: "Patrick Hand";
+  font-style: italic;
+  line-height: 19px;
+  padding-block: 0;
+  padding-left: 19px;
+  padding-right: 19px;
+  background: repeating-linear-gradient(to bottom, transparent 0 1px, lightgray 1px 2px, transparent 2px 19px) 50% 0/calc(100% - 38px) 100% no-repeat;
+}
+
 .charsheet .tab0 {
   flex-wrap: wrap;
   align-content: start;

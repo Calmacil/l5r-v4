@@ -1,0 +1,13 @@
+mixin schoolRank(rank)
+    div(class!=attributes.class).schoolTech
+        +cbButton(`expand${rank}`, ' ', 1)
+        label(for=`rank${rank}`)
+            span Rang:
+            if ('var' == rank)
+                +numberInput(`rank${rank}`, 1)
+            else
+                +numberInput(`rank${rank}`, rank)(readonly)
+        +textInput(`name${rank}`)(placeholder='Technique')
+        +cbButton(`isLearnt${rank}`, ' ', 1)
+        +hiddenInput(`expand${rank}`)
+        +textareaInput(`longdesc${rank}`)(placeholder='description')

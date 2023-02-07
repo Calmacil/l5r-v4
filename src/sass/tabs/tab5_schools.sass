@@ -1,0 +1,152 @@
+// variables
+$lineHeight: 20px
+$scTypeWidth: 60px
+$scNameWidth: calc(100% - $scTypeWidth)
+
+$scExpandWidth: 10px
+$scLearntWidth: 12px
+$scRankWidth: 60px
+$scTechWidth: calc(100% - $scExpandWidth - $scLearntWidth - $scRankWidth - 12px)
+
+$kaRingWidth: 55px
+$kaMasteryWidth: 25px
+$kaNameWidth: calc(100% - $kaMasteryWidth - $kaRingWidth - 15px)
+
+.charsheet .tab5
+    &> div.col2:first-of-type > .repcontainer
+        width: 100%
+        flex-wrap: wrap
+        
+        &> .repitem
+            width: 100%
+            flex-wrap: wrap
+            border-bottom: 3px double black
+
+            &> input[type=text]
+                width: calc($scNameWidth - 3px)
+                height: $lineHeight
+                padding-left: 3px
+                font-weight: bolder
+                font-style: italic
+                font-family: $fontHandwriting
+            &> select
+                width: $scTypeWidth
+                height: $lineHeight
+            &> input[type='hidden']
+                &[value='base'] ~ div.schoolTech.base
+                    display: flex
+                &[value='path'] ~ div.schoolTech.path
+                    display: flex
+                &[value='advanced'] ~ div.schoolTech.advanced
+                    display: flex
+            
+            &> div.schoolTech
+                display: none
+                flex-wrap: wrap
+                width: 100%
+                //height: 20px
+                border-bottom: 1px dotted gray
+                &> label
+                    margin-bottom: 0
+                    &:nth-of-type(1)
+                        width: $scExpandWidth
+                        padding-right: 3px
+                        &> input[type=checkbox]
+                            @include expandSwitch($lineHeight)
+                    &:nth-of-type(2)
+                        width: calc($scRankWidth - 5px)
+                        padding-right: 0
+                        border: solid 1px black
+                        background: gray
+                        height: 16px
+                        font-weight: bold
+                        color: #eee
+                        padding-top: -3px
+                        padding-bottom: 3px
+                        padding-left: 3px
+                        &> span
+                            font-family: $fontHandwriting
+                            font-size: 14px
+                            font-style: italic
+                        &> input[type=number]
+                            margin-bottom: -3px
+                            width: 15px
+                            border-bottom: 0
+                            color: #eee
+                    &:nth-of-type(3)
+                        height: $lineHeight
+                        width: 20px
+                        margin-top: -3px
+                        padding-right: 0
+                        &> input[type=checkbox]
+                            @include toggleable($lineHeight, $fontStandard, false, 12px)
+                            &~ span::before
+                                margin-top: 0
+                                border-radius: 15px
+                                width: 12px
+                                height: 12px
+                                border: 2px solid black
+                &> input
+                    &:nth-of-type(1)
+                        height: $lineHeight
+                        width: calc($scTechWidth - 3px)
+                        font-family: $fontHandwriting
+                        //font-weight: bold
+                        font-style: italic
+                        background: transparent
+                        border: none
+                        padding-left: 3px
+                &> textarea
+                    display: none
+                    height: 4em
+                    @include textareaLined(16px, 1px)
+                    font-family: $fontHandwriting
+                &> input[type=hidden][value='1'] ~ textarea
+                    display: block
+
+    &> div.col2:nth-of-type(2)
+        &> span
+            border-left: dotted gray 1px
+            border-bottom: double gray 3px
+            padding: 2px
+            font-weight: bold
+            &:nth-of-type(1)
+                width: $kaNameWidth
+            &:nth-of-type(2)
+                width: $kaRingWidth
+            &:nth-of-type(3)
+                width: $kaMasteryWidth
+        &> .repcontainer
+            width: 100%
+            flex-wrap: wrap
+
+            &> .repitem
+                width: 100%
+                border-bottom: 3px double black
+                flex-wrap: wrap
+
+                &> input,
+                select
+                    height: 20px
+                    padding: 2px
+                    border: none
+                    border-left: dotted gray 1px
+                    border-bottom: dotted gray 1px
+                    background: transparent
+                    font-family: $fontHandwriting
+                    font-style: italic
+
+                &> input
+                    &:nth-of-type(1)
+                        width: calc($kaNameWidth + 5px)
+                    &:nth-of-type(2)
+                        width: $kaMasteryWidth
+                &> select
+                    width: calc($kaRingWidth + 5px)
+
+                &> textarea
+                    height: 4em
+                    border-left: dotted gray 1px
+                    font-family: $fontHandwriting
+                    font-style: italic
+                    @include textareaLined(19px, 1px)

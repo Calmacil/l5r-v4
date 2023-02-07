@@ -536,7 +536,120 @@
       </div>
     </div>
     <div class="tab tab5">
-      <h1>École et Techniques</h1>
+      <div class="col2">
+        <h3>Écoles</h3>
+        <fieldset class="repeating_schools">
+          <input name="attr_name" type="text" value="" placeholder="École">
+          <select name="attr_type">
+            <option value="" selected></option>
+            <option value="base">Base</option>
+            <option value="path">Voie</option>
+            <option value="advanced">Avancée</option>
+          </select>
+          <input name="attr_type" type="hidden" value="">
+            <div class="base advanced schoolTech">
+              <label>
+                <input name="attr_expand1" value="1" type="checkbox"><span> </span>
+              </label>
+              <label for="rank1"><span>Rang:</span>
+                <input name="attr_rank1" type="number" value="1" readonly>
+              </label>
+              <input name="attr_name1" type="text" value="" placeholder="Technique">
+              <label>
+                <input name="attr_isLearnt1" value="1" type="checkbox"><span> </span>
+              </label>
+              <input name="attr_expand1" type="hidden" value="">
+              <textarea name="attr_longdesc1" placeholder="description"></textarea>
+            </div>
+            <div class="base advanced schoolTech">
+              <label>
+                <input name="attr_expand2" value="1" type="checkbox"><span> </span>
+              </label>
+              <label for="rank2"><span>Rang:</span>
+                <input name="attr_rank2" type="number" value="2" readonly>
+              </label>
+              <input name="attr_name2" type="text" value="" placeholder="Technique">
+              <label>
+                <input name="attr_isLearnt2" value="1" type="checkbox"><span> </span>
+              </label>
+              <input name="attr_expand2" type="hidden" value="">
+              <textarea name="attr_longdesc2" placeholder="description"></textarea>
+            </div>
+            <div class="base advanced schoolTech">
+              <label>
+                <input name="attr_expand3" value="1" type="checkbox"><span> </span>
+              </label>
+              <label for="rank3"><span>Rang:</span>
+                <input name="attr_rank3" type="number" value="3" readonly>
+              </label>
+              <input name="attr_name3" type="text" value="" placeholder="Technique">
+              <label>
+                <input name="attr_isLearnt3" value="1" type="checkbox"><span> </span>
+              </label>
+              <input name="attr_expand3" type="hidden" value="">
+              <textarea name="attr_longdesc3" placeholder="description"></textarea>
+            </div>
+            <div class="base schoolTech">
+              <label>
+                <input name="attr_expand4" value="1" type="checkbox"><span> </span>
+              </label>
+              <label for="rank4"><span>Rang:</span>
+                <input name="attr_rank4" type="number" value="4" readonly>
+              </label>
+              <input name="attr_name4" type="text" value="" placeholder="Technique">
+              <label>
+                <input name="attr_isLearnt4" value="1" type="checkbox"><span> </span>
+              </label>
+              <input name="attr_expand4" type="hidden" value="">
+              <textarea name="attr_longdesc4" placeholder="description"></textarea>
+            </div>
+            <div class="base schoolTech">
+              <label>
+                <input name="attr_expand5" value="1" type="checkbox"><span> </span>
+              </label>
+              <label for="rank5"><span>Rang:</span>
+                <input name="attr_rank5" type="number" value="5" readonly>
+              </label>
+              <input name="attr_name5" type="text" value="" placeholder="Technique">
+              <label>
+                <input name="attr_isLearnt5" value="1" type="checkbox"><span> </span>
+              </label>
+              <input name="attr_expand5" type="hidden" value="">
+              <textarea name="attr_longdesc5" placeholder="description"></textarea>
+            </div>
+            <div class="path schoolTech">
+              <label>
+                <input name="attr_expandvar" value="1" type="checkbox"><span> </span>
+              </label>
+              <label for="rankvar"><span>Rang:</span>
+                <input name="attr_rankvar" type="number" value="1">
+              </label>
+              <input name="attr_namevar" type="text" value="" placeholder="Technique">
+              <label>
+                <input name="attr_isLearntvar" value="1" type="checkbox"><span> </span>
+              </label>
+              <input name="attr_expandvar" type="hidden" value="">
+              <textarea name="attr_longdescvar" placeholder="description"></textarea>
+            </div>
+        </fieldset>
+      </div>
+      <div class="col2" id="katas">
+        <h3>Katas / Kihos</h3><span>Nom</span><span>Anneau</span><span>Niv.</span>
+        <input name="attr_xpKata" type="hidden" value="0">
+        <fieldset class="repeating_kata">
+          <input name="attr_name" type="text" value="">
+          <select name="attr_ring">
+            <option value="" selected></option>
+            <option value="air">Air</option>
+            <option value="earth">Terre</option>
+            <option value="fire">Feu</option>
+            <option value="water">Eau</option>
+            <option value="void">Vide</option>
+          </select>
+          <input name="attr_mastery" type="number" value="3">
+          <textarea name="attr_longdesc" placeholder="Effets"></textarea>
+        </fieldset>
+      </div>
     </div>
     <div class="tab tab6">
       <h1>Magie</h1>
@@ -930,6 +1043,27 @@ function updateDisadvantageXp()
 }
 
 /**
+ * Updates xp due to kata
+ */
+function updateKataXp()
+{
+    getSectionIDs('kata', idarray => {
+        let fields = []
+        idarray.forEach(id => fields.push(`repeating_kata_${id}_mastery`))
+        getAttrs(fields, v => {
+            let kataXp = 0
+            idarray.forEach(id => {
+                let xp = parseInt(v[`repeating_kata_${id}_mastery`])||0
+                kataXp += xp
+            })
+            setAttrs({
+                xpKata: kataXp
+            })
+        })
+    })
+}
+
+/**
  * Computes total insight
  */
 function updateInsight()
@@ -948,17 +1082,19 @@ function updateInsight()
 function updateXp()
 {
     console.error('Change spent XP!')
-    getAttrs(['xpSkill', 'xpTrait', 'adjustXp', 'xpAdvantages', 'xpDisadvantages'], v => {
+    getAttrs(['xpSkill', 'xpTrait', 'adjustXp', 'xpAdvantages', 'xpDisadvantages', 'xpKata'], v => {
         // Rank 2 traits/rings + 2 rank 3 traits
         let xps = parseInt(v.xpSkill)||0
         let xpt = parseInt(v.xpTrait)||0
         let adj = parseInt(v.adjustXp)||0
         let adxp = parseInt(v.xpAdvantages)||0
         let dsxp = parseInt(v.xpDisadvantages)||0
+        // beware of the kata/kiho switch
+        let kaxp = parseInt(v.xpKata)||0
         console.log(`XPskill: ${xps}, XPTrait: ${xpt}, Adj: ${adj}`)
-        console.log((xps + xpt - adj + adxp - dsxp))
+        console.log((xps + xpt - adj + adxp - dsxp + kaxp))
         setAttrs({
-            xpSpent: xps + xpt - adj + adxp - dsxp
+            xpSpent: xps + xpt - adj + adxp - dsxp + kaxp
         })
     })
 }
@@ -999,12 +1135,16 @@ on('change:repeating_disadvantages:cost', evi => {
     updateDisadvantageXp()
 })
 
+on('change:repeating_kata:mastery add:repeating_kata remove:repeating_kata', evi => {
+    updateKataXp()
+})
+
 on('change:adjustInsight change:insightSkill change:insightRing', evi => {
     updateInsight()
 })
 
 
-on('change:xpSkill change:xpTrait change:adjustXp change:xpAdvantages change:xpDisadvantages', evi => {
+on('change:xpSkill change:xpTrait change:adjustXp change:xpAdvantages change:xpDisadvantages change:xpKata', evi => {
     updateXp()
 })
 
@@ -1620,6 +1760,7 @@ on('clicked:repeating_weapons:damageroll', evi => {
     updateInsightXpSkill()
     updateAdvantageXp()
     updateDisadvantageXp()
+    updateKataXp()
     updateInsightRing()
     updateTraitXp()
     updateInit()
