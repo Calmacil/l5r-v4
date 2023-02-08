@@ -1487,20 +1487,22 @@
 }
 
 .charsheet .tab6 {
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 .charsheet .tab6 > .spellSlots {
   width: 100%;
+  flex-wrap: wrap;
 }
 .charsheet .tab6 > .spellSlots > .spellslot {
-  width: 20%;
+  width: calc(19% - 8px);
+  padding: 4px;
+  margin: 0.5% auto;
   border-radius: 12px;
   color: white;
   font-family: "Patrick Hand";
   font-style: italic;
-}
-.charsheet .tab6 > .spellSlots > .spellslot > span {
-  font-weight: bold;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .charsheet .tab6 > .spellSlots > .spellslot.earth {
   background: #363;
@@ -1517,7 +1519,72 @@
 .charsheet .tab6 > .spellSlots > .spellslot.void {
   background: #999;
 }
+.charsheet .tab6 > .spellSlots > .spellslot > span {
+  width: calc(100% - 60px);
+  font-weight: bold;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .slot {
+  display: flex;
+  width: 60px;
+  height: 40px;
+  border-radius: 20px;
+  background: white;
+  align-content: space-between;
+  color: black;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .slot > span {
+  height: 22px;
+  margin-top: 9px;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .slot > input[type=number] {
+  background: transparent;
+  width: 22px;
+  height: 22px;
+  margin-top: 9px;
+  text-align: center;
+  border: none;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .affinities {
+  display: flex;
+  width: 100%;
+  height: 20px;
+  margin-top: 4px;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .affinities > label > input[type=checkbox] {
+  position: absolute;
+  width: calc(25% - 33px);
+  opacity: 0;
+  height: 20px;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .affinities > label > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .affinities > label > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: attr(title);
+  justify-content: center;
+  font-family: "Patrick Hand";
+  margin-top: -5px;
+  margin-right: 4px;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .affinities > label > input[type=checkbox]:checked ~ span::before {
+  background-color: #99a;
+  box-shadow: 0 0 5px inset black;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .affinities > label > input[type=checkbox] ~ span {
+  color: white;
+}
+.charsheet .tab6 > .spellSlots > .spellslot > .affinities > label > input[type=checkbox] ~ span::before {
+  margin-top: 0;
+  border-radius: 15px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid black;
+  background: white;
+}
 .charsheet .tab6 > .spellList {
+  flex-direction: row;
   width: 100%;
 }
 
