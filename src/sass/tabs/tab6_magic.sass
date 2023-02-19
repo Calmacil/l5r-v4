@@ -1,3 +1,13 @@
+$spExpandWidth: 10px
+$spElementWidth: 50px
+$spMasteryWidth: 50px
+$spRangeWidth: 45px
+$spDurationWidth: 45px
+$spRaiseWidth: 180px 
+$spRollWidth: 20px
+$spNameWidth: calc(100% - $spExpandWidth - $spElementWidth - $spMasteryWidth - $spRangeWidth - $spDurationWidth - $spRaiseWidth - $spRollWidth - 64px - 12px)
+
+
 .charsheet
     & .tab6
         flex-direction: column
@@ -66,3 +76,74 @@
         &> .spellList
             flex-direction: row
             width: 100%
+            margin-top: 10px
+            flex-wrap: wrap
+            &> span
+                font-family: $fontStandard
+                font-weight: bold
+                border-bottom: 3px double black
+                text-align: center
+                padding: 4px
+                &:nth-of-type(1)
+                    width: $spExpandWidth
+                &:nth-of-type(2)
+                    width: $spNameWidth
+                &:nth-of-type(3)
+                    width: $spElementWidth
+                    border-left: dotted black 1px
+                &:nth-of-type(4)
+                    width: $spMasteryWidth
+                    border-left: dotted black 1px
+                &:nth-of-type(5)
+                    width: $spRangeWidth
+                    border-left: dotted black 1px
+                &:nth-of-type(6)
+                    width: $spDurationWidth
+                    border-left: dotted black 1px
+                &:nth-of-type(7)
+                    width: $spRaiseWidth 
+                    border-left: dotted black 1px
+                &:nth-of-type(8)
+                    width: $spRollWidth
+
+            &> .repcontainer
+                width: 100%
+                flex-wrap: wrap
+                &> .repitem
+                    width: 100%
+                    flex-wrap: wrap
+                    border-bottom: solid gray 1px
+                    &> input,
+                    &> select
+                        background: transparent
+                        height: 20px
+                        padding: 4px
+                        border: 0
+                        border-right: dotted gray 1px
+                        font-family: $fontHandwriting
+                    &> label
+                        width: calc($spExpandWidth + 4px)
+                        padding-right: 4px
+                        margin-bottom: 0
+                        &> input[type=checkbox]
+                            @include expandSwitch(20px)
+
+                    &> input:nth-of-type(1)
+                        width: calc($spNameWidth + 9px)
+                    &> select
+                        width: calc($spElementWidth + 9px)
+                    &> input:nth-of-type(2)
+                        width: calc($spMasteryWidth + 9px)
+                    &> input:nth-of-type(3)
+                        width: calc($spRangeWidth + 9px)
+                    &> input:nth-of-type(4)
+                        width: calc($spDurationWidth + 9px)
+                    &> input:nth-of-type(5)
+                        width: calc($spRaiseWidth + 9px)
+                    &> textarea
+                        @include textareaLined(16px, 1px)
+                        height: 4em
+                        display: none
+                        font-family: $fontHandwriting
+                    &> input[type=hidden][value='1'] ~ textarea
+                        display: flex

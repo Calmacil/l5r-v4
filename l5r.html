@@ -724,8 +724,28 @@
             </div>
           </div>
       </div>
-      <div class="spellList"><span></span><span>Sort</span><span>Élément</span><span>Maîtrise</span><span>Portée</span><span>Durée</span><span></span>
-        <fieldset class="repeating_spells"></fieldset>
+      <div class="spellList"><span></span><span>Sort</span><span>Élément</span><span>Maîtrise</span><span>Portée</span><span>Durée</span><span>Augmentations</span><span></span>
+        <fieldset class="repeating_spells">
+          <label>
+            <input name="attr_expand" value="1" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_name" type="text" value="">
+          <select name="attr_element">
+            <option value="" selected></option>
+            <option value="earth">Terre</option>
+            <option value="air">Air</option>
+            <option value="water">Eau</option>
+            <option value="fire">Feu</option>
+            <option value="void">Vide</option>
+          </select>
+          <input name="attr_mastery" type="number" value="1" min="1" max="6">
+          <input name="attr_range" type="text" value="">
+          <input name="attr_duration" type="text" value="">
+          <input name="attr_raise" type="text" value="">
+          <button name="act_spellRoll" type="action" value=""></button>
+          <input name="attr_expand" type="hidden" value="">
+          <textarea name="attr_description" placeholder="Description"></textarea>
+        </fieldset>
       </div>
     </div>
     <div class="tab tab7">

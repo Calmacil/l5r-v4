@@ -12,5 +12,21 @@
         span Maîtrise
         span Portée
         span Durée
+        span Augmentations
         span
         fieldset.repeating_spells
+            +cbButton('expand', ' ', 1)
+            +textInput('name')
+            +select('element')
+                option(value='earth') Terre
+                option(value='air') Air
+                option(value='water') Eau
+                option(value='fire') Feu
+                option(value='void') Vide
+            +numberInput('mastery', 1)(min='1', max='6')
+            +textInput('range')
+            +textInput('duration')
+            +textInput('raise')
+            +actButton('spellRoll')
+            +hiddenInput('expand')
+            +textareaInput('description')(placeholder='Description')

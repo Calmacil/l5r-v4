@@ -1586,6 +1586,115 @@
 .charsheet .tab6 > .spellList {
   flex-direction: row;
   width: 100%;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.charsheet .tab6 > .spellList > span {
+  font-family: "Arial";
+  font-weight: bold;
+  border-bottom: 3px double black;
+  text-align: center;
+  padding: 4px;
+}
+.charsheet .tab6 > .spellList > span:nth-of-type(1) {
+  width: 10px;
+}
+.charsheet .tab6 > .spellList > span:nth-of-type(2) {
+  width: calc(100% - 10px - 50px - 50px - 45px - 45px - 180px - 20px - 64px - 12px);
+}
+.charsheet .tab6 > .spellList > span:nth-of-type(3) {
+  width: 50px;
+  border-left: dotted black 1px;
+}
+.charsheet .tab6 > .spellList > span:nth-of-type(4) {
+  width: 50px;
+  border-left: dotted black 1px;
+}
+.charsheet .tab6 > .spellList > span:nth-of-type(5) {
+  width: 45px;
+  border-left: dotted black 1px;
+}
+.charsheet .tab6 > .spellList > span:nth-of-type(6) {
+  width: 45px;
+  border-left: dotted black 1px;
+}
+.charsheet .tab6 > .spellList > span:nth-of-type(7) {
+  width: 180px;
+  border-left: dotted black 1px;
+}
+.charsheet .tab6 > .spellList > span:nth-of-type(8) {
+  width: 20px;
+}
+.charsheet .tab6 > .spellList > .repcontainer {
+  width: 100%;
+  flex-wrap: wrap;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem {
+  width: 100%;
+  flex-wrap: wrap;
+  border-bottom: solid gray 1px;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > input, .charsheet .tab6 > .spellList > .repcontainer > .repitem > select {
+  background: transparent;
+  height: 20px;
+  padding: 4px;
+  border: 0;
+  border-right: dotted gray 1px;
+  font-family: "Patrick Hand";
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > label {
+  width: 14px;
+  padding-right: 4px;
+  margin-bottom: 0;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > label > input[type=checkbox] {
+  position: absolute;
+  width: 10px;
+  opacity: 0;
+  height: 20px;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > label > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > label > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: "►";
+  justify-content: center;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > label > input[type=checkbox]:checked ~ span::before {
+  content: "▼";
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > input:nth-of-type(1) {
+  width: calc(100% - 10px - 50px - 50px - 45px - 45px - 180px - 20px - 64px - 12px + 9px);
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > select {
+  width: 59px;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > input:nth-of-type(2) {
+  width: 59px;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > input:nth-of-type(3) {
+  width: 54px;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > input:nth-of-type(4) {
+  width: 54px;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > input:nth-of-type(5) {
+  width: 189px;
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > textarea {
+  line-height: 16px;
+  padding-block: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: repeating-linear-gradient(to bottom, transparent 0 1px, lightgray 1px 2px, transparent 2px 16px) 50% 0/calc(100% - 32px) 100% no-repeat;
+  height: 4em;
+  display: none;
+  font-family: "Patrick Hand";
+}
+.charsheet .tab6 > .spellList > .repcontainer > .repitem > input[type=hidden][value="1"] ~ textarea {
+  display: flex;
 }
 
 .charsheet .tab0 {
