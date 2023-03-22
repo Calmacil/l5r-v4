@@ -1637,7 +1637,7 @@
 .charsheet .tab6 > .spellList > .repcontainer > .repitem > input, .charsheet .tab6 > .spellList > .repcontainer > .repitem > select {
   background: transparent;
   height: 20px;
-  padding: 4px;
+  padding: 2px;
   border: 0;
   border-right: dotted gray 1px;
   font-family: "Patrick Hand";
@@ -1670,6 +1670,7 @@
 }
 .charsheet .tab6 > .spellList > .repcontainer > .repitem > select {
   width: 59px;
+  vertical-align: middle;
 }
 .charsheet .tab6 > .spellList > .repcontainer > .repitem > input:nth-of-type(2) {
   width: 59px;

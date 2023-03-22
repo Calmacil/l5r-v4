@@ -6,5 +6,5 @@ mixin spellSlot(elem, label)
             span /
             +numberInput(`slot_${elem}_max`, 0)
         .affinities
-            +cbButton(`affinity_${elem}`, 'Aff.')
-            +cbButton(`deficiency_${elem}`, 'Def.')
+            +cbButton(`affinity_${elem}`, 'Aff.', 1)
+            +cbButton(`deficiency_${elem}`, 'Def.', 1)

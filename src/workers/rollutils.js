@@ -117,7 +117,8 @@ function doRoll(pool, title, opts)
             init: false,
             explodeOn: false,
             hasFocus: undefined,
-            finishCallback: undefined
+            finishCallback: undefined,
+            rollStringAddon: undefined
         },
         ...opts
     }
@@ -151,11 +152,15 @@ function doRoll(pool, title, opts)
 
         rollString += `{{displayRoll=${poolToString(pool)}}} `
 
+        if (undefined !== rollStringAddon)
+            rollString += rollStringAddon
+
         startRoll(rollString, function(result) {
+            let computed = {}
             if (opts.finishCallback !== undefined) {
-                opts.finishCallback(result)
+                computed = opts.finishCallback(result)
             }
-            finishRoll(result.rollId)
+            finishRoll(result.rollId, computed)
         })
 
     })
