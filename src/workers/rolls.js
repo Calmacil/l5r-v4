@@ -168,18 +168,19 @@ on('clicked:repeating_weapons:damageroll', evi => {
 /**
  * Roll magic
  */
-on('clicked:repeating_spells:spellRoll', evi => {
+on('clicked:repeating_spells:spellroll', evi => {
     let spId = evi.sourceAttribute.split('_')[2]
     let spElm = `repeating_spells_${spId}_element`
 
+    let spMastery = `repeating_spells_${spId}_mastery`
+    let spName = `repeating_spells_${spId}_name`
+    let spRange = `repeating_spells_${spId}_range`
+    let spDuration = `repeating_spells_${spId}_duration`
+    let spDesc = `repeating_spells_${spId}_description`
+
+
     getAttrs([spElm], (elt) => {
         let element = elt[spElm]
-
-        let spMastery = `repeating_spells_${spId}_mastery`
-        let spName = `repeating_spells_${spId}_name`
-        let spRange = `repeating_spells_${spId}_range`
-        let spDuration = `repeating_spells_${spId}_duration`
-        let spDesc = `repeating_spells_${spId}_description`
 
         let charRing = `${element}`
         let charInsRnk = `insight_rank`
@@ -189,29 +190,29 @@ on('clicked:repeating_spells:spellRoll', evi => {
         let voidSlot = `slot_void`
 
         getAttrs([spMastery, spName, spRange, spDuration, spDesc, charRing, charInsRnk, charAffinity, charDeficiency, spellSlot, voidSlot], v => {
-            let spMastery = parseInt(v[spMastery])||0
-            let spName = v[spName]
-            let spRange = v[spRange]
-            let spDuration = v[spDuration]
-            let spDesc = v[spDesc]
-            let charRing = parseInt(v[charRing])||0
-            let charInsRnk = parseInt(v[charInsRnk])||0
-            let charAffinity = parseInt(v[charAffinity])||0
-            let charDeficiency = parseInt(v[charDeficiency])||0
+            let mastery = parseInt(v[spMastery])||0
+            let name = v[spName]
+            let range = v[spRange]
+            let duration = v[spDuration]
+            let desc = v[spDesc]
+            let ring = parseInt(v[charRing])||0
+            let insRnk = parseInt(v[charInsRnk])||0
+            let affinity = parseInt(v[charAffinity])||0
+            let deficiency = parseInt(v[charDeficiency])||0
             let slot = parseInt(v[spellSlot])||0
             let vslot = parseInt(v[voidSlot])||0
 
             if (slot > 0 || vslot > 0) {
-                let totalAff = 0 + charAffinity - charDeficiency;
+                let totalAff = 0 + affinity - deficiency;
 
-                let pool = createPool((charRing + charInsRnk + totalAff), charRing, 0)
-                let baseTn = 5 * (1 + spMastery)
-                let rollAddon = `{{mastery=${spMastery}}} `
-                    + `{{duration=${spDuration}}} `
-                    + `{{range=${spRange}}} `
-                    + `{{desc=${spDesc}}} `
-                    + `[[basetn=${baseTn}]] `
-                    + `[[raises=?{Augmentations ?|0}]]`
+                let pool = createPool((ring + insRnk + totalAff), ring, 0)
+                let baseTn = 5 * (1 + mastery)
+                let rollAddon = `{{mastery=${mastery}}} `
+                    + `{{duration=${duration}}} `
+                    + `{{range=${range}}} `
+                    + `{{desc=${desc}}} `
+                    + `{{basetn=[[${baseTn}]]}} `
+                    + `{{raises=[[?{Augmentations ?|0}]]}}`
 
                 toAttrs = []
                 if (slot > 0 )
@@ -220,12 +221,18 @@ on('clicked:repeating_spells:spellRoll', evi => {
                     toAttrs[voidSlot] = (vslot - 1)
                 setAttrs(toAttrs) // no matter success or not
 
-                doRoll(pool, spName, {template: 'spell', rollStringAddon: rollAddon, finishCallback: result => {
-                    // TODO
+                doRoll(pool, name, {template: 'spell', rollStringAddon: rollAddon, finishCallback: r => {
+                    console.warn(r);
+                    let basetn = parseInt(r.results.basetn.result)||0
+                    let raises = parseInt(r.results.raises.result)||0
+                    let truetn = basetn + 5 * raises
+                    return {
+                        basetn: truetn
+                    }
                 }})
 
             } else {
-                doRoll(createPool(0, 0, 0), spName, {template: 'cantcast'})
+                doRoll(createPool(1, 0, 0), name, {template: 'cantcast'})
             }
         })
     })

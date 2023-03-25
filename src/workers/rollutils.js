@@ -122,7 +122,7 @@ function doRoll(pool, title, opts)
         },
         ...opts
     }
-    
+    console.warn(opts);
     pool = flattenPool(pool)
     var rollString = `&{template:${opts.template}} `
 
@@ -152,14 +152,15 @@ function doRoll(pool, title, opts)
 
         rollString += `{{displayRoll=${poolToString(pool)}}} `
 
-        if (undefined !== rollStringAddon)
-            rollString += rollStringAddon
+        if (undefined !== opts.rollStringAddon)
+            rollString += opts.rollStringAddon
 
         startRoll(rollString, function(result) {
             let computed = {}
             if (opts.finishCallback !== undefined) {
                 computed = opts.finishCallback(result)
             }
+            console.log(computed)
             finishRoll(result.rollId, computed)
         })
 

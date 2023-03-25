@@ -1,0 +1,26 @@
+rolltemplate.sheet-rolltemplate-spell
+    .sheet-header
+        h1 {{charname}}
+    .sheet-arrow-container
+        .sheet-arrow-right
+    .sheet-results
+        h4 {{title}} : {{displayRoll}}
+        | {{#rollGreater() roll computed::basetn}}
+        h5.success
+            .col2.rollresult Résultat: {{roll}} 
+            .col2 SD {{computed::basetn}}
+        | {{/rollGreater() roll computed::basetn}}
+        | {{#rollTotal() roll computed::basetn}}
+        h5.success
+            .col2.rollresult Résultat: {{roll}} 
+            .col2 SD {{computed::basetn}}
+        | {{/rollTotal() roll computed::basetn}}
+        | {{#rollLess() roll computed::basetn}}
+        h5.failure
+            .col2.rollresult Résultat: {{roll}} 
+            .col2 SD {{computed::basetn}}
+        | {{/rollLess() roll computed::basetn}}
+        .row
+            .col2 Portée: {{range}}
+            .col2 Durée: {{duration}}
+        .row {{desc}}

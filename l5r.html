@@ -660,10 +660,10 @@
             </div>
             <div class="affinities">
               <label>
-                <input name="affinity_earth" type="checkbox"><span>Aff.</span>
+                <input name="attr_affinity_earth" value="1" type="checkbox"><span>Aff.</span>
               </label>
               <label>
-                <input name="deficiency_earth" type="checkbox"><span>Def.</span>
+                <input name="attr_deficiency_earth" value="1" type="checkbox"><span>Def.</span>
               </label>
             </div>
           </div>
@@ -674,10 +674,10 @@
             </div>
             <div class="affinities">
               <label>
-                <input name="affinity_air" type="checkbox"><span>Aff.</span>
+                <input name="attr_affinity_air" value="1" type="checkbox"><span>Aff.</span>
               </label>
               <label>
-                <input name="deficiency_air" type="checkbox"><span>Def.</span>
+                <input name="attr_deficiency_air" value="1" type="checkbox"><span>Def.</span>
               </label>
             </div>
           </div>
@@ -688,10 +688,10 @@
             </div>
             <div class="affinities">
               <label>
-                <input name="affinity_water" type="checkbox"><span>Aff.</span>
+                <input name="attr_affinity_water" value="1" type="checkbox"><span>Aff.</span>
               </label>
               <label>
-                <input name="deficiency_water" type="checkbox"><span>Def.</span>
+                <input name="attr_deficiency_water" value="1" type="checkbox"><span>Def.</span>
               </label>
             </div>
           </div>
@@ -702,10 +702,10 @@
             </div>
             <div class="affinities">
               <label>
-                <input name="affinity_fire" type="checkbox"><span>Aff.</span>
+                <input name="attr_affinity_fire" value="1" type="checkbox"><span>Aff.</span>
               </label>
               <label>
-                <input name="deficiency_fire" type="checkbox"><span>Def.</span>
+                <input name="attr_deficiency_fire" value="1" type="checkbox"><span>Def.</span>
               </label>
             </div>
           </div>
@@ -716,10 +716,10 @@
             </div>
             <div class="affinities">
               <label>
-                <input name="affinity_void" type="checkbox"><span>Aff.</span>
+                <input name="attr_affinity_void" value="1" type="checkbox"><span>Aff.</span>
               </label>
               <label>
-                <input name="deficiency_void" type="checkbox"><span>Def.</span>
+                <input name="attr_deficiency_void" value="1" type="checkbox"><span>Def.</span>
               </label>
             </div>
           </div>
@@ -742,7 +742,7 @@
           <input name="attr_range" type="text" value="">
           <input name="attr_duration" type="text" value="">
           <input name="attr_raise" type="text" value="">
-          <button name="act_spellRoll" type="action" value=""></button>
+          <button name="act_spellroll" type="action" value=""></button>
           <input name="attr_expand" type="hidden" value="">
           <textarea name="attr_description" placeholder="Description"></textarea>
         </fieldset>
@@ -819,6 +819,48 @@
   <div class="sheet-results">
     <h4>{{title}} : {{displayRoll}}</h4>
     <h4>Résultat: <span class="rollresult">{{roll}}</span></h4>
+  </div>
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-spell">
+  <div class="sheet-header">
+    <h1>{{charname}}</h1>
+  </div>
+  <div class="sheet-arrow-container">
+    <div class="sheet-arrow-right"></div>
+  </div>
+  <div class="sheet-results">
+    <h4>{{title}} : {{displayRoll}}</h4>{{#rollGreater() roll computed::basetn}}
+    <h5 class="success">
+      <div class="col2 rollresult">Résultat: {{roll}} </div>
+      <div class="col2">SD {{computed::basetn}}</div>
+    </h5>{{/rollGreater() roll computed::basetn}}
+    {{#rollTotal() roll computed::basetn}}
+    <h5 class="success">
+      <div class="col2 rollresult">Résultat: {{roll}} </div>
+      <div class="col2">SD {{computed::basetn}}</div>
+    </h5>{{/rollTotal() roll computed::basetn}}
+    {{#rollLess() roll computed::basetn}}
+    <h5 class="failure">
+      <div class="col2 rollresult">Résultat: {{roll}} </div>
+      <div class="col2">SD {{computed::basetn}}</div>
+    </h5>{{/rollLess() roll computed::basetn}}
+    <div class="row">
+      <div class="col2">Portée: {{range}}</div>
+      <div class="col2">Durée: {{duration}}</div>
+    </div>
+    <div class="row">{{desc}}</div>
+  </div>
+</rolltemplate>
+<rolltemplate class="sheet-rolltemplate-cantcast">
+  <div class="sheet-header">
+    <h1>{{charname}}</h1>
+  </div>
+  <div class="sheet-arrow-container">
+    <div class="sheet-arrow-right"></div>
+  </div>
+  <div class="sheet-results">
+    <h4>{{title}}</h4>
+    <h4>Impossible d’incanter</h4>
   </div>
 </rolltemplate>
 <script type="text/worker">
@@ -947,11 +989,12 @@ function doRoll(pool, title, opts)
             init: false,
             explodeOn: false,
             hasFocus: undefined,
-            finishCallback: undefined
+            finishCallback: undefined,
+            rollStringAddon: undefined
         },
         ...opts
     }
-    
+    console.warn(opts);
     pool = flattenPool(pool)
     var rollString = `&{template:${opts.template}} `
 
@@ -981,11 +1024,16 @@ function doRoll(pool, title, opts)
 
         rollString += `{{displayRoll=${poolToString(pool)}}} `
 
+        if (undefined !== opts.rollStringAddon)
+            rollString += opts.rollStringAddon
+
         startRoll(rollString, function(result) {
+            let computed = {}
             if (opts.finishCallback !== undefined) {
-                opts.finishCallback(result)
+                computed = opts.finishCallback(result)
             }
-            finishRoll(result.rollId)
+            console.log(computed)
+            finishRoll(result.rollId, computed)
         })
 
     })
@@ -1720,7 +1768,9 @@ on('clicked:constitution clicked:earth clicked:will clicked:reflex clicked:air c
     })
 });
 
-
+/**
+ * Roll skill check
+ */
 on('clicked:repeating_skills:skillroll', function (e)
 {
     let skillId = e.sourceAttribute.split('_')[2]
@@ -1820,7 +1870,9 @@ on('clicked:repeating_weapons:attackroll', evi => {
     })
 })
 
-
+/**
+ * Roll damage
+ */
 on('clicked:repeating_weapons:damageroll', evi => {
     let wpnId = evi.sourceAttribute.split('_')[2]
     let dmgName = `repeating_weapons_${wpnId}_name`
@@ -1844,13 +1896,77 @@ on('clicked:repeating_weapons:damageroll', evi => {
     })
 })
 
+/**
+ * Roll magic
+ */
+on('clicked:repeating_spells:spellroll', evi => {
+    let spId = evi.sourceAttribute.split('_')[2]
+    let spElm = `repeating_spells_${spId}_element`
 
-on('clicked:repeating_spells:spellRoll', evi => {
-    let spellId = evi.sourceAttribute.split('_')[2]
-    let element
-    let ring
-    let mastery
-    let spellrank
+    let spMastery = `repeating_spells_${spId}_mastery`
+    let spName = `repeating_spells_${spId}_name`
+    let spRange = `repeating_spells_${spId}_range`
+    let spDuration = `repeating_spells_${spId}_duration`
+    let spDesc = `repeating_spells_${spId}_description`
+
+
+    getAttrs([spElm], (elt) => {
+        let element = elt[spElm]
+
+        let charRing = `${element}`
+        let charInsRnk = `insight_rank`
+        let charAffinity = `affinity_${element}`
+        let charDeficiency = `deficiency_${element}`
+        let spellSlot = `slot_${element}`
+        let voidSlot = `slot_void`
+
+        getAttrs([spMastery, spName, spRange, spDuration, spDesc, charRing, charInsRnk, charAffinity, charDeficiency, spellSlot, voidSlot], v => {
+            let mastery = parseInt(v[spMastery])||0
+            let name = v[spName]
+            let range = v[spRange]
+            let duration = v[spDuration]
+            let desc = v[spDesc]
+            let ring = parseInt(v[charRing])||0
+            let insRnk = parseInt(v[charInsRnk])||0
+            let affinity = parseInt(v[charAffinity])||0
+            let deficiency = parseInt(v[charDeficiency])||0
+            let slot = parseInt(v[spellSlot])||0
+            let vslot = parseInt(v[voidSlot])||0
+
+            if (slot > 0 || vslot > 0) {
+                let totalAff = 0 + affinity - deficiency;
+
+                let pool = createPool((ring + insRnk + totalAff), ring, 0)
+                let baseTn = 5 * (1 + mastery)
+                let rollAddon = `{{mastery=${mastery}}} `
+                    + `{{duration=${duration}}} `
+                    + `{{range=${range}}} `
+                    + `{{desc=${desc}}} `
+                    + `{{basetn=[[${baseTn}]]}} `
+                    + `{{raises=[[?{Augmentations ?|0}]]}}`
+
+                toAttrs = []
+                if (slot > 0 )
+                    toAttrs[spellSlot] = (slot - 1)
+                else
+                    toAttrs[voidSlot] = (vslot - 1)
+                setAttrs(toAttrs) // no matter success or not
+
+                doRoll(pool, name, {template: 'spell', rollStringAddon: rollAddon, finishCallback: r => {
+                    console.warn(r);
+                    let basetn = parseInt(r.results.basetn.result)||0
+                    let raises = parseInt(r.results.raises.result)||0
+                    let truetn = basetn + 5 * raises
+                    return {
+                        basetn: truetn
+                    }
+                }})
+
+            } else {
+                doRoll(createPool(1, 0, 0), name, {template: 'cantcast'})
+            }
+        })
+    })
 })
   on('sheet:opened', function()
 {

@@ -1,5 +1,6 @@
 .sheet-rolltemplate-base,
-.sheet-rolltemplate-attack
+.sheet-rolltemplate-cantcast,
+.sheet-rolltemplate-spell
     width: 100%
     padding: 5px
     background: #fef68e
@@ -27,3 +28,19 @@
 
         .inlinerollresult
             border: none
+
+.sheet-rolltemplate-spell
+    &> .sheet-results
+        h5,
+        .sheet-row
+            display: flex
+            &> .sheet-col2
+                width: 50%
+        .sheet-row
+            margin-top: 5px
+
+        h5
+            &.sheet-success
+                color: #080
+            &.sheet-failure
+                color: #800

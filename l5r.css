@@ -1737,18 +1737,21 @@
 }
 
 .sheet-rolltemplate-base,
-.sheet-rolltemplate-attack {
+.sheet-rolltemplate-cantcast,
+.sheet-rolltemplate-spell {
   width: 100%;
   padding: 5px;
   background: #fef68e;
   box-shadow: 0 0 8px black inset;
 }
 .sheet-rolltemplate-base > .sheet-header,
-.sheet-rolltemplate-attack > .sheet-header {
+.sheet-rolltemplate-cantcast > .sheet-header,
+.sheet-rolltemplate-spell > .sheet-header {
   padding: 5px;
 }
 .sheet-rolltemplate-base > .sheet-header > h1,
-.sheet-rolltemplate-attack > .sheet-header > h1 {
+.sheet-rolltemplate-cantcast > .sheet-header > h1,
+.sheet-rolltemplate-spell > .sheet-header > h1 {
   font-family: "Patrick Hand";
   font-style: italic;
   font-size: 18px;
@@ -1756,24 +1759,46 @@
   line-height: 26px;
 }
 .sheet-rolltemplate-base .sheet-arrow-container,
-.sheet-rolltemplate-attack .sheet-arrow-container {
+.sheet-rolltemplate-cantcast .sheet-arrow-container,
+.sheet-rolltemplate-spell .sheet-arrow-container {
   padding-left: 15px;
   padding-right: 15px;
 }
 .sheet-rolltemplate-base .sheet-arrow-right,
-.sheet-rolltemplate-attack .sheet-arrow-right {
+.sheet-rolltemplate-cantcast .sheet-arrow-right,
+.sheet-rolltemplate-spell .sheet-arrow-right {
   border-top: solid 2px transparent;
   border-bottom: solid 2px transparent;
   border-left: solid 180px rgba(255, 0, 0, 0.5333333333);
 }
 .sheet-rolltemplate-base > .sheet-results,
-.sheet-rolltemplate-attack > .sheet-results {
+.sheet-rolltemplate-cantcast > .sheet-results,
+.sheet-rolltemplate-spell > .sheet-results {
   padding: 5px;
   text-align: center;
 }
 .sheet-rolltemplate-base > .sheet-results .inlinerollresult,
-.sheet-rolltemplate-attack > .sheet-results .inlinerollresult {
+.sheet-rolltemplate-cantcast > .sheet-results .inlinerollresult,
+.sheet-rolltemplate-spell > .sheet-results .inlinerollresult {
   border: none;
+}
+
+.sheet-rolltemplate-spell > .sheet-results h5,
+.sheet-rolltemplate-spell > .sheet-results .sheet-row {
+  display: flex;
+}
+.sheet-rolltemplate-spell > .sheet-results h5 > .sheet-col2,
+.sheet-rolltemplate-spell > .sheet-results .sheet-row > .sheet-col2 {
+  width: 50%;
+}
+.sheet-rolltemplate-spell > .sheet-results .sheet-row {
+  margin-top: 5px;
+}
+.sheet-rolltemplate-spell > .sheet-results h5.sheet-success {
+  color: #080;
+}
+.sheet-rolltemplate-spell > .sheet-results h5.sheet-failure {
+  color: #800;
 }
 
 /*# sourceMappingURL=l5r.css.map */
