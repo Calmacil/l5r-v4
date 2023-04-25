@@ -55,6 +55,14 @@ function clearHealthBlock()
     })
 }
 
+/**
+ * Fills a health row
+ * @param {string} id 
+ * @param {int} malus 
+ * @param {int} total 
+ * @param {boolean} highlight 
+ * @param {string} label 
+ */
 function fillHealthRow(id, malus, total, highlight=0, label=undefined)
 {
     let rankId = `repeating_health_${id}_rank`
@@ -137,5 +145,33 @@ on('change:hp', evi => {
         woundsWithArmour(parseInt(evi.previousValue)||0, parseInt(evi.newValue)||0)
     }
     updateHealthMonitorDisplay()
-})
+});
 
+on('clicked:sleep', evi => {
+    console.log("Je veux dormis!")
+    getAttrs(['slotfire_max', 'slotair_max', 'slotwater_max', 'slotearth_max', 'slotvoid_max', 'constitution', 'insight_rank', 'hp', 'hp_max'], v => {
+        let fireSlotMax = parseInt(v.slotfire_max)||0
+        let airSlotMax = parseInt(v.slotair_max)||0
+        let waterSlotMax = parseInt(v.slotwater_max)||0
+        let earthSlotMax = parseInt(v.slotearth_max)||0
+        let voidSlotMax = parseInt(v.slotvoid_max)||0
+        let constitution = parseInt(v.constitution)||0
+        let insightRank = parseInt(v.insight_rank)||0
+        let hp = parseInt(v.hp)||0
+        let hpMax = parseInt(v.hp_max)||0
+
+        let regen = 2*constitution + insightRank;
+
+        console.warn('HP:' + hp + ' - MAX:' + hpMax + ' - RGN:' + regen)
+
+        setAttrs({
+            slotfire: fireSlotMax,
+            slotair: airSlotMax,
+            slotwater: waterSlotMax,
+            slotearth: earthSlotMax,
+            slotvoid: voidSlotMax,
+            voidUsed: 0,
+            hp: Math.min(hp + regen, hpMax)
+        })
+    })
+});

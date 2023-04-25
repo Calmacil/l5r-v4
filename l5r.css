@@ -232,7 +232,7 @@
 }
 .charactersheet .menu > div > label > input[type=radio] {
   position: absolute;
-  width: calc(25% - 33px);
+  width: 30px;
   opacity: 0;
   height: 30px;
 }
@@ -296,7 +296,7 @@
 }
 .charsheet .dicebox > div > .explodeOnWrapper > label > input[type=radio] {
   position: absolute;
-  width: calc(25% - 33px);
+  width: 30px;
   opacity: 0;
   height: 25px;
 }
@@ -329,7 +329,7 @@
 }
 .charsheet .dicebox > div > label > input[type=checkbox] {
   position: absolute;
-  width: calc(25% - 33px);
+  width: 30px;
   opacity: 0;
   height: 25px;
 }
@@ -1552,7 +1552,7 @@
 }
 .charsheet .tab6 > .spellSlots > .spellslot > .affinities > label > input[type=checkbox] {
   position: absolute;
-  width: calc(25% - 33px);
+  width: 30px;
   opacity: 0;
   height: 20px;
 }

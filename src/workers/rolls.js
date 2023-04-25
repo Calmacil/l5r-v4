@@ -83,7 +83,7 @@ on('clicked:repeating_skills:skillroll', function (e)
 on('clicked:initroll', function(e) {
     getAttrs(['totalinit', 'rollmod'], v => {
         let pool = parsePoolString(v.totalinit)
-        let mod = parsePoolString(v.rollMod)
+        let mod = parsePoolString(v.rollMod)||parsePoolString("0g0")
         pool = sumPools(pool, mod)
         doRoll(pool, 'Initiative !', {template:'base', woundmalus: false, init: true})
     })
@@ -186,8 +186,8 @@ on('clicked:repeating_spells:spellroll', evi => {
         let charInsRnk = `insight_rank`
         let charAffinity = `affinity_${element}`
         let charDeficiency = `deficiency_${element}`
-        let spellSlot = `slot_${element}`
-        let voidSlot = `slot_void`
+        let spellSlot = `slot${element}`
+        let voidSlot = `slotvoid`
 
         getAttrs([spMastery, spName, spRange, spDuration, spDesc, charRing, charInsRnk, charAffinity, charDeficiency, spellSlot, voidSlot], v => {
             let mastery = parseInt(v[spMastery])||0
