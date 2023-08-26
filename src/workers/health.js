@@ -18,28 +18,40 @@ function addHealthRow(idx, label, malus, total, help=undefined)
 }
 
 /**
- * Prepare the health array for standard human
+ * Prepare the health array for human with modified multipliers
  */
-function prepareHealthRowStd()
+function prepareHealthRowMod(earth, wndHealthy, wndRank)
 {
-    getAttrs(['earth'], v => {
-        let earth = parseInt(v.earth)||0;
-        let maxHp = earth*5
-        let stdRow = earth*2
+    let maxHp = earth * wndHealthy
+    let stdRow = earth * wndRank
 
-        addHealthRow(0, 'Indemne', '0', maxHp)
-        addHealthRow(1, 'Égratigné', '-3', (maxHp += stdRow))
-        addHealthRow(2, 'Légèrement blessé', '-5', (maxHp += stdRow))
-        addHealthRow(3, 'Blessé', '-10', (maxHp += stdRow))
-        addHealthRow(4, 'Gravement blessé', '-15', (maxHp += stdRow))
-        addHealthRow(5, 'Impotent', '-20', (maxHp += stdRow))
-        addHealthRow(6, 'Épuisé, Vide pour agir', '-40', (maxHp += stdRow))
-        addHealthRow(7, 'Hors de combat', 'H/S', (maxHp += stdRow))
+    addHealthRow(0, 'Indemne', '0', maxHp)
+    addHealthRow(1, 'Égratigné', '-3', (maxHp += stdRow))
+    addHealthRow(2, 'Légèrement blessé', '-5', (maxHp += stdRow))
+    addHealthRow(3, 'Blessé', '-10', (maxHp += stdRow))
+    addHealthRow(4, 'Gravement blessé', '-15', (maxHp += stdRow))
+    addHealthRow(5, 'Impotent', '-20', (maxHp += stdRow))
+    addHealthRow(6, 'Épuisé, Vide pour agir', '-40', (maxHp += stdRow))
+    addHealthRow(7, 'Hors de combat', 'H/S', (maxHp += stdRow))
 
-        setAttrs({
-            hp_max: maxHp
-        })
-    })
+    return maxHp
+}
+
+/**
+ * Prepare the health array with free numbers
+ * Use this format: row:malus;row2:malus2;row3:malus3
+ */
+function prepareHealthRowFree(wndFree)
+{
+    let rows = wndFree.split(';')
+    let maxHp = 0;
+    for (let i in rows) {
+        let row = rows[i].split(':')
+        maxHp = parseInt(row[0])||0
+        let malus = row[1]
+        addHealthRow(i, ' ', malus, maxHp)
+    }
+    return maxHp
 }
 
 /**
@@ -115,7 +127,21 @@ function prepareHealthRows()
 {
     // Later add custom health
     clearHealthBlock()
-    prepareHealthRowStd()
+    getAttrs(['healthMode', 'earth', 'wndHealthy', 'wndRank', 'wndFree'], v => {
+        mode = v.healthMode
+        let maxHp = 0
+        if (mode === 'free') {
+            maxHp = prepareHealthRowFree(v.wndFree)
+        } else if (mode === 'modified') {
+            maxHp = prepareHealthRowMod(parseInt(v.earth)||2, parseInt(v.wndHealthy)||5, parseInt(v.wndRank)||2)
+        } else {
+            maxHp = prepareHealthRowMod(parseInt(v.earth)||2, 5, 2)
+        }
+
+        setAttrs({
+            hp_max: maxHp
+        })
+    })
 }
 
 /**
@@ -140,6 +166,20 @@ function woundsWithArmour(oldHp, newHp)
     })
 }
 
+/**
+ * Checks if healthMode has been configured, and set it to standard otherwise
+ */
+function checkHealthMode()
+{
+    getAttrs(['healthMode'], v => {
+        let healthMode = v.healthMode || null
+        console.warn('Healthmode:', healthMode)
+        if (healthMode === null || healthMode === "0") {
+            setAttrs({healthMode: 'standard'})
+        }
+    })
+}
+
 on('change:hp', evi => {
     if (evi.sourceType === 'sheetworker') {
         woundsWithArmour(parseInt(evi.previousValue)||0, parseInt(evi.newValue)||0)
@@ -147,8 +187,13 @@ on('change:hp', evi => {
     updateHealthMonitorDisplay()
 });
 
+on('change:healthMode change:wndHealthy change:wndRank change:wndFree', evi => {
+    healthRows = []
+    prepareHealthRows()
+    updateHealthMonitorDisplay()
+})
+
 on('clicked:sleep', evi => {
-    console.log("Je veux dormis!")
     getAttrs(['slotfire_max', 'slotair_max', 'slotwater_max', 'slotearth_max', 'slotvoid_max', 'constitution', 'insight_rank', 'hp', 'hp_max'], v => {
         let fireSlotMax = parseInt(v.slotfire_max)||0
         let airSlotMax = parseInt(v.slotair_max)||0

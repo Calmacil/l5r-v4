@@ -6,8 +6,22 @@
         +cbButton('displayTaint', 'Souillure', 1)
         +cbButton('displayShadow', 'Ombre', 1)
         //- +cbButton('displayShadowland', "Page de l'Outremonde", 1)
-    div.col2T1
+    div#health.col2T1
         h3 Santé
+        div
+            +cbButton('healthMode', 'Calcul standard', 'standard')
+        div
+            +cbButton('healthMode', 'Calcul personnalisé', 'modified')
+            label
+                span(title="Multiplicateur pour le rang Indemne") facteur Indemne
+                +numberInput('wndHealthy', 5)
+            label
+                span(title="Multiplicateur par rangs") facteur Rangs
+                +numberInput('wndRank', 2)
+        div
+            +cbButton('healthMode', 'Calcul libre', 'free')
+            label
+                +textInput('wndFree')
     div#creation.col2T1
         h3 Création de personnages
         +numberLabelled('adjustXp', 'Ajustement XP', 'adjustXp', 138)(

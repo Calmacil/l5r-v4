@@ -13,10 +13,13 @@ on('sheet:opened', function()
     updateTraitXp()
     updateInit()
 
+    checkHealthMode()
+
     prepareHealthRows()
     updateHealthMonitorDisplay()
     computeMove()
     updateDefense()
 
     updateAllAtkRolls()
+
 })

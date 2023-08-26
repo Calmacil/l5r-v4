@@ -1894,6 +1894,46 @@
   height: 12px;
   border: 2px solid black;
 }
+.charsheet .tab0 div#health {
+  border-left: 1px solid gray;
+  margin-left: -1px;
+  flex-wrap: wrap;
+}
+.charsheet .tab0 div#health > div {
+  width: 100%;
+}
+.charsheet .tab0 div#health > div > label > input[type=checkbox] {
+  position: absolute;
+  width: 22px;
+  opacity: 0;
+  height: 22px;
+}
+.charsheet .tab0 div#health > div > label > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab0 div#health > div > label > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: attr(title);
+  justify-content: center;
+  font-family: "Arial";
+  margin-top: -5px;
+  margin-right: 4px;
+}
+.charsheet .tab0 div#health > div > label > input[type=checkbox]:checked ~ span::before {
+  background-color: #99a;
+  box-shadow: 0 0 5px inset black;
+}
+.charsheet .tab0 div#health > div > label > input[type=checkbox] ~ span::before {
+  margin-top: 0;
+  border-radius: 15px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid black;
+}
+.charsheet .tab0 div#health > div:nth-of-type(3) input[type=text] {
+  width: 320px;
+}
 .charsheet .tab0 div#creation select {
   height: 22px;
   width: 100px;
