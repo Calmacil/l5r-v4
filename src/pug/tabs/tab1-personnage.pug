@@ -1,6 +1,5 @@
 .tab.tab1
-    .col2T1#identity
-        
+    .col1#identity
         +textLabelled('character_name', 'Nom:', 'character_name')
         +textLabelled('clan', 'Clan:', 'clan')
         +textLabelled('family', 'Famille:', 'family')
@@ -9,23 +8,21 @@
         
         +caracbar('caracs')
 
+    .col2T1#desc
         h3 Description
         +textareaInput('description', 'Description')
 
 
     .col3
-        div.xpbox
-            +numberLabelled('xpTotal', 'XP. total')
-            +hiddenInput('xpSpent')
-            +numberLabelled('xpRemain', '(Restant)', 0)(readonly)
-            +numberLabelled('insight', 'Réputation')(readonly)
-            +numberLabelled('insight_rank', '(Rang)')(readonly)
         div.honorbox
             +hiddenInput('hideHonorGlory', 0)
             +numberLabelled('honor', 'Honneur', 'honor', '3.5', 'honor,Honneur')(min=0, max=10, step=0.1)
             +numberLabelled('status', 'Statut', 'status', '1.0')(min=0, max=10, step=0.1)
             +numberLabelled('glory', 'Gloire', 'glory', '1.0')(min=0, max=10, step=0.1)
+            +hiddenInput('displayInfamy', 0)
             +numberLabelled('infamy', 'Infamie', 'infamy', '0.0')(min=0, max=10, step=0.1)
+            +hiddenInput('displayTaint', 0)
             +numberLabelled('taint', 'Souillure', 'taint', '0.0')(min=0, max=10, step=0.1)
+            +hiddenInput('displayShadow', 0)
             +numberLabelled('shadow', 'Ombre', 'shadow', '0.0')(min=0, max=10, step=0.1)
 

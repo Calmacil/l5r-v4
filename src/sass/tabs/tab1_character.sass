@@ -1,4 +1,5 @@
 .charsheet .tab1
+    flex-wrap: wrap
     #identity
         &> label:first-of-type
             font-size: 18px
@@ -7,6 +8,7 @@
         &> label:not(:first-of-type)
             width: calc(50% - 10px)
 
+    #desc
         &> textarea
             border: 1px solid lightgray
             box-shadow: 0 0 8px lightgray inset
@@ -14,17 +16,6 @@
             font-family: $fontHandwriting
             padding: 4px
             @include textareaLined(1.2em, 1em)
-
-    .xpbox
-        width: 100%
-        flex-flow: row wrap
-        align-items: flex-start
-        &> label
-            width: calc(50% - 10px)
-            
-
-            &> input[type=number]
-                width: 30px
 
     .honorbox
         width: 90%
@@ -47,3 +38,7 @@
             &~ label[for="honor"],
             &~ label[for="glory"]
                 display: none
+        input[name="attr_displayInfamy"][value="0"] ~ label[for="infamy"],
+        input[name="attr_displayTaint"][value="0"] ~ label[for="taint"],
+        input[name="attr_displayShadow"][value="0"] ~ label[for="shadow"]
+            display: none

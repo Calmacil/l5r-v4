@@ -155,6 +155,10 @@
   width: 50%;
   flex-wrap: wrap;
 }
+.charsheet div.col1 {
+  width: 100%;
+  flex-wrap: wrap;
+}
 .charsheet div.col40 {
   width: calc(40% - 10px);
   flex-wrap: wrap;
@@ -214,7 +218,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: space-between;
+  align-content: space-between;
   min-height: 560px;
 }
 .charactersheet .menu > .logo {
@@ -223,6 +227,17 @@
   background-image: url("https://raw.githubusercontent.com/Calmacil/l5r-v4/master/img/legend-of-the-five-rings-logo.png");
   background-size: contain;
   background-repeat: no-repeat;
+}
+.charactersheet .menu > .xpbox {
+  width: 100%;
+  flex-flow: row wrap;
+  align-items: flex-start;
+}
+.charactersheet .menu > .xpbox > label {
+  width: calc(50% - 10px);
+}
+.charactersheet .menu > .xpbox > label > input[type=number] {
+  width: 30px;
 }
 .charactersheet .menu > .menuMain, .charactersheet .menu > .menuFooter {
   flex-direction: column;
@@ -540,6 +555,9 @@
   height: 20px;
 }
 
+.charsheet .tab1 {
+  flex-wrap: wrap;
+}
 .charsheet .tab1 #identity > label:first-of-type {
   font-size: 18px;
   align-items: space-between;
@@ -548,7 +566,7 @@
 .charsheet .tab1 #identity > label:not(:first-of-type) {
   width: calc(50% - 10px);
 }
-.charsheet .tab1 #identity > textarea {
+.charsheet .tab1 #desc > textarea {
   border: 1px solid lightgray;
   box-shadow: 0 0 8px lightgray inset;
   border-radius: 5px;
@@ -559,17 +577,6 @@
   padding-left: 1.2em;
   padding-right: 1.2em;
   background: repeating-linear-gradient(to bottom, transparent 0 1em, lightgray 1em calc(1em + 1px), transparent calc(1em + 1px) 1.2em) 50% 0/calc(100% - 2.4em) 100% no-repeat;
-}
-.charsheet .tab1 .xpbox {
-  width: 100%;
-  flex-flow: row wrap;
-  align-items: flex-start;
-}
-.charsheet .tab1 .xpbox > label {
-  width: calc(50% - 10px);
-}
-.charsheet .tab1 .xpbox > label > input[type=number] {
-  width: 30px;
 }
 .charsheet .tab1 .honorbox {
   width: 90%;
@@ -591,6 +598,11 @@
   background: transparent;
 }
 .charsheet .tab1 .honorbox input[name=attr_hideHonorGlory][value="1"] ~ label[for=honor], .charsheet .tab1 .honorbox input[name=attr_hideHonorGlory][value="1"] ~ label[for=glory] {
+  display: none;
+}
+.charsheet .tab1 .honorbox input[name=attr_displayInfamy][value="0"] ~ label[for=infamy],
+.charsheet .tab1 .honorbox input[name=attr_displayTaint][value="0"] ~ label[for=taint],
+.charsheet .tab1 .honorbox input[name=attr_displayShadow][value="0"] ~ label[for=shadow] {
   display: none;
 }
 

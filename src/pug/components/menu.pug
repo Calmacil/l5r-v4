@@ -1,8 +1,8 @@
 .menu
     .logo
+
     .menuMain
         +hiddenInput('displayMagic', 0)
-        +hiddenInput('displayShadowland', 0)
         +rdButton('activeTab', 'Personnage', 1)(checked)
         +rdButton('activeTab', 'Compétences', 2)
         +rdButton('activeTab', 'Combat', 3)
@@ -10,7 +10,12 @@
         +rdButton('activeTab', 'École & Techniques', 5)
         +rdButton('activeTab', 'Magie', 6).menutab6
         +rdButton('activeTab', 'Histoire & Relations', 7)
-        +rdButton('activeTab', 'Outremonde', 8).menutab8
+    .xpbox
+        +numberLabelled('xpTotal', 'XP. total')
+        +hiddenInput('xpSpent')
+        +numberLabelled('xpRemain', '(Restant)', 0)(readonly)
+        +numberLabelled('insight', 'Réputation')(readonly)
+        +numberLabelled('insight_rank', '(Rang)')(readonly)
     .menuFooter
         +rdButton('activeTab', 'Configuration', 0)
-        span &copy; Calmacil 2022
+        span v1.0 &copy; Calmacil 2023

@@ -4,7 +4,7 @@
         display: flex
         flex-direction: row
         flex-wrap: wrap
-        align-items: space-between
+        align-content: space-between
         min-height: 560px
 
         &> .logo
@@ -13,6 +13,18 @@
             background-image: url('#{$imgRepo}/img/legend-of-the-five-rings-logo.png')
             background-size: contain
             background-repeat: no-repeat
+
+
+        &> .xpbox
+            width: 100%
+            flex-flow: row wrap
+            align-items: flex-start
+            &> label
+                width: calc(50% - 10px)
+                
+
+                &> input[type=number]
+                    width: 30px
 
         &> .menuMain,
         &> .menuFooter
