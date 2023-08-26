@@ -770,7 +770,16 @@
         </fieldset>
       </div>
       <div class="history col2">
-        <h3>Historique</h3>
+        <h3>Historique</h3><span>Date</span><span>Événement</span>
+        <fieldset class="repeating_history">
+          <label>
+            <input name="attr_expand" value="1" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_date" type="text" value="">
+          <input name="attr_event" type="text" value="">
+          <input name="attr_expand" type="hidden" value="0">
+          <textarea name="attr_detail" placeholder="Détails"></textarea>
+        </fieldset>
       </div>
     </div>
     <div class="tab tab0">

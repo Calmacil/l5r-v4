@@ -18,3 +18,11 @@
 
     div.history.col2
         h3 Historique
+        span Date
+        span Événement
+        fieldset.repeating_history
+            +cbButton('expand', ' ', 1)
+            +textInput('date')
+            +textInput('event')
+            +hiddenInput('expand', 0)
+            +textareaInput('detail')(placeholder='Détails')

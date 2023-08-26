@@ -2,10 +2,11 @@ $rrelation_width: 160px
 $cb_width: 10px
 $rname_width: calc(100% - $rrelation_width - $cb_width - $cb_width - $cb_width - 44px)
 
-$heigth: 16px
+$date_width: 60px
 
 .charsheet .tab7
-    &> .relations
+
+    &> .col2
         &> span
             font-family: $fontStandard
             font-weight: bold
@@ -14,17 +15,8 @@ $heigth: 16px
             padding: 4px
             &:not(:first-of-type)
                 border-left: 1px dotted gray
-            &:nth-of-type(1)
-                width: $rname_width
-            &:nth-of-type(2)
-                width: $rrelation_width
-            &:nth-of-type(3)
-                width: $cb_width
-            &:nth-of-type(4)
-                width: $cb_width
-            &:nth-of-type(5)
-                width: $cb_width
-
+        &:nth-of-type(2)
+            border-left: double black 3px
         &> .repcontainer
             width: 100%
             flex-wrap: wrap
@@ -39,15 +31,41 @@ $heigth: 16px
                     height: 20px
                     &> input[type=checkbox]
                         @include expandSwitch(20px)
+                
+                &> textarea
+                    display: none
+                    height: 4em
+                    width: 100%
+                    border-top: 1px dotted gray
+                    font-family: $fontHandwriting
+                    @include textareaLined(1.4em, 1.2em)
+                &> input[type=hidden][value="1"]
+                    ~ textarea
+                        display: block
+
+    &> .relations
+        &> span
+            &:nth-of-type(1)
+                width: $rname_width
+            &:nth-of-type(2)
+                width: $rrelation_width
+            &:nth-of-type(3)
+                width: $cb_width
+            &:nth-of-type(4)
+                width: $cb_width
+            &:nth-of-type(5)
+                width: $cb_width
+
+        &> .repcontainer
+            &> .repitem
                 &> input
                     border: none
                     font-family: $fontHandwriting
                     height: 24px
+                    padding: 4px
                     &:nth-of-type(1)
-                        padding: 4px
                         width: calc($rname_width - 2px)
                     &:nth-of-type(2)
-                        padding: 4px
                         border-left: 1px dotted gray
                         width: calc($rrelation_width + 9px)
                 &> label:not(:first-of-type)
@@ -70,13 +88,21 @@ $heigth: 16px
                             height: 12px
                             border: 2px solid black
 
-                &> textarea
-                    display: none
-                    height: 4em
-                    width: 100%
-                    border-top: 1px dotted gray
+    &> .history
+        &> span
+            &:nth-of-type(1)
+                width: $date_width
+            &:nth-of-type(2)
+                width: calc(100% - $date_width - 20px)
+        &> .repcontainer
+            &> .repitem
+                &> input
+                    border: none
                     font-family: $fontHandwriting
-                    @include textareaLined(1.4em, 1.2em)
-                &> input[type=hidden][value="1"]
-                    ~ textarea
-                        display: block
+                    height: 24px
+                    padding: 4px
+                    &:nth-of-type(1)
+                        width: calc($date_width - 2px)
+                    &:nth-of-type(2)
+                        width: calc(100% - $date_width - 9px)
+                        border-left: dotted 1px black
