@@ -35,6 +35,8 @@
 
         &> div 
             &> label
+                &:hover
+                    cursor: pointer
                 &> input[type=radio]
                     @include toggleable(30px, $fontHeader, true)
                     &~ span::before

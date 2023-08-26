@@ -748,7 +748,30 @@
       </div>
     </div>
     <div class="tab tab7">
-      <h1>Histoire et Relations</h1>
+      <div class="relations col2">
+        <h3>Relations</h3><span>Nom</span><span>Relation</span><span title="Allié">A</span><span title="Neutre">N</span><span title="Ennemi">E</span>
+        <fieldset class="repeating_relations">
+          <label>
+            <input name="attr_expand" value="1" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_name" type="text" value="">
+          <input name="attr_relation" type="text" value="">
+          <label>
+            <input name="isAlly" type="checkbox"><span> </span>
+          </label>
+          <label>
+            <input name="isNeutral" type="checkbox"><span> </span>
+          </label>
+          <label>
+            <input name="isEnnemy" type="checkbox"><span> </span>
+          </label>
+          <input name="attr_expand" type="hidden" value="0">
+          <textarea name="attr_description" placeholder="Description"></textarea>
+        </fieldset>
+      </div>
+      <div class="history col2">
+        <h3>Historique</h3>
+      </div>
     </div>
     <div class="tab tab0">
       <div class="col3" id="display">

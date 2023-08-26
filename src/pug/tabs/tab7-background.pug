@@ -1,2 +1,20 @@
 .tab.tab7
-    h1 Histoire et Relations
+    div.relations.col2
+        h3 Relations
+        span Nom
+        span Relation
+        span(title='Allié') A
+        span(title='Neutre') N
+        span(title='Ennemi') E
+        fieldset.repeating_relations
+            +cbButton('expand', ' ', 1)
+            +textInput('name')
+            +textInput('relation')
+            +cbButton('isAlly', ' ')
+            +cbButton('isNeutral', ' ')
+            +cbButton('isEnnemy', ' ')
+            +hiddenInput('expand', 0)
+            +textareaInput('description')(placeholder='Description')
+
+    div.history.col2
+        h3 Historique

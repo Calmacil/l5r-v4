@@ -1,0 +1,82 @@
+$rrelation_width: 160px
+$cb_width: 10px
+$rname_width: calc(100% - $rrelation_width - $cb_width - $cb_width - $cb_width - 44px)
+
+$heigth: 16px
+
+.charsheet .tab7
+    &> .relations
+        &> span
+            font-family: $fontStandard
+            font-weight: bold
+            border-bottom: 3px double black
+            text-align: center
+            padding: 4px
+            &:not(:first-of-type)
+                border-left: 1px dotted gray
+            &:nth-of-type(1)
+                width: $rname_width
+            &:nth-of-type(2)
+                width: $rrelation_width
+            &:nth-of-type(3)
+                width: $cb_width
+            &:nth-of-type(4)
+                width: $cb_width
+            &:nth-of-type(5)
+                width: $cb_width
+
+        &> .repcontainer
+            width: 100%
+            flex-wrap: wrap
+            &> .repitem
+                width: 100%
+                flex-wrap: wrap
+                border-bottom: 1px solid gray
+                &> label:nth-of-type(1)
+                    width: 10px
+                    padding-right: 0
+                    margin-bottom: 0
+                    height: 20px
+                    &> input[type=checkbox]
+                        @include expandSwitch(20px)
+                &> input
+                    border: none
+                    font-family: $fontHandwriting
+                    height: 24px
+                    &:nth-of-type(1)
+                        padding: 4px
+                        width: calc($rname_width - 2px)
+                    &:nth-of-type(2)
+                        padding: 4px
+                        border-left: 1px dotted gray
+                        width: calc($rrelation_width + 9px)
+                &> label:not(:first-of-type)
+                    width: 10px
+                    // padding-left: 4px
+                    // padding-right: 4px
+                    margin-bottom: 0
+                    margin-right: 2px
+                    padding: 0
+                    width: 16px
+                    height: 20px
+                    border-left: 1px dotted gray
+                    &> input[type=checkbox]
+                        @include toggleable($skill_height, $fontStandard, false, 12px)
+                        &~ span::before
+                            margin-top: 0
+                            margin-right: 0
+                            border-radius: 10px
+                            width: 20px
+                            height: 12px
+                            border: 2px solid black
+
+                &> textarea
+                    display: none
+                    height: 4em
+                    width: 100%
+                    border-top: 1px dotted gray
+                    font-family: $fontHandwriting
+                    @include textareaLined(1.4em, 1.2em)
+                &> input[type=hidden][value="1"]
+                    ~ textarea
+                        display: block

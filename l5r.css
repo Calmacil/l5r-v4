@@ -245,6 +245,9 @@
   padding: 0;
   padding-right: 8px;
 }
+.charactersheet .menu > div > label:hover {
+  cursor: pointer;
+}
 .charactersheet .menu > div > label > input[type=radio] {
   position: absolute;
   width: 30px;
@@ -1708,6 +1711,133 @@
 }
 .charsheet .tab6 > .spellList > .repcontainer > .repitem > input[type=hidden][value="1"] ~ textarea {
   display: flex;
+}
+
+.charsheet .tab7 > .relations > span {
+  font-family: "Arial";
+  font-weight: bold;
+  border-bottom: 3px double black;
+  text-align: center;
+  padding: 4px;
+}
+.charsheet .tab7 > .relations > span:not(:first-of-type) {
+  border-left: 1px dotted gray;
+}
+.charsheet .tab7 > .relations > span:nth-of-type(1) {
+  width: calc(100% - 160px - 10px - 10px - 10px - 44px);
+}
+.charsheet .tab7 > .relations > span:nth-of-type(2) {
+  width: 160px;
+}
+.charsheet .tab7 > .relations > span:nth-of-type(3) {
+  width: 10px;
+}
+.charsheet .tab7 > .relations > span:nth-of-type(4) {
+  width: 10px;
+}
+.charsheet .tab7 > .relations > span:nth-of-type(5) {
+  width: 10px;
+}
+.charsheet .tab7 > .relations > .repcontainer {
+  width: 100%;
+  flex-wrap: wrap;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem {
+  width: 100%;
+  flex-wrap: wrap;
+  border-bottom: 1px solid gray;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:nth-of-type(1) {
+  width: 10px;
+  padding-right: 0;
+  margin-bottom: 0;
+  height: 20px;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:nth-of-type(1) > input[type=checkbox] {
+  position: absolute;
+  width: 10px;
+  opacity: 0;
+  height: 20px;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:nth-of-type(1) > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:nth-of-type(1) > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: "►";
+  justify-content: center;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:nth-of-type(1) > input[type=checkbox]:checked ~ span::before {
+  content: "▼";
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > input {
+  border: none;
+  font-family: "Patrick Hand";
+  height: 24px;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > input:nth-of-type(1) {
+  padding: 4px;
+  width: calc(100% - 160px - 10px - 10px - 10px - 44px - 2px);
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > input:nth-of-type(2) {
+  padding: 4px;
+  border-left: 1px dotted gray;
+  width: 169px;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:not(:first-of-type) {
+  width: 10px;
+  margin-bottom: 0;
+  margin-right: 2px;
+  padding: 0;
+  width: 16px;
+  height: 20px;
+  border-left: 1px dotted gray;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] {
+  position: absolute;
+  width: 12px;
+  opacity: 0;
+  height: 24px;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] ~ span {
+  width: 100%;
+  vertical-align: center;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] ~ span::before {
+  display: flex;
+  content: attr(title);
+  justify-content: center;
+  font-family: "Arial";
+  margin-top: -5px;
+  margin-right: 4px;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox]:checked ~ span::before {
+  background-color: #99a;
+  box-shadow: 0 0 5px inset black;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > label:not(:first-of-type) > input[type=checkbox] ~ span::before {
+  margin-top: 0;
+  margin-right: 0;
+  border-radius: 10px;
+  width: 20px;
+  height: 12px;
+  border: 2px solid black;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > textarea {
+  display: none;
+  height: 4em;
+  width: 100%;
+  border-top: 1px dotted gray;
+  font-family: "Patrick Hand";
+  line-height: 1.4em;
+  padding-block: 0;
+  padding-left: 1.4em;
+  padding-right: 1.4em;
+  background: repeating-linear-gradient(to bottom, transparent 0 1.2em, lightgray 1.2em calc(1.2em + 1px), transparent calc(1.2em + 1px) 1.4em) 50% 0/calc(100% - 2.8em) 100% no-repeat;
+}
+.charsheet .tab7 > .relations > .repcontainer > .repitem > input[type=hidden][value="1"] ~ textarea {
+  display: block;
 }
 
 .charsheet .tab0 {
